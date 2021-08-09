@@ -6,6 +6,8 @@ import { accessUser } from "../../store/selectUserReducer";
 import formHead from "../../assets/images/formHead.png";
 import formImage from "../../assets/images/formImage.png";
 
+import "../../styles/HomeView.css";
+
 function FormInit() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,12 +21,16 @@ function FormInit() {
 
   return (
     <div className="form-init">
-      <div>
-        <h2>PROGRAMACIÓN, COMPRA Y SEGUIMIENTO DE INSUMOS</h2>
-        <img src={formImage} alt="formImage" />
+      <div className="title-image-block">
+        <div className="title-block">
+          <h2>PROGRAMACIÓN, COMPRA Y SEGUIMIENTODE INSUMOS</h2>
+        </div>
+        <div className="image-block">
+          <img src={formImage} alt="formImage" />
+        </div>
       </div>
 
-      <div className="form-gen">
+      <div className="access-block">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -33,7 +39,7 @@ function FormInit() {
         >
           <div>
             <div className="mb-3">
-              <div className="app-logo">
+              <div className="access-image">
                 <img src={formHead} alt="formHead" />
               </div>
               <label htmlFor="exampleInputEmail1" className="form-label">
@@ -64,10 +70,11 @@ function FormInit() {
                 className="form-control"
               />
             </div>
-
-            <button type="submit" className="btn btn-outline-secondary">
-              Sign In
-            </button>
+            <div className="buttonContainer">
+              <button type="submit" className="btn btn-outline-secondary">
+                Sign In
+              </button>
+            </div>
           </div>
         </form>
       </div>
