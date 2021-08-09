@@ -1,13 +1,5 @@
 import axios from "axios";
 
-export async function getUserList() {
-  return await axios({
-    method: "GET",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userList",
-  });
-}
-
 export async function userSignIn(email, password) {
   return await axios({
     method: "POST",
@@ -20,123 +12,34 @@ export async function userSignIn(email, password) {
   });
 }
 
-export async function getUserInfo(token) {
+export async function getUserList() {
   return await axios({
     method: "GET",
     baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userInfo",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    url: "/user/userList",
   });
 }
 
-export async function updateUserProfilePic(token, data) {
+export async function destroyUser(userId) {
   return await axios({
-    method: "PUT",
+    method: "DELETE",
     baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userProfilePic",
-    data,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
+    url: "/user/userDelete",
+    data: { userId },
   });
 }
 
-export async function userRegister(
-  name,
-  lastname,
-  email,
-  address,
-  phone,
-  password
-) {
+export async function userRegister(name, lastname, email, role, password) {
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/signup",
+    url: "/user/create",
     data: {
       name,
       lastname,
       email,
-      address,
-      phone,
+      role,
       password,
-    },
-  });
-}
-
-export async function userUpdate(
-  token,
-  name,
-  lastname,
-  dniType,
-  dni,
-  address,
-  neighborhood,
-  phone,
-  height,
-  weight,
-  birthday
-) {
-  return await axios({
-    method: "PUT",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userUpdate",
-    data: {
-      name,
-      lastname,
-      dniType,
-      dni,
-      address,
-      neighborhood,
-      phone,
-      height,
-      weight,
-      birthday,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export async function userSuscribe(token, wodId) {
-  return await axios({
-    method: "PUT",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userSuscribeWods",
-    data: {
-      wodId,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export async function userUnsuscribe(token, wodId) {
-  return await axios({
-    method: "PUT",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userUnsuscribeWods",
-    data: {
-      wodId,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export async function getUserWods(token) {
-  return await axios({
-    method: "GET",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userWodsList",
-    headers: {
-      Authorization: `Bearer ${token}`,
     },
   });
 }

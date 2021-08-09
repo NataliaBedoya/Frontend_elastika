@@ -10,22 +10,6 @@ function ActionBar() {
     history.push("/");
   };
 
-  // const handleClicAdmins = () => {
-  //   dispatch(getAllAdmin());
-  // };
-
-  // const handleClicCoaches = () => {
-  //   dispatch(getAllCoach());
-  // };
-
-  // const handleClicUsers = () => {
-  //   dispatch(getAllUser());
-  // };
-
-  // const handleClicNews = () => {
-  //   dispatch(getAllNews());
-  // };
-
   return (
     <div>
       <ul className="list-group list-group-flush">
