@@ -8,7 +8,8 @@ import {
   getUserWods,
   userSuscribe,
   userUnsuscribe,
-} from "./user/services";
+} from "./services/userServices";
+
 import Swal from "sweetalert2";
 export const GET_USER = "GET_USER";
 export const GET_USER_LIST = "GET_USER_LIST";
