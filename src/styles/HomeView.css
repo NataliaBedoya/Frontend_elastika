@@ -1,0 +1,41 @@
+body {
+  background-attachment: fixed;
+  background-size: cover;
+}
+.form-init {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.title-image-block {
+  padding-top: 100px;
+  padding-left: 90px;
+  padding-right: 40px;
+  width: 65%;
+}
+
+.title-block {
+  font-family: Tahoma, Verdana, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: #2f4457;
+
+  line-height: 150%;
+  padding-bottom: 10px;
+}
+.image-block {
+  width: 100%;
+}
+.access-block {
+  padding-top: 180px;
+  padding-right: 50px;
+  width: 25%;
+}
+.access-image {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.MainView-selectMaterial {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
