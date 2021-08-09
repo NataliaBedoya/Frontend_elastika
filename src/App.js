@@ -1,26 +1,19 @@
-//To create develop
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
 
-import logo from "./logo.svg";
-import "./App.css";
+import HomeView from "./pages/HomeView";
+import MainView from "./pages/MainView";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={HomeView} />
+        <Route exact path="/MainView" component={MainView} />
+        <Route exact path="*" component={NotFound} />
+      </Switch>
+    </Router>
   );
 }
 
