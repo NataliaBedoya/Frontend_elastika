@@ -1,9 +1,8 @@
-import logo from "../assets/images/logo.png";
+import ReportsManager from "../components/reports/ReportsManager";
 import ActionBar from "../components/general/ActionBar";
+import logo from "../assets/images/logo.png";
 
-import "../styles/MainView.css";
-
-function MainView() {
+function ReportsView() {
   return (
     <div className="MainView">
       <div className="MainView-blockLogoNav">
@@ -14,10 +13,12 @@ function MainView() {
           <ActionBar />
         </div>
       </div>
-
-      <div className="MainView-InfoBlock">*********** **************</div>
+      <div className="ReportsView">
+        <h3>Reports</h3>
+        <ReportsManager />
+      </div>
     </div>
   );
 }
 
-export default MainView;
+export default ReportsView;
