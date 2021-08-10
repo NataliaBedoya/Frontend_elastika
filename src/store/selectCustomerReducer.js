@@ -1,27 +1,27 @@
 import Swal from "sweetalert2";
 
 import {
-  getSupplierList,
-  destroySupplier,
-  supplierRegister,
-} from "./services/supplierServices";
+  getCustomerList,
+  destroyCustomer,
+  customerRegister,
+} from "./services/customerServices";
 
-export const GET_SUPPLIER_LIST = "GET_SUPPLIER_LIST";
-export const ASSIGN_SUPPLIER_TO_DELETE = "ASSIGN_SUPPLIER_TO_DELETE";
-export const REMOVE_SUPPLIER_DELETED = "REMOVE_SUPPLIER_DELETED";
-export const CREATE_NEW_SUPPLIER = "CREATE_NEW_SUPPLIER";
+export const GET_CUSTOMER_LIST = "GET_CUSTOMER_LIST";
+export const ASSIGN_CUSTOMER_TO_DELETE = "ASSIGN_CUSTOMER_TO_DELETE";
+export const REMOVE_CUSTOMER_DELETED = "REMOVE_CUSTOMER_DELETED";
+export const CREATE_NEW_CUSTOMER = "CREATE_NEW_CUSTOMER";
 
 const initialState = {
-  supplierList: {},
-  supplierToDelete: {},
+  customerList: {},
+  customerToDelete: {},
 };
 
-export function getAllSupplier() {
+export function getAllCustomer() {
   return async function (dispatch) {
     try {
-      const { data } = await getSupplierList();
+      const { data } = await getCustomerList();
       dispatch({
-        type: GET_SUPPLIER_LIST,
+        type: GET_CUSTOMER_LIST,
         payload: data,
       });
     } catch (error) {
@@ -30,27 +30,27 @@ export function getAllSupplier() {
   };
 }
 
-export function assignSupplierToDelete(id) {
+export function assignCustomerToDelete(id) {
   return async function (dispatch) {
     dispatch({
-      type: ASSIGN_SUPPLIER_TO_DELETE,
+      type: ASSIGN_CUSTOMER_TO_DELETE,
       payload: id,
     });
   };
 }
 
-export function deleteSupplier(supplierToDelete) {
+export function deleteCustomer(customerToDelete) {
   return async function (dispatch) {
     try {
-      const { data } = await destroySupplier(supplierToDelete);
+      const { data } = await destroyCustomer(customerToDelete);
       dispatch({
-        type: REMOVE_SUPPLIER_DELETED,
+        type: REMOVE_CUSTOMER_DELETED,
         payload: data,
       });
       Swal.fire({
         title: "Confirmation",
         icon: "success",
-        text: `Supplier has successfully deleted!`,
+        text: `Customer has successfully deleted!`,
         button: "OK",
       });
     } catch (error) {
@@ -65,10 +65,10 @@ export function deleteSupplier(supplierToDelete) {
   };
 }
 
-export function createNewSupplier(dni, name, contact1, email1, phone1) {
+export function createNewCustomer(dni, name, contact1, email1, phone1) {
   return async function (dispatch) {
     try {
-      const { data } = await supplierRegister(
+      const { data } = await customerRegister(
         dni,
         name,
         contact1,
@@ -76,13 +76,13 @@ export function createNewSupplier(dni, name, contact1, email1, phone1) {
         phone1
       );
       dispatch({
-        type: CREATE_NEW_SUPPLIER,
+        type: CREATE_NEW_CUSTOMER,
         payload: data,
       });
       Swal.fire({
         title: "Confirmation",
         icon: "success",
-        text: `Supplier ${name} has successfully registered!`,
+        text: `Customer ${name} has successfully registered!`,
         button: "OK",
       });
     } catch (error) {
@@ -99,31 +99,31 @@ export function createNewSupplier(dni, name, contact1, email1, phone1) {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_SUPPLIER_LIST: {
+    case GET_CUSTOMER_LIST: {
       return {
         ...state,
-        supplierList: action.payload,
+        customerList: action.payload,
       };
     }
-    case ASSIGN_SUPPLIER_TO_DELETE: {
+    case ASSIGN_CUSTOMER_TO_DELETE: {
       return {
         ...state,
-        supplierToDelete: action.payload,
+        customerToDelete: action.payload,
       };
     }
-    case REMOVE_SUPPLIER_DELETED: {
+    case REMOVE_CUSTOMER_DELETED: {
       return {
         ...state,
-        supplierList: state.supplierList.filter(
-          (supplier) => supplier._id !== action.payload._id
+        customerList: state.customerList.filter(
+          (customer) => customer._id !== action.payload._id
         ),
       };
     }
 
-    case CREATE_NEW_SUPPLIER: {
+    case CREATE_NEW_CUSTOMER: {
       return {
         ...state,
-        supplierList: state.supplierList.concat(action.payload),
+        customerList: state.customerList.concat(action.payload),
       };
     }
 

@@ -25,6 +25,10 @@ function ActionBar() {
           {" "}
           Materials{" "}
         </Link>
+        <Link to="/CustomersView" className="list-group-item">
+          {" "}
+          Customers{" "}
+        </Link>
         <Link to="/SuppliersView" className="list-group-item">
           {" "}
           Suppliers{" "}
