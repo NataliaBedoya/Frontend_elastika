@@ -8,7 +8,7 @@ import "../styles/SupplierView.css";
 function SuppliersView() {
   return (
     <div className="SuppliersView">
-      <div className="SuppliersView-blockLosoNav">
+      <div className="SuppliersView-blockLogoNav">
         <div className="SuppliersView-logo">
           <img src={logo} alt="logo" />
         </div>

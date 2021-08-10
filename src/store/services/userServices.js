@@ -33,7 +33,7 @@ export async function userRegister(name, lastname, email, role, password) {
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/create",
+    url: "/user/signup",
     data: {
       name,
       lastname,
