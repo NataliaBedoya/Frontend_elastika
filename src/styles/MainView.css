@@ -1,0 +1,28 @@
+.MainView {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.MainView-blockLogoNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Tahoma, Verdana, Helvetica, sans-serif;
+}
+
+.MainView-logo {
+  padding-top: 35px;
+  padding-bottom: 25px;
+}
+.MainView-InfoBlock {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Tahoma, Verdana, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: #ffffff;
+}
