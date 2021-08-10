@@ -1,4 +1,4 @@
-import ReportsManager from "../components/reports/ReportsManager";
+//import ReportsManager from "../components/reports/ReportsManager";
 import ActionBar from "../components/general/ActionBar";
 import logo from "../assets/images/logo.png";
 
@@ -15,7 +15,7 @@ function ReportsView() {
       </div>
       <div className="ReportsView">
         <h3>Reports</h3>
-        <ReportsManager />
+        {/* <ReportsManager /> */}
       </div>
     </div>
   );
