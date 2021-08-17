@@ -13,7 +13,6 @@ function UsersList() {
 
   const handleDelete = (id) => {
     setIsChecked(id);
-    console.log(id);
     dispatch(assignUserToDelete(id));
   };
 
