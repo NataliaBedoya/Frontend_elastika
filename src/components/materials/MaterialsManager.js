@@ -9,6 +9,7 @@ function MaterialsManager() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [threshold, setThreshold] = useState("");
 
   const { materialToDelete } = useSelector((state) => {
     return {
@@ -17,7 +18,7 @@ function MaterialsManager() {
   });
 
   const handleCreate = (e) => {
-    dispatch(createNewMaterial(name, description));
+    dispatch(createNewMaterial(name, description, threshold));
   };
 
   const handleDelete = () => {
@@ -57,7 +58,20 @@ function MaterialsManager() {
             value={description}
           />
         </div>
-
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="threshold">
+            Threshold (kg)
+          </span>
+          <input
+            id="threshold"
+            type="text"
+            className="form-control"
+            aria-label="threshold"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setThreshold(e.target.value)}
+            value={threshold}
+          />
+        </div>
         <div>
           <button
             type="button"

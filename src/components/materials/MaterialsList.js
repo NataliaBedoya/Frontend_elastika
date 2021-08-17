@@ -19,17 +19,17 @@ function MaterialsList() {
     dispatch(assignMaterialToDelete(id));
   };
 
-  const { materialsList } = useSelector((state) => {
+  const { materialList } = useSelector((state) => {
     return {
-      materialsList: state.selectMaterialReducer.materialsList,
+      materialList: state.selectMaterialReducer.materialList,
     };
   });
 
   const renderTable = () => {
     return (
-      !!materialsList &&
-      materialsList.length > 0 &&
-      materialsList.map((material) => {
+      !!materialList &&
+      materialList.length > 0 &&
+      materialList.map((material) => {
         return (
           <tr>
             <th>
@@ -43,6 +43,7 @@ function MaterialsList() {
             </th>
             <td>{material.name}</td>
             <td>{material.description}</td>
+            <td>{material.threshold}</td>
           </tr>
         );
       })
@@ -57,6 +58,7 @@ function MaterialsList() {
           <th>Select</th>
           <th>Name</th>
           <th>Description</th>
+          <th>Threshold (kg)</th>
         </tr>
       </thead>
       <tbody>{renderTable()}</tbody>
