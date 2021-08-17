@@ -12,20 +12,25 @@ body {
   padding-top: 100px;
   padding-left: 90px;
   padding-right: 100px;
-  width: 65%;
   justify-content: center;
 }
 
 .title-block {
+  padding-top: 125px;
+  padding-left: 90px;
+  padding-right: 75px;
+  padding-bottom: 20px;
+  width: 85%;
   font-family: Tahoma, Verdana, Helvetica, sans-serif;
+  font-size: x-large;
   font-weight: bolder;
   color: #2f4457;
-  line-height: 250%;
-  padding-bottom: 10px;
-  padding-left: 110px;
+  text-align: center;
 }
 .image-block {
   width: 100%;
+  padding-left: 70px;
+  justify-content: center;
 }
 .access-block {
   padding-top: 160px;
