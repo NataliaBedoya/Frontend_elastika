@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   font-family: Tahoma, Verdana, Helvetica, sans-serif;
+  width: 30%;
 }
 
 .MainView-logo {
@@ -23,6 +24,8 @@
   flex-direction: column;
   justify-content: center;
   font-family: Tahoma, Verdana, Helvetica, sans-serif;
-  font-weight: bolder;
-  color: #ffffff;
+  font-size: 15px;
+  color: #2f4457;
+  font-weight: lighter;
+  width: 70%;
 }
