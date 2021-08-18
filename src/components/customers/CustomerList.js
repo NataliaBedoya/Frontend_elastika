@@ -41,10 +41,31 @@ function CustomerList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>{customer.name}</td>
-            <td>{customer.contact1}</td>
-            <td>{customer.email1}</td>
-            <td>{customer.phone1}</td>
+            <td>
+              <p>
+                {customer.name}
+                <br />
+                🏢{customer.businessPhone}{" "}
+              </p>
+            </td>
+            <td>
+              <p>
+                {customer.contact1} <br />
+                {customer.contact2}
+              </p>
+            </td>
+            <td>
+              <p>
+                {customer.email1} <br />
+                {customer.email2}
+              </p>
+            </td>
+            <td>
+              <p>
+                {customer.phone1} <br />
+                {customer.phone2}
+              </p>
+            </td>
           </tr>
         );
       })
@@ -57,8 +78,8 @@ function CustomerList() {
       <thead>
         <tr>
           <th>Select</th>
-          <th>Name</th>
-          <th>Contact</th>
+          <th>Business Name</th>
+          <th>Contact Name</th>
           <th>Email</th>
           <th>Phone</th>
         </tr>

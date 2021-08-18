@@ -4,14 +4,20 @@ import {
   deleteCustomer,
   createNewCustomer,
 } from "../../store/selectCustomerReducer";
+import CustomerInformationUpdate from "./CustomerInformationUpdate";
+import DeleteAdditionalContact from "./DeleteAdditionalContact";
 
 function CustomersManager() {
   const dispatch = useDispatch();
   const [dni, setDNI] = useState("");
   const [name, setName] = useState("");
+  const [businessPhone, setBusinessPhone] = useState("");
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
+  const [contact2, setContact2] = useState("");
+  const [email2, setEmail2] = useState("");
+  const [phone2, setPhone2] = useState("");
 
   const { customerToDelete } = useSelector((state) => {
     return {
@@ -20,7 +26,19 @@ function CustomersManager() {
   });
 
   const handleCreate = (e) => {
-    dispatch(createNewCustomer(dni, name, contact1, email1, phone1));
+    dispatch(
+      createNewCustomer(
+        dni,
+        name,
+        businessPhone,
+        contact1,
+        email1,
+        phone1,
+        contact2,
+        email2,
+        phone2
+      )
+    );
   };
 
   const handleDelete = () => {
@@ -51,7 +69,6 @@ function CustomersManager() {
             Business Name
           </span>
           <input
-            autoFocus
             id="name"
             type="text"
             className="form-control"
@@ -62,7 +79,21 @@ function CustomersManager() {
           />
         </div>
         <div className="input-group mb-3">
-          <span className="input-group-text" id="lastname">
+          <span className="input-group-text" id="businessPhone">
+            Business Phone
+          </span>
+          <input
+            id="businessPhone"
+            type="text"
+            className="form-control"
+            aria-label="businessPhone"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setBusinessPhone(e.target.value)}
+            value={businessPhone}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="contact1">
             Contact Name
           </span>
           <input
@@ -103,6 +134,50 @@ function CustomersManager() {
             value={phone1}
           />
         </div>
+        <hr />
+        <h6>Additional contact (optional)</h6>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="contact2">
+            Contact Name
+          </span>
+          <input
+            id="contact2"
+            type="text"
+            className="form-control"
+            aria-label="contact2"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setContact2(e.target.value)}
+            value={contact2}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="email2">
+            Contact Email
+          </span>
+          <input
+            id="email2"
+            type="text"
+            className="form-control"
+            aria-label="email2"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setEmail2(e.target.value)}
+            value={email2}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="phone2">
+            Contact Phone
+          </span>
+          <input
+            id="phone2"
+            type="text"
+            className="form-control"
+            aria-label="phone2"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setPhone2(e.target.value)}
+            value={phone2}
+          />
+        </div>
 
         <div>
           <button
@@ -111,6 +186,24 @@ function CustomersManager() {
             onClick={handleCreate}
           >
             Create New Customer
+          </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#customersUpdateModal"
+            className="btn btn-outline-secondary"
+            style={{ marginLeft: 10 }}
+          >
+            Update Customer
+          </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteAdditionalContactModal"
+            className="btn btn-outline-secondary"
+            style={{ marginLeft: 10 }}
+          >
+            Delete Additional Contact
           </button>
         </div>
         <hr />
@@ -127,6 +220,8 @@ function CustomersManager() {
           </button>
         </div>
       </div>
+      <CustomerInformationUpdate />
+      <DeleteAdditionalContact />
     </div>
   );
 }

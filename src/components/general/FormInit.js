@@ -21,9 +21,9 @@ function FormInit() {
 
   return (
     <div className="form-init">
-      <div className="title-image-block">
+      <div>
         <div className="title-block">
-          <h2>PROGRAMACIÓN, COMPRA Y SEGUIMIENTODE INSUMOS</h2>
+          <h2>PROGRAMACIÓN, COMPRA Y SEGUIMIENTO DE INSUMOS</h2>
         </div>
         <div className="image-block">
           <img src={formImage} alt="formImage" />

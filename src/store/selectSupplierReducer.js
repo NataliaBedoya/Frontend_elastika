@@ -4,16 +4,19 @@ import {
   getSupplierList,
   destroySupplier,
   supplierRegister,
+  supplierUpdate,
 } from "./services/supplierServices";
 
 export const GET_SUPPLIER_LIST = "GET_SUPPLIER_LIST";
 export const ASSIGN_SUPPLIER_TO_DELETE = "ASSIGN_SUPPLIER_TO_DELETE";
 export const REMOVE_SUPPLIER_DELETED = "REMOVE_SUPPLIER_DELETED";
 export const CREATE_NEW_SUPPLIER = "CREATE_NEW_SUPPLIER";
+export const UPDATE_SUPPLIER_PROFILE_INFO = "UPDATE_SUPPLIER_PROFILE_INFO";
 
 const initialState = {
   supplierList: {},
   supplierToDelete: {},
+  supplier: {},
 };
 
 export function getAllSupplier() {
@@ -65,7 +68,15 @@ export function deleteSupplier(supplierToDelete) {
   };
 }
 
-export function createNewSupplier(dni, name, contact1, email1, phone1) {
+export function createNewSupplier(
+  dni,
+  name,
+  contact1,
+  email1,
+  phone1,
+  country,
+  city
+) {
   return async function (dispatch) {
     try {
       const { data } = await supplierRegister(
@@ -73,7 +84,9 @@ export function createNewSupplier(dni, name, contact1, email1, phone1) {
         name,
         contact1,
         email1,
-        phone1
+        phone1,
+        country,
+        city
       );
       dispatch({
         type: CREATE_NEW_SUPPLIER,
@@ -93,6 +106,32 @@ export function createNewSupplier(dni, name, contact1, email1, phone1) {
         text: `Something went wrong`,
         button: "OK",
       });
+    }
+  };
+}
+
+export function updateSupplierProfileInfo(supplier, contact1, email1, phone1) {
+  return async function (dispatch) {
+    try {
+      const { data } = await supplierUpdate(supplier, contact1, email1, phone1);
+      dispatch({
+        type: UPDATE_SUPPLIER_PROFILE_INFO,
+        payload: data,
+      });
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `Supplier information has been updated successfully!`,
+        button: "OK",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Something went wrong",
+        button: "OK",
+      });
+      console.log(error.message);
     }
   };
 }
@@ -127,6 +166,12 @@ function reducer(state = initialState, action) {
       };
     }
 
+    case UPDATE_SUPPLIER_PROFILE_INFO: {
+      return {
+        ...state,
+        supplier: action.payload,
+      };
+    }
     default: {
       return state;
     }

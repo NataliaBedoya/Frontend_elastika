@@ -1,4 +1,4 @@
-.MainView {
+.MaterialsView {
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -6,7 +6,7 @@
   align-items: flex-start;
 }
 
-.MainView-blockLogoNav {
+.MaterialsView-blockLogoNav {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +14,11 @@
   width: 30%;
 }
 
-.MainView-logo {
+.MaterialsView-logo {
   padding-top: 35px;
   padding-bottom: 25px;
 }
-.MainView-InfoBlock {
+.MaterialsView-InfoBlock {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -28,4 +28,9 @@
   color: #2f4457;
   font-weight: lighter;
   width: 70%;
+}
+
+.MaterialsView-materialmanagerblock {
+  border: 0.5px solid #ced4da;
+  padding: 0.375rem 0.75rem;
 }

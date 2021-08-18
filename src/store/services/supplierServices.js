@@ -17,7 +17,15 @@ export async function destroySupplier(supplierId) {
   });
 }
 
-export async function supplierRegister(dni, name, contact1, email1, phone1) {
+export async function supplierRegister(
+  dni,
+  name,
+  contact1,
+  email1,
+  phone1,
+  country,
+  city
+) {
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
@@ -25,6 +33,22 @@ export async function supplierRegister(dni, name, contact1, email1, phone1) {
     data: {
       dni,
       name,
+      contact1,
+      email1,
+      phone1,
+      country,
+      city,
+    },
+  });
+}
+
+export async function supplierUpdate(supplierId, contact1, email1, phone1) {
+  return await axios({
+    method: "PUT",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/supplier/supplierUpdate",
+    data: {
+      supplierId,
       contact1,
       email1,
       phone1,

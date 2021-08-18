@@ -15,7 +15,7 @@ function ActionBar() {
       <ul className="list-group list-group-flush">
         <Link to="/MainView" className="list-group-item">
           {" "}
-          Profile{" "}
+          Home{" "}
         </Link>
         <Link to="/ReportsView" className="list-group-item">
           {" "}

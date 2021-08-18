@@ -1,47 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUser, assignUserToDelete } from "../../store/selectUserReducer";
 
-function UsersList() {
+import {
+  getAllMaterials,
+  assignMaterialToDelete,
+} from "../../store/selectMaterialReducer";
+
+function MaterialsList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllUser());
+    dispatch(getAllMaterials());
   }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
-    dispatch(assignUserToDelete(id));
+    dispatch(assignMaterialToDelete(id));
   };
 
-  const { userList } = useSelector((state) => {
+  const { materialList } = useSelector((state) => {
     return {
-      userList: state.selectUserReducer.userList,
+      materialList: state.selectMaterialReducer.materialList,
     };
   });
 
   const renderTable = () => {
     return (
-      !!userList &&
-      userList.length > 0 &&
-      userList.map((user) => {
+      !!materialList &&
+      materialList.length > 0 &&
+      materialList.map((material) => {
         return (
           <tr>
             <th>
               <input
                 type="radio"
-                id={user._id}
-                name="userToDelete"
-                value={user._id}
+                id={material._id}
+                name="materialToDelete"
+                value={material._id}
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>
-              {user.name} {user.lastname}
-            </td>
-            <td>{user.role}</td>
-            <td>{user.email}</td>
+            <td>{material.name}</td>
+            <td>{material.description}</td>
+            <td>{material.threshold}</td>
           </tr>
         );
       })
@@ -50,13 +52,13 @@ function UsersList() {
 
   return (
     <table className="table table-striped">
-      <caption>List of users</caption>
+      <caption>List of materials</caption>
       <thead>
         <tr>
           <th>Select</th>
           <th>Name</th>
-          <th>Role</th>
-          <th>Email</th>
+          <th>Description</th>
+          <th>Threshold (kg)</th>
         </tr>
       </thead>
       <tbody>{renderTable()}</tbody>
@@ -64,4 +66,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default MaterialsList;
