@@ -43,7 +43,7 @@ function UserInformationUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <label htmlFor="name" style={{ color: "black" }}>
+              <label htmlFor="name">
                 <strong> Name: </strong>
               </label>
               <input
@@ -55,7 +55,7 @@ function UserInformationUpdate() {
                 onChange={(e) => setName(e.target.value)}
                 value={name}
               />
-              <label htmlFor="lastname" style={{ color: "black" }}>
+              <label htmlFor="lastname">
                 <strong> Lastname: </strong>
               </label>
               <input
@@ -66,7 +66,7 @@ function UserInformationUpdate() {
                 onChange={(e) => setLastname(e.target.value)}
                 value={lastname}
               />
-              <label htmlFor="role" style={{ color: "black" }}>
+              <label htmlFor="role">
                 <strong> Role: </strong>
               </label>
               <input
@@ -77,7 +77,7 @@ function UserInformationUpdate() {
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
               />
-              <label htmlFor="password" style={{ color: "black" }}>
+              <label htmlFor="password">
                 <strong> Password: </strong>
               </label>
               <input

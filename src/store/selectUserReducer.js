@@ -131,7 +131,7 @@ export function updateUserProfileInfo(name, lastname, role, password) {
   return async function (dispatch) {
     try {
       const authorizationToken = localStorage.getItem("token");
-      const { data: dataUpdate } = await userUpdate(
+      const { data } = await userUpdate(
         authorizationToken,
         name,
         lastname,
@@ -140,7 +140,7 @@ export function updateUserProfileInfo(name, lastname, role, password) {
       );
       dispatch({
         type: UPDATE_USER_PROFILE_INFO,
-        payload: dataUpdate,
+        payload: data,
       });
       Swal.fire({
         title: "Confirmation",
@@ -168,7 +168,7 @@ function reducer(state = initialState, action) {
         user: action.payload,
       };
     }
-    ////
+
     case GET_USER_LIST: {
       return {
         ...state,

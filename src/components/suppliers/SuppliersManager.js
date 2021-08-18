@@ -4,6 +4,7 @@ import {
   deleteSupplier,
   createNewSupplier,
 } from "../../store/selectSupplierReducer";
+import SupplierInformationUpdate from "./SupplierInformationUpdate";
 
 function SuppliersManager() {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ function SuppliersManager() {
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   const { supplierToDelete } = useSelector((state) => {
     return {
@@ -20,13 +23,16 @@ function SuppliersManager() {
   });
 
   const handleCreate = (e) => {
-    dispatch(createNewSupplier(dni, name, contact1, email1, phone1));
+    console.log(dni, name, contact1, email1, phone1, country, city);
+    dispatch(
+      createNewSupplier(dni, name, contact1, email1, phone1, country, city)
+    );
   };
 
   const handleDelete = () => {
     dispatch(deleteSupplier(supplierToDelete));
   };
-  /////
+
   return (
     <div>
       <div>
@@ -61,6 +67,27 @@ function SuppliersManager() {
             value={name}
           />
         </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Country and city</span>
+          <input
+            id="country "
+            type="text"
+            aria-label="country"
+            className="form-control"
+            onChange={(e) => setCountry(e.target.value)}
+            value={country}
+          />
+          <input
+            id="city"
+            type="text"
+            aria-label="city"
+            class="form-control"
+            onChange={(e) => setCity(e.target.value)}
+            value={city}
+          />
+        </div>
+
         <div className="input-group mb-3">
           <span className="input-group-text" id="lastname">
             Contact Name
@@ -112,6 +139,15 @@ function SuppliersManager() {
           >
             Create New Supplier
           </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#supplierUpdateModal"
+            className="btn btn-outline-secondary"
+            style={{ marginLeft: 10 }}
+          >
+            Update Supplier
+          </button>
         </div>
         <hr />
         <h6>
@@ -127,6 +163,7 @@ function SuppliersManager() {
           </button>
         </div>
       </div>
+      <SupplierInformationUpdate />
     </div>
   );
 }
