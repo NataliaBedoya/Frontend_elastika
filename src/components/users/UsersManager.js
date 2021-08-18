@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteUser, createNewUser } from "../../store/selectUserReducer";
+import UserInformationUpdate from "./UserInformationUpdate";
 
 function UsersManager() {
   const dispatch = useDispatch();
@@ -99,7 +100,7 @@ function UsersManager() {
             value={password}
           />
         </div>
-        <div>
+        <div className="Users-button-container">
           <button
             type="button"
             className="btn btn-outline-secondary"
@@ -107,10 +108,19 @@ function UsersManager() {
           >
             Create New User
           </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#userUpdateModal"
+            className="btn btn-outline-secondary"
+            style={{ marginLeft: 10 }}
+          >
+            Update User
+          </button>
         </div>
         <hr />
         <h6>
-          To delete a user, select it in the table and then click the button
+          To delete a user, select it in the table and then click the button.
         </h6>
         <div>
           <button
@@ -122,6 +132,7 @@ function UsersManager() {
           </button>
         </div>
       </div>
+      <UserInformationUpdate />
     </div>
   );
 }
