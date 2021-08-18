@@ -23,7 +23,6 @@ function SuppliersManager() {
   });
 
   const handleCreate = (e) => {
-    console.log(dni, name, contact1, email1, phone1, country, city);
     dispatch(
       createNewSupplier(dni, name, contact1, email1, phone1, country, city)
     );

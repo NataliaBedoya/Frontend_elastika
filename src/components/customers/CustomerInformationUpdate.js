@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllSupplier,
-  updateSupplierProfileInfo,
-} from "../../store/selectSupplierReducer";
+  getAllCustomer,
+  updateCustomerProfileInfo,
+} from "../../store/selectCustomerReducer";
 
-function SupplierInformationUpdate() {
+function CustomerInformationUpdate() {
   const dispatch = useDispatch();
-  const [supplier, setSupplier] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [businessPhone, setBusinessPhone] = useState("");
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
 
   useEffect(() => {
-    dispatch(getAllSupplier());
+    dispatch(getAllCustomer());
   }, []);
 
-  const { supplierList } = useSelector((state) => {
+  const { customerList } = useSelector((state) => {
     return {
-      supplierList: state.selectSupplierReducer.supplierList,
+      customerList: state.selectCustomerReducer.customerList,
     };
   });
 
   const handleUpdate = () => {
-    dispatch(updateSupplierProfileInfo(supplier, contact1, email1, phone1));
+    console.log(customer, businessPhone, contact1, email1, phone1);
+    dispatch(
+      updateCustomerProfileInfo(
+        customer,
+        businessPhone,
+        contact1,
+        email1,
+        phone1
+      )
+    );
   };
 
   return (
@@ -35,7 +45,7 @@ function SupplierInformationUpdate() {
     >
       <div
         className="modal fade"
-        id="supplierUpdateModal"
+        id="customersUpdateModal"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -46,7 +56,7 @@ function SupplierInformationUpdate() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Supplier Information Update
+                Customer Information Update
               </h5>
               <button
                 type="button"
@@ -56,22 +66,33 @@ function SupplierInformationUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <h6>Select the supplier you want to update.</h6>
+              <h6>Select the customer you want to update.</h6>
 
               <select
                 class="form-select"
-                id="supplier"
+                id="customer"
                 aria-label="Example select with button addon"
-                onChange={(e) => setSupplier(e.target.value)}
+                onChange={(e) => setCustomer(e.target.value)}
               >
-                <option selected> Choose a supplier</option>
-                {!!supplierList &&
-                  supplierList.length > 0 &&
-                  supplierList.map((supplier) => (
-                    <option value={supplier._id}>{supplier.name}</option>
+                <option selected> Choose a customer</option>
+                {!!customerList &&
+                  customerList.length > 0 &&
+                  customerList.map((customer) => (
+                    <option value={customer._id}>{customer.name}</option>
                   ))}
               </select>
               <hr />
+              <label htmlFor="businessPhone">
+                <strong> Business Phone: </strong>
+              </label>
+              <input
+                id="businessPhone"
+                type="text"
+                name="businessPhone"
+                className="form-control"
+                onChange={(e) => setBusinessPhone(e.target.value)}
+                value={businessPhone}
+              />
               <label htmlFor="contact1">
                 <strong> Contact Name: </strong>
               </label>
@@ -125,4 +146,4 @@ function SupplierInformationUpdate() {
   );
 }
 
-export default SupplierInformationUpdate;
+export default CustomerInformationUpdate;

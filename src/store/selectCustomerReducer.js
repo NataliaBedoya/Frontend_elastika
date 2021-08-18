@@ -4,14 +4,18 @@ import {
   getCustomerList,
   destroyCustomer,
   customerRegister,
+  customerUpdate,
+  deleteContact,
 } from "./services/customerServices";
 
 export const GET_CUSTOMER_LIST = "GET_CUSTOMER_LIST";
 export const ASSIGN_CUSTOMER_TO_DELETE = "ASSIGN_CUSTOMER_TO_DELETE";
 export const REMOVE_CUSTOMER_DELETED = "REMOVE_CUSTOMER_DELETED";
 export const CREATE_NEW_CUSTOMER = "CREATE_NEW_CUSTOMER";
+export const UPDATE_CUSTOMER_PROFILE_INFO = "UPDATE_CUSTOMER_PROFILE_INFO";
 
 const initialState = {
+  customer: {},
   customerList: {},
   customerToDelete: {},
 };
@@ -65,15 +69,29 @@ export function deleteCustomer(customerToDelete) {
   };
 }
 
-export function createNewCustomer(dni, name, contact1, email1, phone1) {
+export function createNewCustomer(
+  dni,
+  name,
+  businessPhone,
+  contact1,
+  email1,
+  phone1,
+  contact2,
+  email2,
+  phone2
+) {
   return async function (dispatch) {
     try {
       const { data } = await customerRegister(
         dni,
         name,
+        businessPhone,
         contact1,
         email1,
-        phone1
+        phone1,
+        contact2,
+        email2,
+        phone2
       );
       dispatch({
         type: CREATE_NEW_CUSTOMER,
@@ -93,6 +111,70 @@ export function createNewCustomer(dni, name, contact1, email1, phone1) {
         text: `Something went wrong`,
         button: "OK",
       });
+    }
+  };
+}
+
+export function updateCustomerProfileInfo(
+  customer,
+  businessPhone,
+  contact1,
+  email1,
+  phone1
+) {
+  return async function (dispatch) {
+    try {
+      const { data } = await customerUpdate(
+        customer,
+        businessPhone,
+        contact1,
+        email1,
+        phone1
+      );
+      dispatch({
+        type: UPDATE_CUSTOMER_PROFILE_INFO,
+        payload: data,
+      });
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `Customer information has been updated successfully!`,
+        button: "OK",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Something went wrong",
+        button: "OK",
+      });
+      console.log(error.message);
+    }
+  };
+}
+
+export function deleteAdditionalContact(customer) {
+  return async function (dispatch) {
+    try {
+      const { data } = await deleteContact(customer);
+      dispatch({
+        type: UPDATE_CUSTOMER_PROFILE_INFO,
+        payload: data,
+      });
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `Customer information has been updated successfully!`,
+        button: "OK",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Something went wrong",
+        button: "OK",
+      });
+      console.log(error.message);
     }
   };
 }
@@ -124,6 +206,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         customerList: state.customerList.concat(action.payload),
+      };
+    }
+    case UPDATE_CUSTOMER_PROFILE_INFO: {
+      return {
+        ...state,
+        customer: action.payload,
       };
     }
 
