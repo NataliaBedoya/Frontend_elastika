@@ -1,8 +1,11 @@
+import React from "react";
+
 import logo from "../assets/images/logo.png";
 import ActionBar from "../components/general/ActionBar";
 import AvailableProduct from "../components/availableProduct/AvailableProductTable";
 import UpdateManager from "../components/updateProduct/UpdateManager";
 import CommittedProductManager from "../components/committedProduct/CommitedProductManager";
+import ProductInTransitManager from "../components/productInTransit/ProductInTransitManager";
 
 import "../styles/MainView.css";
 
@@ -17,15 +20,14 @@ function MainView() {
           <ActionBar />
         </div>
       </div>
-
       <div className="MainView-InfoBlock">
         <nav>
-          <ul class="nav nav-tabs" id="nav-tab" role="tablist">
-            <li class="nav-item" role="presentation">
+          <ul className="nav nav-tabs nav-fill" id="nav-tab">
+            <li className="nav-item">
               <button
-                // class="nav-link active"
-                class="nav-link"
+                className="nav-link active"
                 id="available-tab"
+                href="#available"
                 data-bs-toggle="tab"
                 data-bs-target="#available"
                 type="button"
@@ -36,10 +38,11 @@ function MainView() {
                 Available Product
               </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li className="nav-item">
               <button
-                class="nav-link"
+                className="nav-link"
                 id="update-tab"
+                href="#update"
                 data-bs-toggle="tab"
                 data-bs-target="#update"
                 type="button"
@@ -50,10 +53,11 @@ function MainView() {
                 Update Stock
               </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li className="nav-item">
               <button
-                class="nav-link"
+                className="nav-link"
                 id="commit-tab"
+                href="#commit"
                 data-bs-toggle="tab"
                 data-bs-target="#commit"
                 type="button"
@@ -64,10 +68,11 @@ function MainView() {
                 Committed product
               </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li className="nav-item">
               <button
-                class="nav-link"
+                className="nav-link"
                 id="transit-tab"
+                href="#transit"
                 data-bs-toggle="tab"
                 data-bs-target="#transit"
                 type="button"
@@ -80,10 +85,10 @@ function MainView() {
             </li>
           </ul>
         </nav>
-        <div class="tab-content" id="nav-tabContent">
+        <div className="tab-content" id="nav-tabContent">
           <div
-            class="tab-pane fade show active"
-            id="available-tab"
+            className="tab-pane fade show active"
+            id="available"
             role="tabpanel"
             aria-labelledby="available-tab"
           >
@@ -96,7 +101,7 @@ function MainView() {
             <AvailableProduct />
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="update"
             role="tabpanel"
             aria-labelledby="update-tab"
@@ -107,7 +112,7 @@ function MainView() {
             <UpdateManager />
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="commit"
             role="tabpanel"
             aria-labelledby="commit-tab"
@@ -116,6 +121,17 @@ function MainView() {
             <h2>Commit product</h2>
             <hr />
             <CommittedProductManager />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="transit"
+            role="tabpanel"
+            aria-labelledby="transit-tab"
+          >
+            <br />
+            <h2>Product in transit</h2>
+            <hr />
+            <ProductInTransitManager />
           </div>
         </div>
       </div>
