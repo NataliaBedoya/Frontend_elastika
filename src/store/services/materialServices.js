@@ -17,7 +17,7 @@ export async function destroyMaterial(materialId) {
   });
 }
 
-export async function materialRegister(name, description) {
+export async function materialRegister(name, description, threshold) {
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
@@ -25,6 +25,28 @@ export async function materialRegister(name, description) {
     data: {
       name,
       description,
+      threshold,
     },
+  });
+}
+
+export async function batchCreation(token, materialId, batch) {
+  return await axios({
+    method: "POST",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/stock/create",
+    data: { materialId, batch },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export async function thresholdUpdate(materialId, threshold) {
+  return await axios({
+    method: "PUT",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/material/materialUpdate",
+    data: { materialId, threshold },
   });
 }
