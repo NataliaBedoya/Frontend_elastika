@@ -5,12 +5,14 @@ import selectUserReducer from "./selectUserReducer";
 import selectSupplierReducer from "./selectSupplierReducer";
 import selectCustomerReducer from "./selectCustomerReducer";
 import selectMaterialReducer from "./selectMaterialReducer";
+import selectReportReducer from "./selectReportReducer";
 
 const rootReducer = combineReducers({
   selectUserReducer,
   selectSupplierReducer,
   selectCustomerReducer,
   selectMaterialReducer,
+  selectReportReducer,
 });
 
 const middlewares = applyMiddleware(thunk);
