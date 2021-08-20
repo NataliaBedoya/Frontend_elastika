@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllMaterials } from "../../store/selectMaterialReducer";
+import {
+  getAllMaterials,
+  deleteBatch,
+  updateStockInfo,
+} from "../../store/selectMaterialReducer";
+import { getStock } from "../../store/selectReportReducer";
 import CreateNewBatch from "./CreateNewBatch";
 
 function UpdateManager() {
@@ -11,17 +16,26 @@ function UpdateManager() {
 
   useEffect(() => {
     dispatch(getAllMaterials());
+    dispatch(getStock());
   }, []);
 
-  const { materialList } = useSelector((state) => {
+  const { materialList, stockByMaterial } = useSelector((state) => {
     return {
       materialList: state.selectMaterialReducer.materialList,
+      stockByMaterial: state.selectReportReducer.stockByMaterial,
     };
   });
 
-  const handleSelectMaterial = () => {
-    console.log(material);
-    // dispatch(getStockByMaterial(material));
+  const batchToShow = stockByMaterial.filter(
+    (batch) => batch.material === material
+  );
+
+  const handleUpdate = () => {
+    if (parseInt(amountInStock) === 0) {
+      dispatch(deleteBatch(batch));
+    } else {
+      dispatch(updateStockInfo(batch, amountInStock));
+    }
   };
 
   return (
@@ -42,13 +56,6 @@ function UpdateManager() {
                 <option value={material._id}>{material.name}</option>
               ))}
           </select>
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            onClick={handleSelectMaterial}
-          >
-            🔍
-          </button>
         </div>
         <br />
         <h6>Select the material batch.</h6>
@@ -57,18 +64,15 @@ function UpdateManager() {
             class="form-select"
             id="material"
             aria-label="Example select with button addon"
-            onChange={(e) => setMaterial(e.target.value)}
+            onChange={(e) => setBatch(e.target.value)}
           >
-            <option selected> Choose a material</option>
-            {!!materialList &&
-              materialList.length > 0 &&
-              materialList.map((material) => (
-                <option value={material.name}>{material.name}</option>
+            <option selected> Choose a batch</option>
+            {!!batchToShow &&
+              batchToShow.length > 0 &&
+              batchToShow.map((element) => (
+                <option value={element._id}>{element.batch}</option>
               ))}
           </select>
-          <button class="btn btn-outline-secondary" type="button">
-            🔍
-          </button>
         </div>
         <br />
         <div className="input-group mb-3">
@@ -90,7 +94,7 @@ function UpdateManager() {
           <button
             type="button"
             className="btn btn-outline-secondary"
-            // onClick={handleUpdate}
+            onClick={handleUpdate}
           >
             Update register
           </button>

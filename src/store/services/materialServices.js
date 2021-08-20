@@ -31,14 +31,34 @@ export async function materialRegister(name, description, threshold) {
 }
 
 export async function batchCreation(token, materialId, batch) {
+  console.log("batch creation");
+  console.log(materialId, batch);
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/stock/create",
     data: { materialId, batch },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${token}`,
+    // },
+  });
+}
+
+export async function destroyBatch(batchId) {
+  return await axios({
+    method: "DELETE",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/stock/stockDelete",
+    data: { batchId },
+  });
+}
+
+export async function amountUpdate(batchId, amountInStock) {
+  return await axios({
+    method: "PUT",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/stock/stockUpdate",
+    data: { batchId, amountInStock },
   });
 }
 
@@ -49,4 +69,33 @@ export async function thresholdUpdate(materialId, threshold) {
     url: "/material/materialUpdate",
     data: { materialId, threshold },
   });
+}
+
+export function commitMaterial(
+  token,
+  materialId,
+  amount,
+  customerId,
+  order,
+  notes,
+  assignmentDate,
+  deliveryDate
+) {
+  // return await axios({
+  //   method: "POST",
+  //   baseURL: process.env.REACT_APP_SERVER_URL,
+  //   url: "/commit/create",
+  //   data: {
+  //     materialId,
+  //     amount,
+  //     customerId,
+  //     order,
+  //     notes,
+  //     assignmentDate,
+  //     deliveryDate,
+  //   },
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 }
