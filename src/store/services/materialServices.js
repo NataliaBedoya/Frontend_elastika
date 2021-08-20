@@ -71,7 +71,7 @@ export async function thresholdUpdate(materialId, threshold) {
   });
 }
 
-export function commitMaterial(
+export async function commitMaterial(
   token,
   materialId,
   amount,
@@ -81,21 +81,21 @@ export function commitMaterial(
   assignmentDate,
   deliveryDate
 ) {
-  // return await axios({
-  //   method: "POST",
-  //   baseURL: process.env.REACT_APP_SERVER_URL,
-  //   url: "/commit/create",
-  //   data: {
-  //     materialId,
-  //     amount,
-  //     customerId,
-  //     order,
-  //     notes,
-  //     assignmentDate,
-  //     deliveryDate,
-  //   },
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
+  return await axios({
+    method: "POST",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/commit/create",
+    data: {
+      materialId,
+      amount,
+      customerId,
+      order,
+      notes,
+      assignmentDate,
+      deliveryDate,
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
