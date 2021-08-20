@@ -26,7 +26,9 @@ function AvailableProduct() {
           <tr>
             <td>{material.name}</td>
             <td>{material.description}</td>
-            <td>{material.threshold}</td>
+            <td>
+              {new Intl.NumberFormat().format(parseInt(material.threshold))}
+            </td>
           </tr>
         );
       })
