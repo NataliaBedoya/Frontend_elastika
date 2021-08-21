@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getAllSupplier,
-  assignSupplierToDelete,
-} from "../../store/selectSupplierReducer";
+import { assignSupplierToDelete } from "../../store/selectSupplierReducer";
 
 function SuppliersList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllSupplier());
-  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
