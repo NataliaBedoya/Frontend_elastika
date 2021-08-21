@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCustomer,
-  deleteAdditionalContact,
-} from "../../store/selectCustomerReducer";
+import { deleteAdditionalContact } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
   const [customer, setCustomer] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-  }, []);
 
   const { customerList } = useSelector((state) => {
     return {

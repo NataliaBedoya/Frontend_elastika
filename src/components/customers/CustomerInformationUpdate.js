@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCustomer,
-  updateCustomerProfileInfo,
-} from "../../store/selectCustomerReducer";
+import { updateCustomerProfileInfo } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
@@ -12,10 +9,6 @@ function CustomerInformationUpdate() {
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-  }, []);
 
   const { customerList } = useSelector((state) => {
     return {

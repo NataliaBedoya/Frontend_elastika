@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getAllCustomer,
-  assignCustomerToDelete,
-} from "../../store/selectCustomerReducer";
+import { assignCustomerToDelete } from "../../store/selectCustomerReducer";
 
 function CustomerList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
