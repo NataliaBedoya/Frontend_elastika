@@ -96,7 +96,7 @@ function MainView() {
             <h2>Stock</h2>
             <hr />
             <h6>
-              Quantity of product available to date {new Date().toDateString()}
+              Quantity of product available to date {new Date().toDateString()}.
             </h6>
             <AvailableProduct />
           </div>
