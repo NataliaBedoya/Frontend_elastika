@@ -1,17 +1,16 @@
 import Swal from "sweetalert2";
 
 import {
-
   batchCreation,
   getMaterialList,
   destroyMaterial,
   materialRegister,
   thresholdUpdate,
   commitMaterial,
+  destroyCommit,
   destroyBatch,
   amountUpdate,
   transitRegister,
-
 } from "./services/materialServices";
 
 export const GET_MATERIAL_LIST = "GET_MATERIAL_LIST";
@@ -23,6 +22,7 @@ export const GET_MATERIAL_TO_UPDATE = "GET_MATERIAL_TO_UPDATE";
 export const CREATE_NEW_BATCH = "CREATE_NEW_BATCH";
 export const UPDATE_THRESHOLD = "UPDATE_THRESHOLD";
 export const ASSIGN_MATERIAL_TO_CUSTOMER = "ASSIGN_MATERIAL_TO_CUSTOMER";
+export const REMOVE_COMMIT = "REMOVE_COMMIT";
 export const REMOVE_BATCH = "REMOVE_BATCH";
 export const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
@@ -34,7 +34,6 @@ const initialState = {
   materialToUpdate: {},
   assignedMaterial: {},
   productInTransit: {},
-
 };
 
 export function getAllMaterials() {
@@ -85,7 +84,6 @@ export function deleteMaterial(materialToDelete) {
     }
   };
 }
-
 
 export function createNewMaterial(name, description, threshold) {
   return async function (dispatch) {
@@ -268,6 +266,32 @@ export function assignMaterialToCustomer(
   };
 }
 
+export function deleteCommit(order) {
+  return async function (dispatch) {
+    try {
+      const { data } = await destroyCommit(order);
+      dispatch({
+        type: REMOVE_COMMIT,
+        payload: data,
+      });
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `The assignment has been successfully deleted!`,
+        button: "OK",
+      });
+    } catch (error) {
+      console.log(error.message);
+      Swal.fire({
+        title: "Alert",
+        icon: "error",
+        text: `Something went wrong`,
+        button: "OK",
+      });
+    }
+  };
+}
+
 export function registerMaterialInTransit(
   order,
   orderDate,
@@ -318,7 +342,6 @@ export function registerMaterialInTransit(
   };
 }
 
-
 function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_MATERIAL_LIST: {
@@ -342,8 +365,12 @@ function reducer(state = initialState, action) {
       };
     }
 
-
     case REMOVE_BATCH: {
+      return {
+        ...state,
+      };
+    }
+    case REMOVE_COMMIT: {
       return {
         ...state,
       };
@@ -355,14 +382,12 @@ function reducer(state = initialState, action) {
       };
     }
 
-
     case CREATE_NEW_MATERIAL: {
       return {
         ...state,
         materialList: state.materialList.concat(action.payload),
       };
     }
-
 
     case GET_MATERIAL_TO_UPDATE: {
       return {

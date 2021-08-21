@@ -5,6 +5,7 @@ import {
   assignMaterialToCustomer,
 } from "../../store/selectMaterialReducer";
 import { getAllCustomer } from "../../store/selectCustomerReducer";
+import DeleteAssignment from "./DeleteAssignment";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
@@ -179,13 +180,15 @@ function CommittedProductManager() {
         <div>
           <button
             type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteAssignmentModal"
             className="btn btn-outline-secondary"
-            onClick={handleDelete}
           >
             Delete Assignment
           </button>
         </div>
       </div>
+      <DeleteAssignment />
     </div>
   );
 }
