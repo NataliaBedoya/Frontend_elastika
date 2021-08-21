@@ -1,28 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// import {
-//   deleteMaterial,
-//   createNewMaterial,
-// } from "../../store/selectMaterialReducer";
+
+import {
+  registerMaterialInTransit,
+  getAllMaterials,
+} from "../../store/selectMaterialReducer";
+import { getAllSupplier } from "../../store/selectSupplierReducer";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
+  const [order, setOrder] = useState("");
+  const [orderDate, setOrderDate] = useState("");
+  const [supplier, setSupplier] = useState("");
   const [material, setMaterial] = useState("");
   const [amount, setAmount] = useState("");
-  const [customer, setCustomer] = useState("");
+  const [transactionType, setTransactionType] = useState("");
+  const [shipmentDate, setShipmentDate] = useState("");
+  const [arrivalDate, setArrivalDate] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
   const [notes, setNotes] = useState("");
-  const [date, setDate] = useState("");
 
-  // const { materialToDelete } = useSelector((state) => {
-  //   return {
-  //     materialToDelete: state.selectMaterialReducer.materialToDelete,
-  //   };
-  // });
+  const { materialList, supplierList } = useSelector((state) => {
+    return {
+      materialList: state.selectMaterialReducer.materialList,
+      supplierList: state.selectSupplierReducer.supplierList,
+    };
+  });
 
-  const handleAssign = (e) => {
-    console.log("assign");
+  useEffect(() => {
+    dispatch(getAllMaterials());
+    dispatch(getAllSupplier());
+  }, []);
+
+  const handleRegister = (e) => {
+    dispatch(
+      registerMaterialInTransit(
+        order,
+        orderDate,
+        supplier,
+        material,
+        amount,
+        transactionType,
+        shipmentDate,
+        arrivalDate,
+        releaseDate,
+        notes
+      )
+    );
   };
 
   const handleDelete = () => {
@@ -33,22 +57,73 @@ function CommittedProductManager() {
     <div>
       <div>
         <h6>
-          To commit a material to a customer, fill out the following form.
+          To monitor the import process of a product, fill out the following
+          form.
         </h6>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="order">
+            Order number
+          </span>
+          <input
+            autoFocus
+            id="order"
+            type="text"
+            className="form-control"
+            aria-label="order"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setOrder(e.target.value)}
+            value={order}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="orderDate">
+            Order Date
+          </span>
+          <input
+            id="orderDate"
+            type="date"
+            className="form-control"
+            aria-label="orderDate"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setOrderDate(e.target.value)}
+            value={orderDate}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="supplier">
+            Supplier
+          </span>
+          <select
+            className="form-select"
+            id="supplier"
+            aria-label="Example select with button addon"
+            onChange={(e) => setSupplier(e.target.value)}
+          >
+            <option selected> Choose a supplier</option>
+            {!!supplierList &&
+              supplierList.length > 0 &&
+              supplierList.map((supplier) => (
+                <option value={supplier._id}>{supplier.name}</option>
+              ))}
+          </select>
+        </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="material">
             Material
           </span>
-          <input
-            autoFocus
+          <select
+            className="form-select"
             id="material"
-            type="text"
-            className="form-control"
-            aria-label="material"
-            aria-describedby="basic-addon1"
+            aria-label="Example select with button addon"
             onChange={(e) => setMaterial(e.target.value)}
-            value={material}
-          />
+          >
+            <option selected> Choose a material</option>
+            {!!materialList &&
+              materialList.length > 0 &&
+              materialList.map((material) => (
+                <option value={material._id}>{material.name}</option>
+              ))}
+          </select>
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="amount">
@@ -64,43 +139,77 @@ function CommittedProductManager() {
             value={amount}
           />
         </div>
-        <div className="input-group mb-3">
-          <span className="input-group-text" id="customer">
-            Customer
-          </span>
-          <input
-            id="customer"
-            type="text"
-            className="form-control"
-            aria-label="customer"
-            aria-describedby="basic-addon1"
-            onChange={(e) => setCustomer(e.target.value)}
-            value={customer}
-          />
-        </div>
 
         <div className="input-group mb-3">
-          <span className="input-group-text" id="date">
-            Date
+          <span className="input-group-text" id="transactionType">
+            Transaction Type
+          </span>
+          <select
+            className="form-select"
+            id="transactionType"
+            aria-label="Example select with button addon"
+            onChange={(e) => setTransactionType(e.target.value)}
+          >
+            <option selected> Choose an option</option>
+            <option>100% anticipated</option>
+            <option>50% anticipated - 50% cash against documents</option>
+            <option>30% anticipated - 70% cash against documents</option>
+            <option>20% anticipated - 80% cash against documents</option>
+            <option>100% on credit at 90 days from the B/L date</option>
+          </select>
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="shipmentDate">
+            Shipment Date
           </span>
           <input
-            id="date"
+            id="shipmentDate"
+            min={orderDate}
             type="date"
             className="form-control"
-            aria-label="date"
+            aria-label="shipmentDate"
             aria-describedby="basic-addon1"
-            onChange={(e) => setDate(e.target.value)}
-            value={date}
+            onChange={(e) => setShipmentDate(e.target.value)}
+            value={shipmentDate}
           />
         </div>
-
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="arrivalDate">
+            Arrival Date
+          </span>
+          <input
+            id="arrivalDate"
+            min={shipmentDate}
+            type="date"
+            className="form-control"
+            aria-label="arrivalDate"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setArrivalDate(e.target.value)}
+            value={arrivalDate}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="releaseDate">
+            Release Date
+          </span>
+          <input
+            id="releaseDate"
+            type="date"
+            min={arrivalDate}
+            className="form-control"
+            aria-label="releaseDate"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setReleaseDate(e.target.value)}
+            value={releaseDate}
+          />
+        </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="notes">
             Notes
           </span>
           <input
             id="notes"
-            type="text"
+            type="textarea"
             className="form-control"
             aria-label="notes"
             aria-describedby="basic-addon1"
@@ -112,15 +221,14 @@ function CommittedProductManager() {
           <button
             type="button"
             className="btn btn-outline-secondary"
-            onClick={handleAssign}
+            onClick={handleRegister}
           >
-            Assign Material
+            Register Order
           </button>
         </div>
         <hr />
         <h6>
-          To delete an assignment, select it in the table and then click the
-          button
+          To delete an order, select it in the table and then click the button
         </h6>
         <div>
           <button

@@ -99,3 +99,38 @@ export async function commitMaterial(
     },
   });
 }
+
+export async function transitRegister(
+  token,
+  order,
+  orderDate,
+  supplierId,
+  materialId,
+  amount,
+  transactionType,
+  shipmentDate,
+  arrivalDate,
+  releaseDate,
+  notes
+) {
+  return await axios({
+    method: "POST",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/transit/create",
+    data: {
+      order,
+      orderDate,
+      supplierId,
+      materialId,
+      amount,
+      transactionType,
+      shipmentDate,
+      arrivalDate,
+      releaseDate,
+      notes,
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

@@ -152,7 +152,7 @@ function CommittedProductManager() {
           </span>
           <input
             id="notes"
-            type="text"
+            type="textarea"
             className="form-control"
             aria-label="notes"
             aria-describedby="basic-addon1"

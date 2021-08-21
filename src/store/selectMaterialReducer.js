@@ -9,6 +9,7 @@ import {
   commitMaterial,
   destroyBatch,
   amountUpdate,
+  transitRegister,
 } from "./services/materialServices";
 
 export const GET_MATERIAL_LIST = "GET_MATERIAL_LIST";
@@ -21,6 +22,7 @@ export const UPDATE_THRESHOLD = "UPDATE_THRESHOLD";
 export const ASSIGN_MATERIAL_TO_CUSTOMER = "ASSIGN_MATERIAL_TO_CUSTOMER";
 export const REMOVE_BATCH = "REMOVE_BATCH";
 export const UPDATE_AMOUNT = "UPDATE_AMOUNT";
+export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
 
 const initialState = {
   material: {},
@@ -28,6 +30,7 @@ const initialState = {
   materialToDelete: {},
   materialToUpdate: {},
   assignedMaterial: {},
+  productInTransit: {},
 };
 
 export function getAllMaterials() {
@@ -236,6 +239,56 @@ export function assignMaterialToCustomer(
         notes,
         assignmentDate,
         deliveryDate
+      );
+      dispatch({
+        type: PRODUCT_IN_TRANSIT,
+        payload: data,
+      });
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `The product in transit has been successfully registered with the purchase order ${order}`,
+        button: "OK",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Something went wrong",
+        button: "OK",
+      });
+      console.log(error.message);
+    }
+  };
+}
+
+export function registerMaterialInTransit(
+  order,
+  orderDate,
+  supplier,
+  material,
+  amount,
+  transactionType,
+  shipmentDate,
+  arrivalDate,
+  releaseDate,
+  notes
+) {
+  return async function (dispatch) {
+    try {
+      const authorizationToken = localStorage.getItem("token");
+      const { data } = await transitRegister(
+        authorizationToken,
+        order,
+        orderDate,
+        supplier,
+        material,
+        amount,
+        transactionType,
+        shipmentDate,
+        arrivalDate,
+        releaseDate,
+        notes
       );
       dispatch({
         type: ASSIGN_MATERIAL_TO_CUSTOMER,
