@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getAllMaterials,
   deleteBatch,
   updateStockInfo,
 } from "../../store/selectMaterialReducer";
-import { getStock } from "../../store/selectReportReducer";
+
 import CreateNewBatch from "./CreateNewBatch";
 
 function UpdateManager() {
@@ -13,11 +12,6 @@ function UpdateManager() {
   const [material, setMaterial] = useState("");
   const [batch, setBatch] = useState("");
   const [amountInStock, setAmountInStock] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-    dispatch(getStock());
-  }, []);
 
   const { materialList, stockByMaterial } = useSelector((state) => {
     return {

@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  createNewBatch,
-  getAllMaterials,
-} from "../../store/selectMaterialReducer";
+import { createNewBatch } from "../../store/selectMaterialReducer";
 
 function CreateNewBatch() {
   const dispatch = useDispatch();
   const [material, setMaterial] = useState("");
   const [batch, setBatch] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-  }, []);
 
   const { materialList } = useSelector((state) => {
     return {

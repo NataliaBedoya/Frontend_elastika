@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCustomer } from "../../store/selectCustomerReducer";
-import { getCommit } from "../../store/selectReportReducer";
 import { deleteCommit } from "../../store/selectMaterialReducer";
 
 function DeleteAssignment() {
   const dispatch = useDispatch();
   const [customer, setCustomer] = useState("");
   const [order, setOrder] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-    dispatch(getCommit());
-  }, []);
 
   const { customerList, commitByMaterial } = useSelector((state) => {
     return {

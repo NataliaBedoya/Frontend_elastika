@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAllMaterials,
-  assignMaterialToCustomer,
-} from "../../store/selectMaterialReducer";
-import { getAllCustomer } from "../../store/selectCustomerReducer";
+import { assignMaterialToCustomer } from "../../store/selectMaterialReducer";
+
 import DeleteAssignment from "./DeleteAssignment";
 
 function CommittedProductManager() {
@@ -16,11 +13,6 @@ function CommittedProductManager() {
   const [notes, setNotes] = useState("");
   const [assignmentDate, setAssignmentDate] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-    dispatch(getAllCustomer());
-  }, []);
 
   const { materialList, customerList } = useSelector((state) => {
     return {

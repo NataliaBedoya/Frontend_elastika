@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import {
-  registerMaterialInTransit,
-  getAllMaterials,
-} from "../../store/selectMaterialReducer";
-import { getAllSupplier } from "../../store/selectSupplierReducer";
+import { registerMaterialInTransit } from "../../store/selectMaterialReducer";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
@@ -26,11 +21,6 @@ function CommittedProductManager() {
       supplierList: state.selectSupplierReducer.supplierList,
     };
   });
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-    dispatch(getAllSupplier());
-  }, []);
 
   const handleRegister = (e) => {
     dispatch(
