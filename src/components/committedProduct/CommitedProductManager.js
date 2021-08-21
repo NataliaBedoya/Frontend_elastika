@@ -119,7 +119,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="assignmentDate">
-            Assignment *
+            Assignment Date *
           </span>
           <input
             id="assignmentDate"
@@ -134,7 +134,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="deliveryDate">
-            Delivery *
+            Delivery Date *
           </span>
           <input
             id="deliveryDate"

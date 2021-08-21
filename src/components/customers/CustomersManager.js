@@ -66,7 +66,7 @@ function CustomersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="name">
-            Business Name*
+            Business Name *
           </span>
           <input
             id="name"
@@ -94,7 +94,7 @@ function CustomersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="contact1">
-            Contact Name*
+            Contact Name *
           </span>
           <input
             id="contact1"
@@ -108,7 +108,7 @@ function CustomersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="email1">
-            Contact Email*
+            Contact Email *
           </span>
           <input
             id="email1"
@@ -122,7 +122,7 @@ function CustomersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="phone1">
-            Contact Phone*
+            Contact Phone *
           </span>
           <input
             id="phone1"

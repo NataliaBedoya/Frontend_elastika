@@ -26,13 +26,13 @@ function ReportTransitByMaterial() {
             </td>
             <td>{new Intl.NumberFormat().format(parseInt(transit.amount))}</td>
             <td>
-              Order: {new Date(transit.orderDate).toDateString()}
+              &#8226; Order: {new Date(transit.orderDate).toDateString()}
               <br />
-              Shipment: {new Date(transit.shipmentDate).toDateString()}
+              &#8226; Shipment: {new Date(transit.shipmentDate).toDateString()}
               <br />
-              Arrival: {new Date(transit.arrivalDate).toDateString()}
+              &#8226; Arrival: {new Date(transit.arrivalDate).toDateString()}
               <br />
-              Release: {new Date(transit.releaseDate).toDateString()}
+              &#8226; Release: {new Date(transit.releaseDate).toDateString()}
             </td>
             <td>
               {transit.transactionType} <hr />

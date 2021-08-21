@@ -33,7 +33,7 @@ function MaterialsManager() {
         <h6>To create a new material, fill out the following form.</h6>
         <div className="input-group mb-3">
           <span className="input-group-text" id="name">
-            Name*
+            Name *
           </span>
           <input
             autoFocus
@@ -62,7 +62,7 @@ function MaterialsManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="threshold">
-            Threshold (kg)*
+            Threshold (kg) *
           </span>
           <input
             id="threshold"

@@ -49,7 +49,7 @@ function UpdateManager() {
             aria-label="Example select with button addon"
             onChange={(e) => setMaterial(e.target.value)}
           >
-            <option selected> Choose a material</option>
+            <option selected> Choose a material *</option>
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
@@ -66,7 +66,7 @@ function UpdateManager() {
             aria-label="Example select with button addon"
             onChange={(e) => setBatch(e.target.value)}
           >
-            <option selected> Choose a batch</option>
+            <option selected> Choose a batch * </option>
             {!!batchToShow &&
               batchToShow.length > 0 &&
               batchToShow.map((element) => (
@@ -77,7 +77,7 @@ function UpdateManager() {
         <br />
         <div className="input-group mb-3">
           <span className="input-group-text" id="amountInStock">
-            Current Amount
+            Current Amount *
           </span>
           <input
             id="amountInStock"
