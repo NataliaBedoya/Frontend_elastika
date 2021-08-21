@@ -6,9 +6,11 @@ import {
   AssignMaterialToGetReport,
   getStock,
   getCommit,
+  getTransit,
 } from "../../store/selectReportReducer";
 import ReportStockByMaterial from "./ReportStockByMaterial";
 import ReportCommitByMaterial from "./ReportCommitByMaterial";
+import ReportTransitbyMaterial from "./ReportTransitbyMaterial";
 
 function MaterialsManager() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ function MaterialsManager() {
     dispatch(getAllMaterials());
     dispatch(getStock());
     dispatch(getCommit());
+    dispatch(getTransit());
   }, []);
 
   const { customerList, materialList } = useSelector((state) => {
@@ -93,11 +96,14 @@ function MaterialsManager() {
             </button>
           </div>
           <hr />
-          <h4>Material in stock</h4>
+          <h4>Material in Stock</h4>
           <ReportStockByMaterial />
           <hr />
-          <h4>Commited material</h4>
+          <h4>Commited Material</h4>
           <ReportCommitByMaterial />
+          <hr />
+          <h4>Material in Transit</h4>
+          <ReportTransitbyMaterial />
         </div>
       );
     }

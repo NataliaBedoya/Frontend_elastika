@@ -21,3 +21,14 @@ export async function getCommitByMaterial(token, commitId) {
     },
   });
 }
+
+export async function getTransitByMaterial(token, transitId) {
+  return await axios({
+    method: "GET",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/transit/transitList",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
