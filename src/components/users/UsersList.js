@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUser, assignUserToDelete } from "../../store/selectUserReducer";
+import { assignUserToDelete } from "../../store/selectUserReducer";
 
 function UsersList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllUser());
-  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
