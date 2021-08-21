@@ -7,12 +7,14 @@ import {
 } from "./services/reportServices";
 
 export const ASSIGN_MATERIAL_TO_GET_REPORT = "ASSIGN_MATERIAL_TO_GET_REPORT";
+export const ASSIGN_CUSTOMER_TO_GET_REPORT = "ASSIGN_CUSTOMER_TO_GET_REPORT";
 export const GET_STOCK_BY_MATERIAL = "GET_STOCK_BY_MATERIAL";
 export const GET_COMMIT_BY_MATERIAL = "GET_COMMIT_BY_MATERIAL";
 export const GET_TRANSIT_BY_MATERIAL = "GET_TRANSIT_BY_MATERIAL";
 
 const initialState = {
   materialToGetReport: {},
+  customerToGetReport: {},
   stockByMaterial: [],
   commitByMaterial: [],
   transitByMaterial: [],
@@ -23,6 +25,15 @@ export function AssignMaterialToGetReport(material) {
     dispatch({
       type: ASSIGN_MATERIAL_TO_GET_REPORT,
       payload: material,
+    });
+  };
+}
+
+export function AssignCustomerToGetReport(customer) {
+  return async function (dispatch) {
+    dispatch({
+      type: ASSIGN_CUSTOMER_TO_GET_REPORT,
+      payload: customer,
     });
   };
 }
@@ -75,6 +86,13 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         materialToGetReport: action.payload,
+      };
+    }
+
+    case ASSIGN_CUSTOMER_TO_GET_REPORT: {
+      return {
+        ...state,
+        customerToGetReport: action.payload,
       };
     }
 

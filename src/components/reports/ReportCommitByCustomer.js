@@ -2,17 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function CommitByMaterial() {
-  const { commitByMaterial, materialToGetReport } = useSelector((state) => {
+  const { commitByMaterial, customerToGetReport } = useSelector((state) => {
     return {
       commitByMaterial: state.selectReportReducer.commitByMaterial,
-      materialToGetReport: state.selectReportReducer.materialToGetReport,
+      customerToGetReport: state.selectReportReducer.customerToGetReport,
     };
   });
 
-  console.log(commitByMaterial);
-
   const commitToShow = commitByMaterial.filter(
-    (commit) => commit.material._id === materialToGetReport
+    (commit) => commit.customer._id === customerToGetReport
   );
 
   const renderTable = () => {
@@ -23,7 +21,7 @@ function CommitByMaterial() {
         return (
           <tr>
             <td>
-              {commit.customer.name} <br />
+              {commit.material.name} <br />
               Order: {commit.order}
             </td>
             <td>{new Intl.NumberFormat().format(parseInt(commit.amount))}</td>
@@ -41,7 +39,7 @@ function CommitByMaterial() {
         <caption>Commited Product</caption>
         <thead>
           <tr>
-            <th>Customer</th>
+            <th>Material</th>
             <th>Amount (kg) </th>
             <th>Delivery Date</th>
             <th>Notes</th>

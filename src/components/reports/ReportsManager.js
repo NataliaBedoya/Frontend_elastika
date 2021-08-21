@@ -4,6 +4,7 @@ import { getAllCustomer } from "../../store/selectCustomerReducer";
 import { getAllMaterials } from "../../store/selectMaterialReducer";
 
 import {
+  AssignCustomerToGetReport,
   AssignMaterialToGetReport,
   getStock,
   getCommit,
@@ -12,6 +13,8 @@ import {
 import ReportStockByMaterial from "./ReportStockByMaterial";
 import ReportCommitByMaterial from "./ReportCommitByMaterial";
 import ReportTransitbyMaterial from "./ReportTransitbyMaterial";
+import ReportAllMaterialInTransit from "./ReportAllMaterialInTransit";
+import ReportCommitByCustomer from "./ReportCommitByCustomer";
 
 function MaterialsManager() {
   const dispatch = useDispatch();
@@ -22,7 +25,6 @@ function MaterialsManager() {
   useEffect(() => {
     dispatch(getAllCustomer());
     dispatch(getAllMaterials());
-
     dispatch(getStock());
     dispatch(getCommit());
     dispatch(getTransit());
@@ -37,7 +39,7 @@ function MaterialsManager() {
 
   const callReport = () => {
     if (report === "MaterialCommittedByCustomer") {
-      console.log(customer.name);
+      dispatch(AssignCustomerToGetReport(customer));
     } else {
       dispatch(AssignMaterialToGetReport(material));
     }
@@ -46,27 +48,35 @@ function MaterialsManager() {
   const ShowComponent = () => {
     if (report === "MaterialCommittedByCustomer") {
       return (
-        <div class="input-group">
-          <select
-            class="form-select"
-            id="customer"
-            aria-label="Example select with button addon"
-            onChange={(e) => setCustomer(e.target.value)}
-          >
-            <option selected> Choose a customer</option>
-            {!!customerList &&
-              customerList.length > 0 &&
-              customerList.map((customer) => (
-                <option value={customer.name}>{customer.name}</option>
-              ))}
-          </select>
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            onClick={callReport}
-          >
-            🔍
-          </button>
+        <div>
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="customer"
+              aria-label="Example select with button addon"
+              onChange={(e) => setCustomer(e.target.value)}
+            >
+              <option selected> Choose a customer</option>
+              {!!customerList &&
+                customerList.length > 0 &&
+                customerList.map((customer) => (
+                  <option value={customer._id}>{customer.name}</option>
+                ))}
+            </select>
+          </div>
+          <br />
+          <div>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={callReport}
+            >
+              Generate Report
+            </button>
+          </div>
+          <hr />
+          <h4>Material commited</h4>
+          <ReportCommitByCustomer />
         </div>
       );
     } else if (report === "InformationByMaterial") {
@@ -108,6 +118,12 @@ function MaterialsManager() {
           <ReportTransitbyMaterial />
         </div>
       );
+    } else if (report === "MaterialInTransit") {
+      <div>
+        <h4>Material in Transit</h4>
+        <ReportAllMaterialInTransit />
+        <hr />
+      </div>;
     }
   };
 
@@ -128,10 +144,10 @@ function MaterialsManager() {
             </option>
             <option value={"MaterialInTransit"}>Material in transit</option>
             <option value={"MaterialCommittedByReference"}>
-              Material committed by reference
+              Material commited by reference
             </option>
             <option value={"MaterialCommittedByCustomer"}>
-              Material committed by customer
+              Material commited by customer
             </option>
           </select>
         </div>
