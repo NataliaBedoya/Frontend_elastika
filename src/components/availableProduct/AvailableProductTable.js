@@ -17,6 +17,7 @@ function AvailableProduct() {
     };
   });
 
+  const reduc = (accumulator, stock) => accumulator + stock.amountInStock;
   const renderTable = () => {
     return (
       !!materialList &&
@@ -26,7 +27,22 @@ function AvailableProduct() {
           <tr>
             <td>{material.name}</td>
             <td>{material.description}</td>
-            <td>{material.threshold}</td>
+
+            <td>
+              {new Intl.NumberFormat().format(parseInt(material.threshold))}
+            </td>
+            <td>
+              {new Intl.NumberFormat().format(
+                parseInt(material.stock.reduce(reduc, 0))
+              )}{" "}
+            </td>
+            <td>
+              {parseInt(material.threshold) >
+              parseInt(material.stock.reduce(reduc, 0))
+                ? "🚨"
+                : " "}
+            </td>
+
           </tr>
         );
       })
@@ -42,6 +58,9 @@ function AvailableProduct() {
           <th>Description</th>
           <th>Threshold (kg)</th>
           <th>Stock (kg)</th>
+
+          <th></th>
+
         </tr>
       </thead>
       <tbody>{renderTable()}</tbody>

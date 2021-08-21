@@ -24,7 +24,6 @@ function CustomerInformationUpdate() {
   });
 
   const handleUpdate = () => {
-    console.log(customer, businessPhone, contact1, email1, phone1);
     dispatch(
       updateCustomerProfileInfo(
         customer,
