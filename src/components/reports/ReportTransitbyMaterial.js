@@ -20,10 +20,24 @@ function ReportTransitByMaterial() {
       transitToShow.map((transit) => {
         return (
           <tr>
-            <td>{transit.order}</td>
-            <td>{transit.supplier.name}</td>
+            <td>
+              {transit.supplier.name} <br />
+              Order: {transit.order}
+            </td>
             <td>{new Intl.NumberFormat().format(parseInt(transit.amount))}</td>
-            <td>{new Date(transit.release).toDateString()}</td>
+            <td>
+              Order: {new Date(transit.orderDate).toDateString()}
+              <br />
+              Shipment: {new Date(transit.shipmentDate).toDateString()}
+              <br />
+              Arrival: {new Date(transit.arrivalDate).toDateString()}
+              <br />
+              Release: {new Date(transit.releaseDate).toDateString()}
+            </td>
+            <td>
+              {transit.transactionType} <hr />
+              {transit.notes}
+            </td>
           </tr>
         );
       })
@@ -31,18 +45,20 @@ function ReportTransitByMaterial() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>Product In Transit</caption>
-      <thead>
-        <tr>
-          <th>Purchase order</th>
-          <th>Supplier</th>
-          <th>Amount (kg)</th>
-          <th>Release Date</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>Product In Transit</caption>
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>Amount (kg)</th>
+            <th>Timing</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

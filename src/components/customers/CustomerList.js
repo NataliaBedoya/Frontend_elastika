@@ -73,19 +73,21 @@ function CustomerList() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>List of customers</caption>
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Business Name</th>
-          <th>Contact Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>List of customers</caption>
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Business Name</th>
+            <th>Contact Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

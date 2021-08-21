@@ -49,18 +49,20 @@ function UsersList() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>List of users</caption>
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>List of users</caption>
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>User Name</th>
+            <th>Role</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

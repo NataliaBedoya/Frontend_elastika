@@ -47,7 +47,6 @@ function MaterialsList() {
             <td>
               {new Intl.NumberFormat().format(parseInt(material.threshold))}
             </td>
-
           </tr>
         );
       })
@@ -55,18 +54,20 @@ function MaterialsList() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>List of materials</caption>
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Threshold (kg)</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>List of materials</caption>
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Threshold (kg)</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

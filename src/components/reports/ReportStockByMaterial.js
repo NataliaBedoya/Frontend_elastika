@@ -31,16 +31,18 @@ function ReportStockByMaterial() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>Available Batches</caption>
-      <thead>
-        <tr>
-          <th>Batch number</th>
-          <th>Amount (kg)</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>Available Batches</caption>
+        <thead>
+          <tr>
+            <th>Batch ID</th>
+            <th>Amount Available (kg)</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

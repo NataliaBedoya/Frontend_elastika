@@ -41,10 +41,16 @@ function SuppliersList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>{supplier.name}</td>
+            <td>
+              {supplier.name} <br />
+              📍 {supplier.city}, {supplier.country}
+            </td>
             <td>{supplier.contact1}</td>
-            <td>{supplier.email1}</td>
-            <td>{supplier.phone1}</td>
+            <td>
+              {supplier.email1}
+              <br />
+              {supplier.phone1}
+            </td>
           </tr>
         );
       })
@@ -52,19 +58,20 @@ function SuppliersList() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>List of suppliers</caption>
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Email</th>
-          <th>Phone</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>List of suppliers</caption>
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Supplier Name</th>
+            <th>Contact Name</th>
+            <th>Contact Info</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

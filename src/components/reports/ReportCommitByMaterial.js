@@ -27,10 +27,13 @@ function CommitByMaterial() {
       commitToShow.map((commit) => {
         return (
           <tr>
-            <td>{commit.order}</td>
-            <td>{commit.customer.name}</td>
+            <td>
+              {commit.customer.name} <br />
+              Order: {commit.order}
+            </td>
             <td>{new Intl.NumberFormat().format(parseInt(commit.amount))}</td>
             <td>{new Date(commit.deliveryDate).toDateString()}</td>
+            <td>{commit.notes}</td>
           </tr>
         );
       })
@@ -38,18 +41,20 @@ function CommitByMaterial() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>Commited Product</caption>
-      <thead>
-        <tr>
-          <th>Purchase order</th>
-          <th>Customer</th>
-          <th>Amount (kg)</th>
-          <th>Delivery Date</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>Commited Product</caption>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Amount (kg) </th>
+            <th>Delivery Date</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 
