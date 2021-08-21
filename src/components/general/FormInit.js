@@ -23,7 +23,7 @@ function FormInit() {
     <div className="form-init">
       <div>
         <div className="title-block">
-          <h2>PROGRAMACIÓN, COMPRA Y SEGUIMIENTO DE INSUMOS</h2>
+          <h2>PROGRAMMING, PURCHASE AND MONITORING OF SUPPLIES</h2>
         </div>
         <div className="image-block">
           <img src={formImage} alt="formImage" />

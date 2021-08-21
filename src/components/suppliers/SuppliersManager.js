@@ -53,7 +53,7 @@ function SuppliersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="name">
-            Business Name
+            Business Name*
           </span>
           <input
             autoFocus
@@ -89,7 +89,7 @@ function SuppliersManager() {
 
         <div className="input-group mb-3">
           <span className="input-group-text" id="lastname">
-            Contact Name
+            Contact Name*
           </span>
           <input
             id="contact1"
@@ -103,7 +103,7 @@ function SuppliersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="email1">
-            Contact Email
+            Contact Email*
           </span>
           <input
             id="email1"
@@ -117,7 +117,7 @@ function SuppliersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="phone1">
-            Contact Phone
+            Contact Phone*
           </span>
           <input
             id="phone1"

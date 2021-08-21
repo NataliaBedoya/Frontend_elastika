@@ -57,7 +57,7 @@ function CreateNewBatch() {
             </div>
             <div className="modal-body">
               <label htmlFor="material" style={{ color: "black" }}>
-                <strong> Material: </strong>
+                <strong> Material* </strong>
               </label>
               <select
                 class="form-select"
@@ -73,7 +73,7 @@ function CreateNewBatch() {
                   ))}
               </select>
               <label htmlFor="batch" style={{ color: "black" }}>
-                <strong> Batch: </strong>
+                <strong> Batch*: </strong>
               </label>
               <input
                 id="batch"

@@ -62,7 +62,7 @@ function CommittedProductManager() {
         </h6>
         <div className="input-group mb-3">
           <span className="input-group-text" id="order">
-            Order number
+            Order number*
           </span>
           <input
             autoFocus
@@ -77,7 +77,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="orderDate">
-            Order Date
+            Order Date*
           </span>
           <input
             id="orderDate"
@@ -91,7 +91,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="supplier">
-            Supplier
+            Supplier*
           </span>
           <select
             className="form-select"
@@ -109,7 +109,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="material">
-            Material
+            Material*
           </span>
           <select
             className="form-select"
@@ -127,7 +127,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="amount">
-            Amount (kg)
+            Amount (kg)*
           </span>
           <input
             id="amount"
@@ -142,7 +142,7 @@ function CommittedProductManager() {
 
         <div className="input-group mb-3">
           <span className="input-group-text" id="transactionType">
-            Transaction Type
+            Transaction Type*
           </span>
           <select
             className="form-select"
