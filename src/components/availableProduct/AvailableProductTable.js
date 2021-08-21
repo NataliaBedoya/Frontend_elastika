@@ -16,8 +16,8 @@ function AvailableProduct() {
       materialList: state.selectMaterialReducer.materialList,
     };
   });
-  const reduc = (accumulator, stock) => accumulator + stock.amountInStock;
 
+  const reduc = (accumulator, stock) => accumulator + stock.amountInStock;
   const renderTable = () => {
     return (
       !!materialList &&
@@ -27,6 +27,7 @@ function AvailableProduct() {
           <tr>
             <td>{material.name}</td>
             <td>{material.description}</td>
+
             <td>
               {new Intl.NumberFormat().format(parseInt(material.threshold))}
             </td>
@@ -41,6 +42,7 @@ function AvailableProduct() {
                 ? "🚨"
                 : " "}
             </td>
+
           </tr>
         );
       })
@@ -56,7 +58,9 @@ function AvailableProduct() {
           <th>Description</th>
           <th>Threshold (kg)</th>
           <th>Stock (kg)</th>
+
           <th></th>
+
         </tr>
       </thead>
       <tbody>{renderTable()}</tbody>

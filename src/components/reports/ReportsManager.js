@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCustomer } from "../../store/selectCustomerReducer";
 import { getAllMaterials } from "../../store/selectMaterialReducer";
+
 import {
   AssignMaterialToGetReport,
   getStock,
@@ -12,6 +13,7 @@ import ReportStockByMaterial from "./ReportStockByMaterial";
 import ReportCommitByMaterial from "./ReportCommitByMaterial";
 import ReportTransitbyMaterial from "./ReportTransitbyMaterial";
 
+
 function MaterialsManager() {
   const dispatch = useDispatch();
   const [report, setReport] = useState("");
@@ -21,9 +23,11 @@ function MaterialsManager() {
   useEffect(() => {
     dispatch(getAllCustomer());
     dispatch(getAllMaterials());
+
     dispatch(getStock());
     dispatch(getCommit());
     dispatch(getTransit());
+
   }, []);
 
   const { customerList, materialList } = useSelector((state) => {
@@ -34,11 +38,14 @@ function MaterialsManager() {
   });
 
   const callReport = () => {
+
     if (report === "MaterialCommittedByCustomer") {
       console.log(customer.name);
     } else {
       dispatch(AssignMaterialToGetReport(material));
-    }
+
+    
+     }
   };
 
   const ShowComponent = () => {
@@ -67,6 +74,7 @@ function MaterialsManager() {
           </button>
         </div>
       );
+
     } else if (report === "InformationByMaterial") {
       return (
         <div>

@@ -4,6 +4,7 @@ import {
   deleteMaterial,
   createNewMaterial,
 } from "../../store/selectMaterialReducer";
+
 import MaterialUpdate from "./MaterialUpdate";
 
 function MaterialsManager() {
@@ -81,6 +82,7 @@ function MaterialsManager() {
           >
             Create New Material
           </button>
+
           <button
             type="button"
             data-bs-toggle="modal"
@@ -90,6 +92,7 @@ function MaterialsManager() {
           >
             Update Threshold
           </button>
+
         </div>
         <hr />
         <h6>
@@ -105,7 +108,9 @@ function MaterialsManager() {
           </button>
         </div>
       </div>
+
       <MaterialUpdate />
+
     </div>
   );
 }

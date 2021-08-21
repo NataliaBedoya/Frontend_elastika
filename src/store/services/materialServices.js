@@ -17,7 +17,9 @@ export async function destroyMaterial(materialId) {
   });
 }
 
+
 export async function materialRegister(name, description, threshold) {
+
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,
@@ -25,6 +27,7 @@ export async function materialRegister(name, description, threshold) {
     data: {
       name,
       description,
+
       threshold,
     },
   });
@@ -131,6 +134,7 @@ export async function transitRegister(
     },
     headers: {
       Authorization: `Bearer ${token}`,
+
     },
   });
 }

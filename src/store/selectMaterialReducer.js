@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 
 import {
+
   batchCreation,
   getMaterialList,
   destroyMaterial,
@@ -10,12 +11,14 @@ import {
   destroyBatch,
   amountUpdate,
   transitRegister,
+
 } from "./services/materialServices";
 
 export const GET_MATERIAL_LIST = "GET_MATERIAL_LIST";
 export const ASSIGN_MATERIAL_TO_DELETE = "ASSIGN_MATERIAL_TO_DELETE";
 export const REMOVE_MATERIAL_DELETED = "REMOVE_MATERIAL_DELETED";
 export const CREATE_NEW_MATERIAL = "CREATE_NEW_MATERIAL";
+
 export const GET_MATERIAL_TO_UPDATE = "GET_MATERIAL_TO_UPDATE";
 export const CREATE_NEW_BATCH = "CREATE_NEW_BATCH";
 export const UPDATE_THRESHOLD = "UPDATE_THRESHOLD";
@@ -31,6 +34,7 @@ const initialState = {
   materialToUpdate: {},
   assignedMaterial: {},
   productInTransit: {},
+
 };
 
 export function getAllMaterials() {
@@ -82,10 +86,12 @@ export function deleteMaterial(materialToDelete) {
   };
 }
 
+
 export function createNewMaterial(name, description, threshold) {
   return async function (dispatch) {
     try {
       const { data } = await materialRegister(name, description, threshold);
+
       dispatch({
         type: CREATE_NEW_MATERIAL,
         payload: data,
@@ -312,6 +318,7 @@ export function registerMaterialInTransit(
   };
 }
 
+
 function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_MATERIAL_LIST: {
@@ -335,6 +342,7 @@ function reducer(state = initialState, action) {
       };
     }
 
+
     case REMOVE_BATCH: {
       return {
         ...state,
@@ -347,12 +355,14 @@ function reducer(state = initialState, action) {
       };
     }
 
+
     case CREATE_NEW_MATERIAL: {
       return {
         ...state,
         materialList: state.materialList.concat(action.payload),
       };
     }
+
 
     case GET_MATERIAL_TO_UPDATE: {
       return {

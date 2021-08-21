@@ -1,5 +1,7 @@
 import ReportsManager from "../components/reports/ReportsManager";
+
 import ReportStockByMaterial from "../components/reports/ReportStockByMaterial";
+
 import ActionBar from "../components/general/ActionBar";
 import logo from "../assets/images/logo.png";
 
@@ -24,6 +26,7 @@ function ReportsView() {
           <ReportsManager />
         </div>
         <hr />
+
       </div>
     </div>
   );

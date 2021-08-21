@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -40,7 +41,7 @@ function CommittedProductManager() {
         deliveryDate
       )
     );
-  };
+  }
 
   const handleDelete = () => {
     console.log("delete");
@@ -56,6 +57,7 @@ function CommittedProductManager() {
           <span className="input-group-text" id="material">
             Material
           </span>
+
           <select
             className="form-select"
             id="material"
@@ -146,13 +148,16 @@ function CommittedProductManager() {
             value={deliveryDate}
           />
         </div>
-        <div className="input-group mb-3">
+
+       <div className="input-group mb-3">
           <span className="input-group-text" id="notes">
             Notes
           </span>
           <input
             id="notes"
+
             type="textarea"
+
             className="form-control"
             aria-label="notes"
             aria-describedby="basic-addon1"
