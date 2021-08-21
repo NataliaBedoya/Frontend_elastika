@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllMaterials,
-  updateMaterialInfo,
-} from "../../store/selectMaterialReducer";
+import { updateMaterialInfo } from "../../store/selectMaterialReducer";
 
 function MaterialUpdate() {
   const dispatch = useDispatch();
   const [material, setMaterial] = useState("");
   const [threshold, setThreshold] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-  }, []);
 
   const { materialList } = useSelector((state) => {
     return {

@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getAllMaterials,
-  assignMaterialToDelete,
-} from "../../store/selectMaterialReducer";
+import { assignMaterialToDelete } from "../../store/selectMaterialReducer";
 
 function MaterialsList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
