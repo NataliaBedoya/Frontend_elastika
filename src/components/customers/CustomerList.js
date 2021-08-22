@@ -25,7 +25,7 @@ function CustomerList() {
       customerList.map((customer) => {
         return (
           <tr>
-            <th>
+            <th style={{ width: "5%", textAlign: "center" }}>
               <input
                 type="radio"
                 id={customer._id}
@@ -34,26 +34,26 @@ function CustomerList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>
+            <td style={{ width: "35%", textAlign: "center" }}>
               <p>
                 {customer.name}
                 <br />
                 🏢{customer.businessPhone}{" "}
               </p>
             </td>
-            <td>
+            <td style={{ width: "20", textAlign: "center" }}>
               <p>
                 {customer.contact1} <br />
                 {customer.contact2}
               </p>
             </td>
-            <td>
+            <td style={{ width: "20", textAlign: "center" }}>
               <p>
                 {customer.email1} <br />
                 {customer.email2}
               </p>
             </td>
-            <td>
+            <td style={{ width: "20", textAlign: "center" }}>
               <p>
                 {customer.phone1} <br />
                 {customer.phone2}
@@ -71,11 +71,11 @@ function CustomerList() {
         <caption>List of customers</caption>
         <thead>
           <tr>
-            <th>Select</th>
-            <th>Business Name</th>
-            <th>Contact Name</th>
-            <th>Email</th>
-            <th>Phone</th>
+            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "35%", textAlign: "center" }}>Business Name</th>
+            <th style={{ width: "20", textAlign: "center" }}>Contact Name</th>
+            <th style={{ width: "20%", textAlign: "center" }}>Email</th>
+            <th style={{ width: "20%", textAlign: "center" }}>Phone</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>
