@@ -15,6 +15,7 @@ import ReportCommitByMaterial from "./ReportCommitByMaterial";
 import ReportTransitbyMaterial from "./ReportTransitbyMaterial";
 import ReportAllMaterialInTransit from "./ReportAllMaterialInTransit";
 import ReportCommitByCustomer from "./ReportCommitByCustomer";
+import ReportCommitByReference from "./ReportCommitByReference";
 
 function MaterialsManager() {
   const dispatch = useDispatch();
@@ -40,7 +41,10 @@ function MaterialsManager() {
   const callReport = () => {
     if (report === "MaterialCommittedByCustomer") {
       dispatch(AssignCustomerToGetReport(customer));
-    } else {
+    } else if (
+      report === "InformationByMaterial" ||
+      report === "MaterialCommittedByReference"
+    ) {
       dispatch(AssignMaterialToGetReport(material));
     }
   };
@@ -75,7 +79,7 @@ function MaterialsManager() {
             </button>
           </div>
           <hr />
-          <h4>Material commited</h4>
+          <h4>Material Commited</h4>
           <ReportCommitByCustomer />
         </div>
       );
@@ -119,11 +123,46 @@ function MaterialsManager() {
         </div>
       );
     } else if (report === "MaterialInTransit") {
-      <div>
-        <h4>Material in Transit</h4>
-        <ReportAllMaterialInTransit />
-        <hr />
-      </div>;
+      return (
+        <div>
+          <h4>Material Commited</h4>
+          <ReportAllMaterialInTransit />
+          <hr />
+        </div>
+      );
+    } else if (report === "MaterialCommittedByReference") {
+      return (
+        <div>
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="material"
+              aria-label="Example select with button addon"
+              onChange={(e) => setMaterial(e.target.value)}
+            >
+              <option selected> Choose a material</option>
+              {!!materialList &&
+                materialList.length > 0 &&
+                materialList.map((material) => (
+                  <option value={material._id}>{material.name}</option>
+                ))}
+            </select>
+          </div>
+          <br />
+          <div>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={callReport}
+            >
+              Generate Report
+            </button>
+          </div>
+          <hr />
+          <h4>Material in Stock</h4>
+          <ReportCommitByReference />
+        </div>
+      );
     }
   };
 

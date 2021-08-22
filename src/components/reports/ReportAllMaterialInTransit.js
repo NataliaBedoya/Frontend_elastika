@@ -8,6 +8,8 @@ function ReportAllMaterialInTransit() {
     };
   });
 
+  //console.log(transitByMaterial);
+
   const renderTable = () => {
     return (
       !!transitByMaterial &&
