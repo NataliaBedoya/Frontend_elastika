@@ -25,7 +25,7 @@ function SuppliersList() {
       supplierList.map((supplier) => {
         return (
           <tr>
-            <th>
+            <th style={{ width: "5%", textAlign: "center" }}>
               <input
                 type="radio"
                 id={supplier._id}
@@ -34,12 +34,20 @@ function SuppliersList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>
+            <td
+              style={{
+                width: "45%",
+                textAlign: "center",
+                overflowWrap: "break-word",
+              }}
+            >
               {supplier.name} <br />
               📍 {supplier.city}, {supplier.country}
             </td>
-            <td>{supplier.contact1}</td>
-            <td>
+            <td style={{ width: "25%", textAlign: "center" }}>
+              {supplier.contact1}
+            </td>
+            <td style={{ width: "25%", textAlign: "center" }}>
               {supplier.email1}
               <br />
               {supplier.phone1}
@@ -56,10 +64,10 @@ function SuppliersList() {
         <caption>List of suppliers</caption>
         <thead>
           <tr>
-            <th>Select</th>
-            <th>Supplier Name</th>
-            <th>Contact Name</th>
-            <th>Contact Info</th>
+            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "45%", textAlign: "center" }}>Supplier Name</th>
+            <th style={{ width: "25%", textAlign: "center" }}>Contact Name</th>
+            <th style={{ width: "25%", textAlign: "center" }}>Contact Info</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>
