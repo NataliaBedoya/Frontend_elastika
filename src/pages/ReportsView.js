@@ -26,7 +26,6 @@ function ReportsView() {
           <ReportsManager />
         </div>
         <hr />
-
       </div>
     </div>
   );

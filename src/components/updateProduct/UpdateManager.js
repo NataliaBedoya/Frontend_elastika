@@ -71,7 +71,7 @@ function UpdateManager() {
         <br />
         <div className="input-group mb-3">
           <span className="input-group-text" id="amountInStock">
-            Current Amount *
+            Current Amount (kg) *
           </span>
           <input
             id="amountInStock"

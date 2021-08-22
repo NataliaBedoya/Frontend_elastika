@@ -20,8 +20,8 @@ function ReportStockByMaterial() {
       stockToShow.map((stock) => {
         return (
           <tr>
-            <td>{stock.batch}</td>
-            <td>
+            <td style={{ width: "50%", textAlign: "center" }}>{stock.batch}</td>
+            <td style={{ width: "50%", textAlign: "center" }}>
               {new Intl.NumberFormat().format(parseInt(stock.amountInStock))}
             </td>
           </tr>
@@ -36,8 +36,10 @@ function ReportStockByMaterial() {
         <caption>Available Batches</caption>
         <thead>
           <tr>
-            <th>Batch ID</th>
-            <th>Amount Available (kg)</th>
+            <th style={{ width: "50%", textAlign: "center" }}>Batch ID</th>
+            <th style={{ width: "50%", textAlign: "center" }}>
+              Amount Available (kg)
+            </th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>
