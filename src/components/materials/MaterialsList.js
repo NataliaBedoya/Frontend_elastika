@@ -25,7 +25,7 @@ function MaterialsList() {
       materialList.map((material) => {
         return (
           <tr>
-            <th>
+            <th style={{ width: "5%", textAlign: "center" }}>
               <input
                 type="radio"
                 id={material._id}
@@ -34,10 +34,14 @@ function MaterialsList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>{material.name}</td>
-            <td>{material.description}</td>
+            <td style={{ width: "35%", textAlign: "center" }}>
+              {material.name}
+            </td>
+            <td style={{ width: "35%", textAlign: "center" }}>
+              {material.description}
+            </td>
 
-            <td>
+            <td style={{ width: "25%", textAlign: "center" }}>
               {new Intl.NumberFormat().format(parseInt(material.threshold))}
             </td>
           </tr>
@@ -52,10 +56,12 @@ function MaterialsList() {
         <caption>List of materials</caption>
         <thead>
           <tr>
-            <th>Select</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Threshold (kg)</th>
+            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "35%", textAlign: "center" }}>Name</th>
+            <th style={{ width: "35%", textAlign: "center" }}>Description</th>
+            <th style={{ width: "25%", textAlign: "center" }}>
+              Threshold (kg)
+            </th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>
