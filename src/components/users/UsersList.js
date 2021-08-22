@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { assignUserToDelete } from "../../store/selectUserReducer";
+import { assignUserToDelete, getAllUser } from "../../store/selectUserReducer";
 
 function UsersList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
@@ -24,7 +28,7 @@ function UsersList() {
       userList.map((user) => {
         return (
           <tr>
-            <th>
+            <th style={{ width: "5%", textAlign: "center" }}>
               <input
                 type="radio"
                 id={user._id}
@@ -33,11 +37,11 @@ function UsersList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>
+            <td style={{ width: "35%", textAlign: "center" }}>
               {user.name} {user.lastname}
             </td>
-            <td>{user.role}</td>
-            <td>{user.email}</td>
+            <td style={{ width: "35%", textAlign: "center" }}>{user.role}</td>
+            <td style={{ width: "30%", textAlign: "center" }}>{user.email}</td>
           </tr>
         );
       })
@@ -50,10 +54,10 @@ function UsersList() {
         <caption>List of users</caption>
         <thead>
           <tr>
-            <th>Select</th>
-            <th>User Name</th>
-            <th>Role</th>
-            <th>Email</th>
+            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "35%", textAlign: "center" }}>User Name</th>
+            <th style={{ width: "30%", textAlign: "center" }}>Role</th>
+            <th style={{ width: "30%", textAlign: "center" }}>Email</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>
