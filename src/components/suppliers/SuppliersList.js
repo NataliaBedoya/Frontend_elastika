@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getAllSupplier,
-  assignSupplierToDelete,
-} from "../../store/selectSupplierReducer";
+import { assignSupplierToDelete } from "../../store/selectSupplierReducer";
 
 function SuppliersList() {
   const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllSupplier());
-  }, []);
 
   const handleDelete = (id) => {
     setIsChecked(id);
@@ -32,7 +25,7 @@ function SuppliersList() {
       supplierList.map((supplier) => {
         return (
           <tr>
-            <th>
+            <th style={{ width: "5%", textAlign: "center" }}>
               <input
                 type="radio"
                 id={supplier._id}
@@ -41,10 +34,24 @@ function SuppliersList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td>{supplier.name}</td>
-            <td>{supplier.contact1}</td>
-            <td>{supplier.email1}</td>
-            <td>{supplier.phone1}</td>
+            <td
+              style={{
+                width: "35%",
+                textAlign: "left",
+                overflowWrap: "break-word",
+              }}
+            >
+              {supplier.name} <br />
+              📍 {supplier.city}, {supplier.country}
+            </td>
+            <td style={{ width: "30%", textAlign: "center" }}>
+              {supplier.contact1}
+            </td>
+            <td style={{ width: "30%", textAlign: "center" }}>
+              {supplier.email1}
+              <br />
+              {supplier.phone1}
+            </td>
           </tr>
         );
       })
@@ -52,19 +59,20 @@ function SuppliersList() {
   };
 
   return (
-    <table className="table table-striped">
-      <caption>List of suppliers</caption>
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Email</th>
-          <th>Phone</th>
-        </tr>
-      </thead>
-      <tbody>{renderTable()}</tbody>
-    </table>
+    <div class="table-responsive">
+      <table className="table table-striped">
+        <caption>List of suppliers</caption>
+        <thead>
+          <tr>
+            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "35%", textAlign: "center" }}>Supplier Name</th>
+            <th style={{ width: "30%", textAlign: "center" }}>Contact Name</th>
+            <th style={{ width: "30%", textAlign: "center" }}>Contact Info</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
+    </div>
   );
 }
 

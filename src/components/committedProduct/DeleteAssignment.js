@@ -1,38 +1,43 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateMaterialInfo } from "../../store/selectMaterialReducer";
+import { deleteCommit } from "../../store/selectMaterialReducer";
 
-function MaterialUpdate() {
+function DeleteAssignment() {
   const dispatch = useDispatch();
-  const [material, setMaterial] = useState("");
-  const [threshold, setThreshold] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [order, setOrder] = useState("");
 
-  const { materialList } = useSelector((state) => {
+  const { customerList, commitByMaterial } = useSelector((state) => {
     return {
-      materialList: state.selectMaterialReducer.materialList,
+      commitByMaterial: state.selectReportReducer.commitByMaterial,
+      customerList: state.selectCustomerReducer.customerList,
     };
   });
 
-  const onSave = () => {
-    const modalEl = document.getElementById("materialUpdateModal");
-    const modal = window.bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
+  const orderList = commitByMaterial.filter(
+    (commit) => commit.customer._id === customer
+  );
+
+  const handleDelete = () => {
+    dispatch(deleteCommit(order));
   };
 
-  const handleUpdate = () => {
-    dispatch(updateMaterialInfo(material, threshold));
+  const onSave = () => {
+    const modalEl = document.getElementById("deleteAssignmentModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
   };
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleUpdate();
+        handleDelete();
       }}
     >
       <div
         className="modal fade"
-        id="materialUpdateModal"
+        id="deleteAssignmentModal"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -43,7 +48,7 @@ function MaterialUpdate() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Material threshold update
+                Delete assignment
               </h5>
               <button
                 type="button"
@@ -53,33 +58,37 @@ function MaterialUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <h6>Select the material you want to update.</h6>
+              <h6>Select the customer</h6>
 
               <select
                 class="form-select"
-                id="material"
+                id="customer"
                 aria-label="Example select with button addon"
-                onChange={(e) => setMaterial(e.target.value)}
+                onChange={(e) => setCustomer(e.target.value)}
               >
-                <option selected> Choose a material</option>
-                {!!materialList &&
-                  materialList.length > 0 &&
-                  materialList.map((material) => (
-                    <option value={material._id}>{material.name}</option>
+                <option selected> Choose a customer * </option>
+                {!!customerList &&
+                  customerList.length > 0 &&
+                  customerList.map((customer) => (
+                    <option value={customer._id}>{customer.name}</option>
                   ))}
               </select>
               <hr />
-              <label htmlFor="threshold">
-                <strong> Threshold: </strong>
-              </label>
-              <input
-                id="threshold"
-                type="text"
-                name="threshold"
-                className="form-control"
-                onChange={(e) => setThreshold(e.target.value)}
-                value={threshold}
-              />
+              <h6>Select the purchase order *</h6>
+
+              <select
+                class="form-select"
+                id="customer"
+                aria-label="Example select with button addon"
+                onChange={(e) => setOrder(e.target.value)}
+              >
+                <option selected> Choose an order * </option>
+                {!!orderList &&
+                  orderList.length > 0 &&
+                  orderList.map((order) => (
+                    <option value={order._id}>{order.order}</option>
+                  ))}
+              </select>
             </div>
             <div className="modal-footer">
               <button
@@ -87,7 +96,7 @@ function MaterialUpdate() {
                 className="btn btn-outline-secondary"
                 onClick={onSave}
               >
-                Update
+                Delete
               </button>
               <button
                 type="button"
@@ -104,4 +113,4 @@ function MaterialUpdate() {
   );
 }
 
-export default MaterialUpdate;
+export default DeleteAssignment;

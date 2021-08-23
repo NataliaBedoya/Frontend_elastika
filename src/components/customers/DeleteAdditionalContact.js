@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCustomer,
-  deleteAdditionalContact,
-} from "../../store/selectCustomerReducer";
+import { deleteAdditionalContact } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
   const [customer, setCustomer] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-  }, []);
 
   const { customerList } = useSelector((state) => {
     return {
       customerList: state.selectCustomerReducer.customerList,
     };
   });
+
+  const onSave = () => {
+    const modalEl = document.getElementById("deleteAdditionalContactModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
 
   const handleDeleteContact = () => {
     dispatch(deleteAdditionalContact(customer));
@@ -69,7 +68,11 @@ function CustomerInformationUpdate() {
               </select>
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Select
               </button>
               <button

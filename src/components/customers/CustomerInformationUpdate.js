@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCustomer,
-  updateCustomerProfileInfo,
-} from "../../store/selectCustomerReducer";
+import { updateCustomerProfileInfo } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
@@ -12,10 +9,6 @@ function CustomerInformationUpdate() {
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllCustomer());
-  }, []);
 
   const { customerList } = useSelector((state) => {
     return {
@@ -34,7 +27,11 @@ function CustomerInformationUpdate() {
       )
     );
   };
-
+  const onSave = () => {
+    const modalEl = document.getElementById("customersUpdateModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
   return (
     <form
       onSubmit={(e) => {
@@ -127,7 +124,11 @@ function CustomerInformationUpdate() {
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Update
               </button>
               <button

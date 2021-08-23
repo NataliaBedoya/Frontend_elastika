@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { getAllMaterials } from "../../store/selectMaterialReducer";
+import React from "react";
+import { useSelector } from "react-redux";
 
 function AvailableProduct() {
-  const [checkedValue, setIsChecked] = useState("");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-  }, []);
-
   const { materialList } = useSelector((state) => {
     return {
       materialList: state.selectMaterialReducer.materialList,
@@ -42,7 +33,6 @@ function AvailableProduct() {
                 ? "🚨"
                 : " "}
             </td>
-
           </tr>
         );
       })
@@ -60,7 +50,6 @@ function AvailableProduct() {
           <th>Stock (kg)</th>
 
           <th></th>
-
         </tr>
       </thead>
       <tbody>{renderTable()}</tbody>

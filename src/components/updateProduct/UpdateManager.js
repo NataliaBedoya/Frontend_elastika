@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getAllMaterials,
   deleteBatch,
   updateStockInfo,
 } from "../../store/selectMaterialReducer";
-import { getStock } from "../../store/selectReportReducer";
+
 import CreateNewBatch from "./CreateNewBatch";
 
 function UpdateManager() {
@@ -13,11 +12,6 @@ function UpdateManager() {
   const [material, setMaterial] = useState("");
   const [batch, setBatch] = useState("");
   const [amountInStock, setAmountInStock] = useState("");
-
-  useEffect(() => {
-    dispatch(getAllMaterials());
-    dispatch(getStock());
-  }, []);
 
   const { materialList, stockByMaterial } = useSelector((state) => {
     return {
@@ -49,7 +43,7 @@ function UpdateManager() {
             aria-label="Example select with button addon"
             onChange={(e) => setMaterial(e.target.value)}
           >
-            <option selected> Choose a material</option>
+            <option selected> Choose a material *</option>
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
@@ -66,7 +60,7 @@ function UpdateManager() {
             aria-label="Example select with button addon"
             onChange={(e) => setBatch(e.target.value)}
           >
-            <option selected> Choose a batch</option>
+            <option selected> Choose a batch * </option>
             {!!batchToShow &&
               batchToShow.length > 0 &&
               batchToShow.map((element) => (
@@ -77,7 +71,7 @@ function UpdateManager() {
         <br />
         <div className="input-group mb-3">
           <span className="input-group-text" id="amountInStock">
-            Current Amount
+            Current Amount (kg) *
           </span>
           <input
             id="amountInStock"

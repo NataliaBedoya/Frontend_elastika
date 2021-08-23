@@ -1,11 +1,20 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import logo from "../assets/images/logo.png";
 import ActionBar from "../components/general/ActionBar";
 import MaterialsManager from "../components/materials/MaterialsManager";
 import MaterialsList from "../components/materials/MaterialsList";
 
+import { getAllMaterials } from "../store/selectMaterialReducer";
+
 import "../styles/MaterialsView.css";
 
 function MaterialsView() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllMaterials());
+  }, []);
+
   return (
     <div className="MaterialsView">
       <div className="MaterialsView-blockLogoNav">

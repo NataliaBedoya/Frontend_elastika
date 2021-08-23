@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllSupplier,
-  updateSupplierProfileInfo,
-} from "../../store/selectSupplierReducer";
+import { updateSupplierProfileInfo } from "../../store/selectSupplierReducer";
 
 function SupplierInformationUpdate() {
   const dispatch = useDispatch();
@@ -12,15 +9,17 @@ function SupplierInformationUpdate() {
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
 
-  useEffect(() => {
-    dispatch(getAllSupplier());
-  }, []);
-
   const { supplierList } = useSelector((state) => {
     return {
       supplierList: state.selectSupplierReducer.supplierList,
     };
   });
+
+  const onSave = () => {
+    const modalEl = document.getElementById("supplierUpdateModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
 
   const handleUpdate = () => {
     dispatch(updateSupplierProfileInfo(supplier, contact1, email1, phone1));
@@ -107,7 +106,11 @@ function SupplierInformationUpdate() {
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Update
               </button>
               <button

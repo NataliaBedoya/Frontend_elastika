@@ -1,23 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-function ReportTransitByMaterial() {
-  const { transitByMaterial, materialToGetReport } = useSelector((state) => {
+function ReportAllMaterialInTransit() {
+  const { transitByMaterial } = useSelector((state) => {
     return {
       transitByMaterial: state.selectReportReducer.transitByMaterial,
-      materialToGetReport: state.selectReportReducer.materialToGetReport,
     };
   });
 
-  const transitToShow = transitByMaterial.filter(
-    (transit) => transit.material === materialToGetReport
-  );
-
   const renderTable = () => {
     return (
-      !!transitToShow &&
-      transitToShow.length > 0 &&
-      transitToShow.map((transit) => {
+      !!transitByMaterial &&
+      transitByMaterial.length > 0 &&
+      transitByMaterial.map((transit) => {
         return (
           <tr>
             <td style={{ width: "25%", textAlign: "left" }}>
@@ -53,7 +48,7 @@ function ReportTransitByMaterial() {
         <thead>
           <tr>
             <th style={{ width: "25%", textAlign: "center" }}>Supplier</th>
-            <th style={{ width: "15%", textAlign: "center" }}>Amount (kg)</th>
+            <th style={{ width: "10%", textAlign: "center" }}>Amount (kg)</th>
             <th style={{ width: "30%", textAlign: "center" }}>Timing</th>
             <th style={{ width: "30%", textAlign: "center" }}>Notes</th>
           </tr>
@@ -64,4 +59,4 @@ function ReportTransitByMaterial() {
   );
 }
 
-export default ReportTransitByMaterial;
+export default ReportAllMaterialInTransit;

@@ -31,7 +31,7 @@ function UsersManager() {
         <h6>To create a new user, fill out the following form.</h6>
         <div className="input-group mb-3">
           <span className="input-group-text" id="name">
-            Name
+            Name *
           </span>
           <input
             autoFocus
@@ -46,7 +46,7 @@ function UsersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="lastname">
-            Lastname
+            Lastname *
           </span>
           <input
             id="lastname"
@@ -74,7 +74,7 @@ function UsersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="email">
-            Email
+            Email *
           </span>
           <input
             id="email"
@@ -88,7 +88,7 @@ function UsersManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="password">
-            Password
+            Password *
           </span>
           <input
             id="password"

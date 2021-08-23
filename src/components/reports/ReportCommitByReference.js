@@ -9,8 +9,6 @@ function CommitByMaterial() {
     };
   });
 
-  console.log(commitByMaterial);
-
   const commitToShow = commitByMaterial.filter(
     (commit) => commit.material._id === materialToGetReport
   );
@@ -22,11 +20,11 @@ function CommitByMaterial() {
       commitToShow.map((commit) => {
         return (
           <tr>
-            <td style={{ width: "25%", textAlign: "left" }}>
+            <td style={{ width: "30%", textAlign: "left" }}>
               {commit.customer.name} <br />
               Order: {commit.order}
             </td>
-            <td style={{ width: "25%", textAlign: "center" }}>
+            <td style={{ width: "20%", textAlign: "center" }}>
               {new Intl.NumberFormat().format(parseInt(commit.amount))}
             </td>
             <td style={{ width: "25%", textAlign: "center" }}>
@@ -45,8 +43,8 @@ function CommitByMaterial() {
         <caption>Commited Product</caption>
         <thead>
           <tr>
-            <th style={{ width: "25%", textAlign: "center" }}>Customer</th>
-            <th style={{ width: "25%", textAlign: "center" }}>Amount (kg) </th>
+            <th style={{ width: "30%", textAlign: "center" }}>Customer</th>
+            <th style={{ width: "20%", textAlign: "center" }}>Amount (kg) </th>
             <th style={{ width: "25%", textAlign: "center" }}>Delivery Date</th>
             <th style={{ width: "25%", textAlign: "center" }}>Notes</th>
           </tr>

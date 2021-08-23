@@ -1,17 +1,29 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import logo from "../assets/images/logo.png";
 import ActionBar from "../components/general/ActionBar";
 import AvailableProduct from "../components/availableProduct/AvailableProductTable";
 import UpdateManager from "../components/updateProduct/UpdateManager";
 import CommittedProductManager from "../components/committedProduct/CommitedProductManager";
-
 import ProductInTransitManager from "../components/productInTransit/ProductInTransitManager";
-
+import { getAllMaterials } from "../store/selectMaterialReducer";
+import { getAllSupplier } from "../store/selectSupplierReducer";
+import { getAllCustomer } from "../store/selectCustomerReducer";
+import { getStock, getCommit, getTransit } from "../store/selectReportReducer";
 
 import "../styles/MainView.css";
 
 function MainView() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllMaterials());
+    dispatch(getAllCustomer());
+    dispatch(getAllSupplier());
+    dispatch(getStock());
+    dispatch(getCommit());
+    dispatch(getTransit());
+  }, []);
+
   return (
     <div className="MainView">
       <div className="MainView-blockLogoNav">
@@ -31,7 +43,6 @@ function MainView() {
                 className="nav-link active"
                 id="available-tab"
                 href="#available"
-
                 data-bs-toggle="tab"
                 data-bs-target="#available"
                 type="button"
@@ -48,7 +59,6 @@ function MainView() {
                 className="nav-link"
                 id="update-tab"
                 href="#update"
-
                 data-bs-toggle="tab"
                 data-bs-target="#update"
                 type="button"
@@ -65,7 +75,6 @@ function MainView() {
                 className="nav-link"
                 id="commit-tab"
                 href="#commit"
-
                 data-bs-toggle="tab"
                 data-bs-target="#commit"
                 type="button"
@@ -82,7 +91,6 @@ function MainView() {
                 className="nav-link"
                 id="transit-tab"
                 href="#transit"
-
                 data-bs-toggle="tab"
                 data-bs-target="#transit"
                 type="button"
@@ -100,7 +108,6 @@ function MainView() {
           <div
             className="tab-pane fade show active"
             id="available"
-
             role="tabpanel"
             aria-labelledby="available-tab"
           >
@@ -108,16 +115,12 @@ function MainView() {
             <h2>Stock</h2>
             <hr />
             <h6>
-
               Quantity of product available to date {new Date().toDateString()}.
-
             </h6>
             <AvailableProduct />
           </div>
           <div
-
             className="tab-pane fade"
-
             id="update"
             role="tabpanel"
             aria-labelledby="update-tab"
@@ -128,9 +131,7 @@ function MainView() {
             <UpdateManager />
           </div>
           <div
-
             className="tab-pane fade"
-
             id="commit"
             role="tabpanel"
             aria-labelledby="commit-tab"
@@ -152,7 +153,6 @@ function MainView() {
             <hr />
             <ProductInTransitManager />
           </div>
-
         </div>
       </div>
     </div>

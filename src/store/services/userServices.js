@@ -20,15 +20,6 @@ export async function getUserList() {
   });
 }
 
-export async function destroyUser(userId) {
-  return await axios({
-    method: "DELETE",
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    url: "/user/userDelete",
-    data: { userId },
-  });
-}
-
 export async function userRegister(name, lastname, email, role, password) {
   return await axios({
     method: "POST",
@@ -59,5 +50,14 @@ export async function userUpdate(token, name, lastname, role, password) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+  });
+}
+
+export async function destroyUser(userId) {
+  return await axios({
+    method: "DELETE",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/user/userDelete",
+    data: { userId },
   });
 }

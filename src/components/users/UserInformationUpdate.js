@@ -13,6 +13,12 @@ function UserInformationUpdate() {
     dispatch(updateUserProfileInfo(name, lastname, role, password));
   };
 
+  const onSave = () => {
+    const modalEl = document.getElementById("userUpdateModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -90,7 +96,11 @@ function UserInformationUpdate() {
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Update
               </button>
               <button

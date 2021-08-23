@@ -1,11 +1,8 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAllMaterials,
-  assignMaterialToCustomer,
-} from "../../store/selectMaterialReducer";
-import { getAllCustomer } from "../../store/selectCustomerReducer";
+import { assignMaterialToCustomer } from "../../store/selectMaterialReducer";
+
+import DeleteAssignment from "./DeleteAssignment";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
@@ -17,11 +14,6 @@ function CommittedProductManager() {
   const [assignmentDate, setAssignmentDate] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
 
-  useEffect(() => {
-    dispatch(getAllMaterials());
-    dispatch(getAllCustomer());
-  }, []);
-
   const { materialList, customerList } = useSelector((state) => {
     return {
       materialList: state.selectMaterialReducer.materialList,
@@ -30,6 +22,7 @@ function CommittedProductManager() {
   });
 
   const handleAssign = (e) => {
+    console.log("dispatch", materialList);
     dispatch(
       assignMaterialToCustomer(
         material,
@@ -38,13 +31,10 @@ function CommittedProductManager() {
         order,
         notes,
         assignmentDate,
-        deliveryDate
+        deliveryDate,
+        materialList
       )
     );
-  }
-
-  const handleDelete = () => {
-    console.log("delete");
   };
 
   return (
@@ -55,7 +45,7 @@ function CommittedProductManager() {
         </h6>
         <div className="input-group mb-3">
           <span className="input-group-text" id="material">
-            Material
+            Material *
           </span>
 
           <select
@@ -74,7 +64,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="amount">
-            Amount (kg)
+            Amount (kg) *
           </span>
           <input
             id="amount"
@@ -88,7 +78,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="customer">
-            Customer
+            Customer *
           </span>
           <select
             className="form-select"
@@ -106,7 +96,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="order">
-            Purchase Order
+            Purchase Order *
           </span>
           <input
             id="order"
@@ -120,7 +110,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="assignmentDate">
-            Assignment Date
+            Assignment Date *
           </span>
           <input
             id="assignmentDate"
@@ -135,7 +125,7 @@ function CommittedProductManager() {
         </div>
         <div className="input-group mb-3">
           <span className="input-group-text" id="deliveryDate">
-            Delivery Date
+            Delivery Date *
           </span>
           <input
             id="deliveryDate"
@@ -149,15 +139,13 @@ function CommittedProductManager() {
           />
         </div>
 
-       <div className="input-group mb-3">
+        <div className="input-group mb-3">
           <span className="input-group-text" id="notes">
             Notes
           </span>
           <input
             id="notes"
-
             type="textarea"
-
             className="form-control"
             aria-label="notes"
             aria-describedby="basic-addon1"
@@ -182,13 +170,15 @@ function CommittedProductManager() {
         <div>
           <button
             type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteAssignmentModal"
             className="btn btn-outline-secondary"
-            onClick={handleDelete}
           >
             Delete Assignment
           </button>
         </div>
       </div>
+      <DeleteAssignment />
     </div>
   );
 }
