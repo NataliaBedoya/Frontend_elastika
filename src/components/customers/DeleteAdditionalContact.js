@@ -12,6 +12,12 @@ function CustomerInformationUpdate() {
     };
   });
 
+  const onSave = () => {
+    const modalEl = document.getElementById("deleteAdditionalContactModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
+
   const handleDeleteContact = () => {
     dispatch(deleteAdditionalContact(customer));
   };
@@ -62,7 +68,11 @@ function CustomerInformationUpdate() {
               </select>
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Select
               </button>
               <button

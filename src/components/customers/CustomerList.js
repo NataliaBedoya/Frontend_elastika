@@ -34,14 +34,14 @@ function CustomerList() {
                 onChange={(e) => handleDelete(e.target.value)}
               />
             </th>
-            <td style={{ width: "35%", textAlign: "center" }}>
+            <td style={{ width: "30%", textAlign: "left" }}>
               <p>
                 {customer.name}
                 <br />
                 🏢{customer.businessPhone}{" "}
               </p>
             </td>
-            <td style={{ width: "20", textAlign: "center" }}>
+            <td style={{ width: "25%", textAlign: "center" }}>
               <p>
                 {customer.contact1} <br />
                 {customer.contact2}

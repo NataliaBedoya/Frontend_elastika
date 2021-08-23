@@ -22,6 +22,12 @@ function DeleteAssignment() {
     dispatch(deleteCommit(order));
   };
 
+  const onSave = () => {
+    const modalEl = document.getElementById("deleteAssignmentModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -83,20 +89,13 @@ function DeleteAssignment() {
                     <option value={order._id}>{order.order}</option>
                   ))}
               </select>
-              {/* <label htmlFor="order">
-                <strong> Purchase Order * </strong>
-              </label>
-              <input
-                id="order"
-                type="text"
-                name="order"
-                className="form-control"
-                onChange={(e) => setOrder(e.target.value)}
-                value={order}
-              /> */}
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Delete
               </button>
               <button

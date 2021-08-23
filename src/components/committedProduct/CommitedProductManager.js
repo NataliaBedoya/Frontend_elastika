@@ -22,6 +22,7 @@ function CommittedProductManager() {
   });
 
   const handleAssign = (e) => {
+    console.log("dispatch", materialList);
     dispatch(
       assignMaterialToCustomer(
         material,
@@ -30,13 +31,10 @@ function CommittedProductManager() {
         order,
         notes,
         assignmentDate,
-        deliveryDate
+        deliveryDate,
+        materialList
       )
     );
-  };
-
-  const handleDelete = () => {
-    console.log("delete");
   };
 
   return (

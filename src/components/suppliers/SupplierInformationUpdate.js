@@ -15,6 +15,12 @@ function SupplierInformationUpdate() {
     };
   });
 
+  const onSave = () => {
+    const modalEl = document.getElementById("supplierUpdateModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
+
   const handleUpdate = () => {
     dispatch(updateSupplierProfileInfo(supplier, contact1, email1, phone1));
   };
@@ -100,7 +106,11 @@ function SupplierInformationUpdate() {
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Update
               </button>
               <button

@@ -68,9 +68,10 @@ export function createNewUser(name, lastname, email, role, password) {
         role,
         password
       );
+      console.log(data);
       dispatch({
         type: CREATE_NEW_USER,
-        payload: data,
+        payload: data.user,
       });
       Swal.fire({
         title: "Confirmation",
@@ -178,10 +179,19 @@ function reducer(state = initialState, action) {
         userList: state.userList.concat(action.payload),
       };
     }
+    // case UPDATE_USER_PROFILE_INFO: {
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //   };
+    // }
     case UPDATE_USER_PROFILE_INFO: {
       return {
         ...state,
         user: action.payload,
+        userList: state.userList.map((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
       };
     }
     case ASSIGN_USER_TO_DELETE: {

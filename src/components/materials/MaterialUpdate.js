@@ -13,6 +13,12 @@ function MaterialUpdate() {
     };
   });
 
+  const onSave = () => {
+    const modalEl = document.getElementById("materialUpdateModal");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  };
+
   const handleUpdate = () => {
     dispatch(updateMaterialInfo(material, threshold));
   };
@@ -76,7 +82,11 @@ function MaterialUpdate() {
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
+              <button
+                type="submit"
+                className="btn btn-outline-secondary"
+                onClick={onSave}
+              >
                 Update
               </button>
               <button

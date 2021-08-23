@@ -26,7 +26,9 @@ export const REMOVE_COMMIT = "REMOVE_COMMIT";
 export const REMOVE_BATCH = "REMOVE_BATCH";
 export const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
+//
 
+///
 const initialState = {
   material: {},
   materialList: {},
@@ -229,7 +231,8 @@ export function assignMaterialToCustomer(
   order,
   notes,
   assignmentDate,
-  deliveryDate
+  deliveryDate,
+  materialList
 ) {
   return async function (dispatch) {
     try {
@@ -244,16 +247,38 @@ export function assignMaterialToCustomer(
         assignmentDate,
         deliveryDate
       );
+
       dispatch({
         type: PRODUCT_IN_TRANSIT,
         payload: data,
       });
-      Swal.fire({
-        title: "Confirmation",
-        icon: "success",
-        text: `The product in transit has been successfully registered with the purchase order ${order}`,
-        button: "OK",
-      });
+
+      const materialToCompare = materialList.filter(
+        (materialToCompare) => materialToCompare._id === material
+      );
+      const reduc = (accumulator, stock) => accumulator + stock.amountInStock;
+
+      const amountToCompare = materialToCompare.reduce((sum, material) => {
+        return sum + material.stock.reduce(reduc, 0);
+      }, 0);
+
+      if (parseInt(amount) > parseInt(amountToCompare)) {
+        Swal.fire({
+          title: "Attention",
+          icon: "warning",
+          text: `
+            The product in transit has been successfully registered with the purchase order ${order}.
+            But, you are committing a product with insufficient stock, check the import process.`,
+          button: "OK",
+        });
+      } else {
+        Swal.fire({
+          title: "Confirmation",
+          icon: "success",
+          text: `The product in transit has been successfully registered with the purchase order ${order}`,
+          button: "OK",
+        });
+      }
     } catch (error) {
       Swal.fire({
         title: "Oops...",
