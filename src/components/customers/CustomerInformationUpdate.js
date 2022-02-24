@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCustomerProfileInfo } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
-  const [customer, setCustomer] = useState("");
-  const [businessPhone, setBusinessPhone] = useState("");
-  const [contact1, setContact1] = useState("");
-  const [email1, setEmail1] = useState("");
-  const [phone1, setPhone1] = useState("");
+  const customer = useSelector(state => state.selectCustomerReducer.customerToUpdate);
 
-  const { customerList } = useSelector((state) => {
-    return {
-      customerList: state.selectCustomerReducer.customerList,
-    };
-  });
+  const [businessPhone, setBusinessPhone] = useState(customer.businessPhone);
+  const [contact1, setContact1] = useState(customer.contact1);
+  const [email1, setEmail1] = useState(customer.email1);
+  const [phone1, setPhone1] = useState(customer.phone1);
+
+  useEffect(() => {
+    setBusinessPhone(customer.businessPhone);
+    setContact1(customer.contact1);
+    setEmail1(customer.email1);
+    setPhone1(customer.phone1);
+  }, [customer])
 
   const handleUpdate = () => {
     dispatch(
       updateCustomerProfileInfo(
-        customer,
+        customer._id,
         businessPhone,
         contact1,
         email1,
@@ -62,22 +64,6 @@ function CustomerInformationUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <h6>Select the customer you want to update.</h6>
-
-              <select
-                class="form-select"
-                id="customer"
-                aria-label="Example select with button addon"
-                onChange={(e) => setCustomer(e.target.value)}
-              >
-                <option selected> Choose a customer</option>
-                {!!customerList &&
-                  customerList.length > 0 &&
-                  customerList.map((customer) => (
-                    <option value={customer._id}>{customer.name}</option>
-                  ))}
-              </select>
-              <hr />
               <label htmlFor="businessPhone">
                 <strong> Business Phone: </strong>
               </label>

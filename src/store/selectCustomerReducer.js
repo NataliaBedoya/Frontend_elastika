@@ -9,15 +9,18 @@ import {
 } from "./services/customerServices";
 
 export const GET_CUSTOMER_LIST = "GET_CUSTOMER_LIST";
-export const ASSIGN_CUSTOMER_TO_DELETE = "ASSIGN_CUSTOMER_TO_DELETE";
-export const REMOVE_CUSTOMER_DELETED = "REMOVE_CUSTOMER_DELETED";
+export const ASSIGN_CUSTOMER_TO_UPDATE = "ASSIGN_CUSTOMER_TO_UPDATE";
 export const CREATE_NEW_CUSTOMER = "CREATE_NEW_CUSTOMER";
-export const UPDATE_CUSTOMER_PROFILE_INFO = "UPDATE_CUSTOMER_PROFILE_INFO";
 
 const initialState = {
   customer: {},
   customerList: {},
-  customerToDelete: {},
+  customerToUpdate: {
+    businessPhone: '',
+    contact1: '',
+    email1: '',
+    phone1: ''
+  },
 };
 
 export function getAllCustomer() {
@@ -34,11 +37,11 @@ export function getAllCustomer() {
   };
 }
 
-export function assignCustomerToDelete(id) {
+export function assignCustomerToUpdate(customer) {
   return async function (dispatch) {
     dispatch({
-      type: ASSIGN_CUSTOMER_TO_DELETE,
-      payload: id,
+      type: ASSIGN_CUSTOMER_TO_UPDATE,
+      payload: customer,
     });
   };
 }
@@ -47,10 +50,7 @@ export function deleteCustomer(customerToDelete) {
   return async function (dispatch) {
     try {
       const { data } = await destroyCustomer(customerToDelete);
-      dispatch({
-        type: REMOVE_CUSTOMER_DELETED,
-        payload: data,
-      });
+      dispatch(getAllCustomer());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -97,6 +97,8 @@ export function createNewCustomer(
         type: CREATE_NEW_CUSTOMER,
         payload: data,
       });
+      const modalUploadCostumer = document.getElementById('uploadCostumer');
+      window.bootstrap.Modal.getInstance(modalUploadCostumer).hide();
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -116,7 +118,7 @@ export function createNewCustomer(
 }
 
 export function updateCustomerProfileInfo(
-  customer,
+  customerId,
   businessPhone,
   contact1,
   email1,
@@ -124,17 +126,14 @@ export function updateCustomerProfileInfo(
 ) {
   return async function (dispatch) {
     try {
-      const { data } = await customerUpdate(
-        customer,
+      await customerUpdate(
+        customerId,
         businessPhone,
         contact1,
         email1,
         phone1
       );
-      dispatch({
-        type: UPDATE_CUSTOMER_PROFILE_INFO,
-        payload: data,
-      });
+      dispatch(getAllCustomer());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -156,11 +155,8 @@ export function updateCustomerProfileInfo(
 export function deleteAdditionalContact(customer) {
   return async function (dispatch) {
     try {
-      const { data } = await deleteContact(customer);
-      dispatch({
-        type: UPDATE_CUSTOMER_PROFILE_INFO,
-        payload: data,
-      });
+      await deleteContact(customer);
+      dispatch(getAllCustomer());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -187,31 +183,16 @@ function reducer(state = initialState, action) {
         customerList: action.payload,
       };
     }
-    case ASSIGN_CUSTOMER_TO_DELETE: {
+    case ASSIGN_CUSTOMER_TO_UPDATE: {
       return {
         ...state,
-        customerToDelete: action.payload,
+        customerToUpdate: action.payload,
       };
     }
-    case REMOVE_CUSTOMER_DELETED: {
-      return {
-        ...state,
-        customerList: state.customerList.filter(
-          (customer) => customer._id !== action.payload._id
-        ),
-      };
-    }
-
     case CREATE_NEW_CUSTOMER: {
       return {
         ...state,
         customerList: state.customerList.concat(action.payload),
-      };
-    }
-    case UPDATE_CUSTOMER_PROFILE_INFO: {
-      return {
-        ...state,
-        customer: action.payload,
       };
     }
 

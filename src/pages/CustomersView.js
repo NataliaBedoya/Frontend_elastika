@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import logo from "../assets/images/logo.png";
-import ActionBar from "../components/general/ActionBar";
 import CustomersManager from "../components/customers/CustomersManager";
 import CustomersList from "../components/customers/CustomerList";
+import CustomerInformationUpdate from "../components/customers/CustomerInformationUpdate";
+import DeleteAdditionalContact from "../components/customers/DeleteAdditionalContact";
 import { getAllCustomer } from "../store/selectCustomerReducer";
 
 import "../styles/CustomersView.css";
@@ -16,27 +16,23 @@ function CustomersView() {
   }, []);
 
   return (
-    <div className="CustomersView">
-      <div className="CustomersView-blockLogoNav">
-        <div className="CustomersView-logo">
-          <img src={logo} alt="logo" />
+      <div className="CustomersView">
+        <div className="customers-view-header">
+          <h2>Customers Manager</h2>
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#uploadCostumer"
+          >
+            Create Customer
+          </button>
         </div>
-        <div>
-          <ActionBar />
-        </div>
-      </div>
-      <div className="CustomersView-InfoBlock">
-        <br />
-        <h2>Customers Manager</h2>
-        <hr />
-        <div className="Customers-customermanagerblock">
-          <CustomersManager />
-        </div>
-        <br />
-        <hr />
+        <CustomersManager />
+        <CustomerInformationUpdate />
+        <DeleteAdditionalContact />
         <CustomersList />
       </div>
-    </div>
   );
 }
 

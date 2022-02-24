@@ -22,7 +22,6 @@ function CommittedProductManager() {
   });
 
   const handleAssign = (e) => {
-    console.log("dispatch", materialList);
     dispatch(
       assignMaterialToCustomer(
         material,

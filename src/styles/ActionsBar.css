@@ -1,0 +1,16 @@
+.list-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 20vw;
+  position: fixed;
+}
+
+.list-group-img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.list-group-img {
+  max-width: 180px;
+}
