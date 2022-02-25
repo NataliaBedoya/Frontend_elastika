@@ -1,7 +1,4 @@
-body {
-  background-attachment: fixed;
-  background-size: cover;
-}
+
 .form-init {
   display: flex;
   flex-direction: row;

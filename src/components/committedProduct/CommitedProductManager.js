@@ -163,7 +163,7 @@ function CommittedProductManager() {
         </div>
         <hr />
         <h6>
-          To delete an assignment, select it in the table and then click the
+          To delete an assignment click the
           button
         </h6>
         <div>
