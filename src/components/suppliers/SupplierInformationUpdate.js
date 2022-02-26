@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSupplierProfileInfo } from "../../store/selectSupplierReducer";
 
 function SupplierInformationUpdate() {
+  const supplier = useSelector(state => state.selectSupplierReducer.supplierToUpdate);
+
   const dispatch = useDispatch();
-  const [supplier, setSupplier] = useState("");
   const [contact1, setContact1] = useState("");
   const [email1, setEmail1] = useState("");
   const [phone1, setPhone1] = useState("");
 
-  const { supplierList } = useSelector((state) => {
-    return {
-      supplierList: state.selectSupplierReducer.supplierList,
-    };
-  });
+  useEffect(() => {
+    setContact1(supplier.contact1);
+    setEmail1(supplier.email1);
+    setPhone1(supplier.phone1);
+  }, [supplier]);
 
   const onSave = () => {
     const modalEl = document.getElementById("supplierUpdateModal");
@@ -22,7 +23,7 @@ function SupplierInformationUpdate() {
   };
 
   const handleUpdate = () => {
-    dispatch(updateSupplierProfileInfo(supplier, contact1, email1, phone1));
+    dispatch(updateSupplierProfileInfo(supplier._id, contact1, email1, phone1));
   };
 
   return (
@@ -55,22 +56,6 @@ function SupplierInformationUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <h6>Select the supplier you want to update.</h6>
-
-              <select
-                className="form-select"
-                id="supplier"
-                aria-label="Example select with button addon"
-                onChange={(e) => setSupplier(e.target.value)}
-              >
-                <option selected> Choose a supplier</option>
-                {!!supplierList &&
-                  supplierList.length > 0 &&
-                  supplierList.map((supplier) => (
-                    <option value={supplier._id}>{supplier.name}</option>
-                  ))}
-              </select>
-              <hr />
               <label htmlFor="contact1">
                 <strong> Contact Name: </strong>
               </label>

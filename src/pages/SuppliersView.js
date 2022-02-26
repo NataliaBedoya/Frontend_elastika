@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import logo from "../assets/images/logo.png";
-import ActionBar from "../components/general/ActionBar";
 import SuppliersManager from "../components/suppliers/SuppliersManager";
 import SuppliersList from "../components/suppliers/SuppliersList";
 import { getAllSupplier } from "../store/selectSupplierReducer";
+import SupplierInformationUpdate from "../components/suppliers/SupplierInformationUpdate";
 
 import "../styles/SupplierView.css";
 
@@ -17,25 +16,20 @@ function SuppliersView() {
 
   return (
     <div className="SuppliersView">
-      <div className="SuppliersView-blockLogoNav">
-        <div className="SuppliersView-logo">
-          <img src={logo} alt="logo" />
-        </div>
-        <div>
-          <ActionBar />
-        </div>
-      </div>
-      <div className="SuppliersView-InfoBlock">
-        <br />
+      <div className="SuppliersView-header">
         <h2>Suppliers Manager</h2>
-        <hr />
-        <div className="SuppliersView-usermanagerblock">
-          <SuppliersManager />
-        </div>
-        <br />
-        <hr />
-        <SuppliersList />
+        <button
+            type="button"
+            className="btn btn-outline-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#uploadSupplier"
+          >
+            Create Supplier
+          </button>
       </div>
+      <SuppliersManager />
+      <SupplierInformationUpdate />
+      <SuppliersList />
     </div>
   );
 }

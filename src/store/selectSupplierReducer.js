@@ -8,14 +8,14 @@ import {
 } from "./services/supplierServices";
 
 export const GET_SUPPLIER_LIST = "GET_SUPPLIER_LIST";
-export const ASSIGN_SUPPLIER_TO_DELETE = "ASSIGN_SUPPLIER_TO_DELETE";
+export const ASSIGN_SUPPLIER_TO_UPDATE = "ASSIGN_SUPPLIER_TO_UPDATE";
 export const REMOVE_SUPPLIER_DELETED = "REMOVE_SUPPLIER_DELETED";
 export const CREATE_NEW_SUPPLIER = "CREATE_NEW_SUPPLIER";
 export const UPDATE_SUPPLIER_PROFILE_INFO = "UPDATE_SUPPLIER_PROFILE_INFO";
 
 const initialState = {
   supplierList: {},
-  supplierToDelete: {},
+  supplierToUpdate: {},
   supplier: {},
 };
 
@@ -33,11 +33,11 @@ export function getAllSupplier() {
   };
 }
 
-export function assignSupplierToDelete(id) {
+export function assignSupplierToUpdate(supplier) {
   return async function (dispatch) {
     dispatch({
-      type: ASSIGN_SUPPLIER_TO_DELETE,
-      payload: id,
+      type: ASSIGN_SUPPLIER_TO_UPDATE,
+      payload: supplier,
     });
   };
 }
@@ -92,6 +92,8 @@ export function createNewSupplier(
         type: CREATE_NEW_SUPPLIER,
         payload: data,
       });
+      const modalUploadSupplier = document.getElementById('uploadSupplier');
+      window.bootstrap.Modal.getInstance(modalUploadSupplier).hide();
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -113,11 +115,8 @@ export function createNewSupplier(
 export function updateSupplierProfileInfo(supplier, contact1, email1, phone1) {
   return async function (dispatch) {
     try {
-      const { data } = await supplierUpdate(supplier, contact1, email1, phone1);
-      dispatch({
-        type: UPDATE_SUPPLIER_PROFILE_INFO,
-        payload: data,
-      });
+      await supplierUpdate(supplier, contact1, email1, phone1);
+      dispatch(getAllSupplier());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -144,10 +143,10 @@ function reducer(state = initialState, action) {
         supplierList: action.payload,
       };
     }
-    case ASSIGN_SUPPLIER_TO_DELETE: {
+    case ASSIGN_SUPPLIER_TO_UPDATE: {
       return {
         ...state,
-        supplierToDelete: action.payload,
+        supplierToUpdate: action.payload,
       };
     }
     case REMOVE_SUPPLIER_DELETED: {
