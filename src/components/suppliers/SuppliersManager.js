@@ -67,8 +67,8 @@ function SuppliersManager() {
           />
         </div>
 
-        <div class="input-group mb-3">
-          <span class="input-group-text">Country and city</span>
+        <div className="input-group mb-3">
+          <span className="input-group-text">Country and city</span>
           <input
             id="country "
             type="text"
@@ -81,7 +81,7 @@ function SuppliersManager() {
             id="city"
             type="text"
             aria-label="city"
-            class="form-control"
+            className="form-control"
             onChange={(e) => setCity(e.target.value)}
             value={city}
           />

@@ -31,7 +31,7 @@ function ReportStockByMaterial() {
   };
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped">
         <caption>Available Batches</caption>
         <thead>

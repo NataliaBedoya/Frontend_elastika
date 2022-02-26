@@ -33,7 +33,6 @@ function CustomersManager() {
   };
 
   return (
-    <div>
       <div 
         className="modal fade"
         id="uploadCostumer"
@@ -186,7 +185,6 @@ function CustomersManager() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

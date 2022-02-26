@@ -58,7 +58,7 @@ function SupplierInformationUpdate() {
               <h6>Select the supplier you want to update.</h6>
 
               <select
-                class="form-select"
+                className="form-select"
                 id="supplier"
                 aria-label="Example select with button addon"
                 onChange={(e) => setSupplier(e.target.value)}

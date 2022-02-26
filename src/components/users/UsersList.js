@@ -49,7 +49,7 @@ function UsersList() {
   };
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped">
         <caption>List of users</caption>
         <thead>

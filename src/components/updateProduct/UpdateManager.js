@@ -36,9 +36,9 @@ function UpdateManager() {
     <div>
       <div>
         <h6>Select the material you want to update. </h6>
-        <div class="input-group">
+        <div className="input-group">
           <select
-            class="form-select"
+            className="form-select"
             id="material"
             aria-label="Example select with button addon"
             onChange={(e) => setMaterial(e.target.value)}
@@ -53,9 +53,9 @@ function UpdateManager() {
         </div>
         <br />
         <h6>Select the material batch.</h6>
-        <div class="input-group">
+        <div className="input-group">
           <select
-            class="form-select"
+            className="form-select"
             id="material"
             aria-label="Example select with button addon"
             onChange={(e) => setBatch(e.target.value)}

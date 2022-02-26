@@ -40,7 +40,7 @@ function CommitByMaterial() {
   };
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped">
         <caption>Commited Product</caption>
         <thead>

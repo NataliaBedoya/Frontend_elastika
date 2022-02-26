@@ -59,7 +59,7 @@ function SuppliersList() {
   };
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped">
         <caption>List of suppliers</caption>
         <thead>

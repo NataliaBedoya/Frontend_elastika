@@ -47,7 +47,7 @@ function ReportTransitByMaterial() {
   };
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped">
         <caption>Product In Transit</caption>
         <thead>

@@ -21,7 +21,7 @@ function MaterialsManager() {
   const dispatch = useDispatch();
   const [report, setReport] = useState("");
   const [customer, setCustomer] = useState("");
-  const [material, setMaterial] = useState("");
+  const [material, setMaterial] = useState("default");
 
   useEffect(() => {
     dispatch(getAllCustomer());
@@ -53,18 +53,19 @@ function MaterialsManager() {
     if (report === "MaterialCommittedByCustomer") {
       return (
         <div>
-          <div class="input-group">
+          <div className="input-group">
             <select
-              class="form-select"
+              className="form-select"
               id="customer"
               aria-label="Example select with button addon"
               onChange={(e) => setCustomer(e.target.value)}
+              value={customer}
             >
-              <option selected> Choose a customer</option>
+              <option value="default"> Choose a customer</option>
               {!!customerList &&
                 customerList.length > 0 &&
                 customerList.map((customer) => (
-                  <option value={customer._id}>{customer.name}</option>
+                  <option value={customer._id} key={customer._id} >{customer.name}</option>
                 ))}
             </select>
           </div>
@@ -86,18 +87,19 @@ function MaterialsManager() {
     } else if (report === "InformationByMaterial") {
       return (
         <div>
-          <div class="input-group">
+          <div className="input-group">
             <select
-              class="form-select"
+              className="form-select"
               id="material"
               aria-label="Example select with button addon"
               onChange={(e) => setMaterial(e.target.value)}
+              value={material}
             >
-              <option selected> Choose a material</option>
+              <option value="default"> Choose a material</option>
               {!!materialList &&
                 materialList.length > 0 &&
                 materialList.map((material) => (
-                  <option value={material._id}>{material.name}</option>
+                  <option value={material._id} key={material._id}>{material.name}</option>
                 ))}
             </select>
           </div>
@@ -133,18 +135,19 @@ function MaterialsManager() {
     } else if (report === "MaterialCommittedByReference") {
       return (
         <div>
-          <div class="input-group">
+          <div className="input-group">
             <select
-              class="form-select"
+              className="form-select"
               id="material"
               aria-label="Example select with button addon"
               onChange={(e) => setMaterial(e.target.value)}
+              value={material}
             >
-              <option selected> Choose a material</option>
+              <option value="default"> Choose a material</option>
               {!!materialList &&
                 materialList.length > 0 &&
                 materialList.map((material) => (
-                  <option value={material._id}>{material.name}</option>
+                  <option value={material._id} key={material._id}>{material.name}</option>
                 ))}
             </select>
           </div>
@@ -170,14 +173,15 @@ function MaterialsManager() {
     <div>
       <div>
         <h6>Choose the report you want to see and then select the option</h6>
-        <div class="input-group">
+        <div className="input-group">
           <select
-            class="form-select"
+            className="form-select"
             id="report"
             aria-label="Example select with button addon"
             onChange={(e) => setReport(e.target.value)}
+            value={report}
           >
-            <option selected>Choose a report</option>
+            <option value="default">Choose a report</option>
             <option value={"InformationByMaterial"}>
               Information by material
             </option>

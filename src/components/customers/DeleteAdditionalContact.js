@@ -54,7 +54,7 @@ function CustomerInformationUpdate() {
             <div className="modal-body">
               <h6>Select the customer to remove the additional contact.</h6>
               <select
-                class="form-select"
+                className="form-select"
                 id="customer"
                 aria-label="Example select with button addon"
                 onChange={(e) => setCustomer(e.target.value)}

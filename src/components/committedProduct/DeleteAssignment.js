@@ -61,7 +61,7 @@ function DeleteAssignment() {
               <h6>Select the customer</h6>
 
               <select
-                class="form-select"
+                className="form-select"
                 id="customer"
                 aria-label="Example select with button addon"
                 onChange={(e) => setCustomer(e.target.value)}
@@ -77,7 +77,7 @@ function DeleteAssignment() {
               <h6>Select the purchase order *</h6>
 
               <select
-                class="form-select"
+                className="form-select"
                 id="customer"
                 aria-label="Example select with button addon"
                 onChange={(e) => setOrder(e.target.value)}

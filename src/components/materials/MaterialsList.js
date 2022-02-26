@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { assignMaterialToDelete } from "../../store/selectMaterialReducer";
+import Options from "../../assets/images/menu.png";
+import { assignMaterialToUpdate, deleteMaterial } from "../../store/selectMaterialReducer";
 
 function MaterialsList() {
-  const [checkedValue, setIsChecked] = useState("");
   const dispatch = useDispatch();
 
+  const handleUpdate = (material) => {
+    dispatch(assignMaterialToUpdate(material));
+  };
+
   const handleDelete = (id) => {
-    setIsChecked(id);
-    dispatch(assignMaterialToDelete(id));
+    dispatch(deleteMaterial(id));
   };
 
   const { materialList } = useSelector((state) => {
@@ -24,15 +26,31 @@ function MaterialsList() {
       materialList.length > 0 &&
       materialList.map((material) => {
         return (
-          <tr>
-            <th style={{ width: "5%", textAlign: "center" }}>
-              <input
-                type="radio"
-                id={material._id}
-                name="materialToDelete"
-                value={material._id}
-                onChange={(e) => handleDelete(e.target.value)}
-              />
+          <tr key={material._id}>
+            <th style={{ width: "10%", textAlign: 'center' }}>
+              <div className="dropdown">
+                <button className="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img width="15px" alt="options" src={Options} />
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a
+                    className="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#materialUpdateModal"
+                    onClick={() => handleUpdate(material)}
+                    href="#"
+                  >
+                    Update threshold
+                  </a></li>
+                  <li><a
+                    className="dropdown-item"
+                    onClick={() => handleDelete(material._id)}
+                    href="#"
+                  >
+                    Delete
+                  </a></li>
+                </ul>
+              </div>
             </th>
             <td style={{ width: "35%", textAlign: "center" }}>
               {material.name}
@@ -51,12 +69,12 @@ function MaterialsList() {
   };
 
   return (
-    <div class="table-responsive">
+    <div style={{ width: "90%" }} className="table-responsive">
       <table className="table table-striped">
         <caption>List of materials</caption>
         <thead>
           <tr>
-            <th style={{ width: "5%", textAlign: "center" }}>Select</th>
+            <th style={{ width: "10%", textAlign: 'center' }}>Select</th>
             <th style={{ width: "35%", textAlign: "center" }}>Name</th>
             <th style={{ width: "35%", textAlign: "center" }}>Description</th>
             <th style={{ width: "25%", textAlign: "center" }}>

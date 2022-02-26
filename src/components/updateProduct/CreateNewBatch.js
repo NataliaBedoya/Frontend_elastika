@@ -53,7 +53,7 @@ function CreateNewBatch() {
                 <strong> Material * </strong>
               </label>
               <select
-                class="form-select"
+                className="form-select"
                 id="material"
                 aria-label="Example select with button addon"
                 onChange={(e) => setMaterial(e.target.value)}

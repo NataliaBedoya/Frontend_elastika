@@ -21,20 +21,16 @@ const initialState = {
 };
 
 export function AssignMaterialToGetReport(material) {
-  return async function (dispatch) {
-    dispatch({
-      type: ASSIGN_MATERIAL_TO_GET_REPORT,
-      payload: material,
-    });
+  return {
+    type: ASSIGN_MATERIAL_TO_GET_REPORT,
+    payload: material,
   };
 }
 
 export function AssignCustomerToGetReport(customer) {
-  return async function (dispatch) {
-    dispatch({
-      type: ASSIGN_CUSTOMER_TO_GET_REPORT,
-      payload: customer,
-    });
+  return {
+    type: ASSIGN_CUSTOMER_TO_GET_REPORT,
+    payload: customer,
   };
 }
 

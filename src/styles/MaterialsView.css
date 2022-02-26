@@ -1,33 +1,21 @@
 .MaterialsView {
-  padding: 20px;
+  margin-left: 20vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+.MaterialsView-header {
+  width: 90%;
+  height: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.MaterialsView-blockLogoNav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: Tahoma, Verdana, Helvetica, sans-serif;
-  width: 30%;
-}
-
-.MaterialsView-logo {
-  padding-top: 35px;
-  padding-bottom: 25px;
-}
-.MaterialsView-InfoBlock {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: Tahoma, Verdana, Helvetica, sans-serif;
-  font-size: 15px;
-  color: #2f4457;
-  font-weight: lighter;
-  width: 70%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .MaterialsView-materialmanagerblock {

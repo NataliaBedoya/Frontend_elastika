@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMaterialInfo } from "../../store/selectMaterialReducer";
 
 function MaterialUpdate() {
-  const dispatch = useDispatch();
-  const [material, setMaterial] = useState("");
-  const [threshold, setThreshold] = useState("");
+  const material = useSelector(state => state.selectMaterialReducer.materialToUpdate);
 
-  const { materialList } = useSelector((state) => {
-    return {
-      materialList: state.selectMaterialReducer.materialList,
-    };
-  });
+  const dispatch = useDispatch();
+  const [threshold, setThreshold] = useState(material.threshold);
+
+  useEffect(() => {
+    setThreshold(material.threshold);
+  }, [material])
 
   const onSave = () => {
     const modalEl = document.getElementById("materialUpdateModal");
@@ -20,7 +19,7 @@ function MaterialUpdate() {
   };
 
   const handleUpdate = () => {
-    dispatch(updateMaterialInfo(material, threshold));
+    dispatch(updateMaterialInfo(material._id, threshold));
   };
 
   return (
@@ -53,22 +52,6 @@ function MaterialUpdate() {
               ></button>
             </div>
             <div className="modal-body">
-              <h6>Select the material you want to update.</h6>
-
-              <select
-                class="form-select"
-                id="material"
-                aria-label="Example select with button addon"
-                onChange={(e) => setMaterial(e.target.value)}
-              >
-                <option selected> Choose a material</option>
-                {!!materialList &&
-                  materialList.length > 0 &&
-                  materialList.map((material) => (
-                    <option value={material._id}>{material.name}</option>
-                  ))}
-              </select>
-              <hr />
               <label htmlFor="threshold">
                 <strong> Threshold: </strong>
               </label>

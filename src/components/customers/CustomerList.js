@@ -31,38 +31,38 @@ function CustomerList() {
       customerList.map((customer) => {
         return (
           <tr key={customer._id}>
-            <th style={{ width: "10%", minHeight: '50%', textAlign: 'center' }}>
-            <div class="dropdown">
-              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img width="15px" alt="options" src={Options}/>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a
-                  class="dropdown-item"
-                  data-bs-toggle="modal"
-                  data-bs-target="#customersUpdateModal"
-                  onClick={() => handleUpdate(customer)}
-                  href="#"
+            <td style={{ width: "10%", textAlign: 'center' }}>
+              <div className="dropdown">
+                <button className="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img width="15px" alt="options" src={Options} />
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a
+                    className="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customersUpdateModal"
+                    onClick={() => handleUpdate(customer)}
+                    href="#"
                   >
                     Update
                   </a></li>
-                <li><a
-                  class="dropdown-item"
-                  onClick={() => handleDelete(customer._id)}
-                  href="#"
+                  <li><a
+                    className="dropdown-item"
+                    onClick={() => handleDelete(customer._id)}
+                    href="#"
                   >
                     Delete
                   </a></li>
-                <li><a
-                  class="dropdown-item"
-                  onClick={() => handleDeleteContact(customer._id)}
-                  href="#"
+                  <li><a
+                    className="dropdown-item"
+                    onClick={() => handleDeleteContact(customer._id)}
+                    href="#"
                   >
                     Delete additional contact
-                </a></li>
-              </ul>
-            </div>
-            </th>
+                  </a></li>
+                </ul>
+              </div>
+            </td>
             <td style={{ width: "25%" }}>
               <p>
                 {customer.name}
@@ -95,7 +95,7 @@ function CustomerList() {
   };
 
   return (
-    <div style={{ width: "90%" }} class="table-responsive">
+    <div style={{ width: "90%" }} className="table-responsive">
       <table className="table table-striped">
         <caption>List of customers</caption>
         <thead>

@@ -14,13 +14,10 @@ import {
 } from "./services/materialServices";
 
 export const GET_MATERIAL_LIST = "GET_MATERIAL_LIST";
-export const ASSIGN_MATERIAL_TO_DELETE = "ASSIGN_MATERIAL_TO_DELETE";
+export const ASSIGN_MATERIAL_TO_UPDATE = "ASSIGN_MATERIAL_TO_UPDATE";
 export const REMOVE_MATERIAL_DELETED = "REMOVE_MATERIAL_DELETED";
 export const CREATE_NEW_MATERIAL = "CREATE_NEW_MATERIAL";
-
-export const GET_MATERIAL_TO_UPDATE = "GET_MATERIAL_TO_UPDATE";
 export const CREATE_NEW_BATCH = "CREATE_NEW_BATCH";
-export const UPDATE_THRESHOLD = "UPDATE_THRESHOLD";
 export const ASSIGN_MATERIAL_TO_CUSTOMER = "ASSIGN_MATERIAL_TO_CUSTOMER";
 export const REMOVE_COMMIT = "REMOVE_COMMIT";
 export const REMOVE_BATCH = "REMOVE_BATCH";
@@ -32,8 +29,9 @@ export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
 const initialState = {
   material: {},
   materialList: {},
-  materialToDelete: {},
-  materialToUpdate: {},
+  materialToUpdate: {
+    threshold: ''
+  },
   assignedMaterial: {},
   productInTransit: {},
 };
@@ -52,10 +50,10 @@ export function getAllMaterials() {
   };
 }
 
-export function assignMaterialToDelete(id) {
+export function assignMaterialToUpdate(id) {
   return async function (dispatch) {
     dispatch({
-      type: ASSIGN_MATERIAL_TO_DELETE,
+      type: ASSIGN_MATERIAL_TO_UPDATE,
       payload: id,
     });
   };
@@ -96,6 +94,8 @@ export function createNewMaterial(name, description, threshold) {
         type: CREATE_NEW_MATERIAL,
         payload: data,
       });
+      const modalUploadMaterial = document.getElementById('uploadMaterial');
+      window.bootstrap.Modal.getInstance(modalUploadMaterial).hide();
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -198,14 +198,11 @@ export function updateStockInfo(stockId, amountInStock) {
   };
 }
 
-export function updateMaterialInfo(material, threshold) {
+export function updateMaterialInfo(materialId, threshold) {
   return async function (dispatch) {
     try {
-      const { data } = await thresholdUpdate(material, threshold);
-      dispatch({
-        type: UPDATE_THRESHOLD,
-        payload: data,
-      });
+      const { data } = await thresholdUpdate(materialId, threshold);
+      dispatch(getAllMaterials());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -375,10 +372,10 @@ function reducer(state = initialState, action) {
         materialList: action.payload,
       };
     }
-    case ASSIGN_MATERIAL_TO_DELETE: {
+    case ASSIGN_MATERIAL_TO_UPDATE: {
       return {
         ...state,
-        materialToDelete: action.payload,
+        materialToUpdate: action.payload,
       };
     }
     case REMOVE_MATERIAL_DELETED: {
@@ -389,7 +386,6 @@ function reducer(state = initialState, action) {
         ),
       };
     }
-
     case REMOVE_BATCH: {
       return {
         ...state,
@@ -400,31 +396,15 @@ function reducer(state = initialState, action) {
         ...state,
       };
     }
-
     case UPDATE_AMOUNT: {
       return {
         ...state,
       };
     }
-
     case CREATE_NEW_MATERIAL: {
       return {
         ...state,
         materialList: state.materialList.concat(action.payload),
-      };
-    }
-
-    case GET_MATERIAL_TO_UPDATE: {
-      return {
-        ...state,
-        materialToUpdate: action.payload,
-      };
-    }
-
-    case UPDATE_THRESHOLD: {
-      return {
-        ...state,
-        material: action.payload,
       };
     }
     case ASSIGN_MATERIAL_TO_CUSTOMER: {
@@ -433,7 +413,6 @@ function reducer(state = initialState, action) {
         assignedMaterial: action.payload,
       };
     }
-
     default: {
       return state;
     }
