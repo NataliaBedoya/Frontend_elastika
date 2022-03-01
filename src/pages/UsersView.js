@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
-import logo from "../assets/images/logo.png";
-import ActionBar from "../components/general/ActionBar";
 import UsersManager from "../components/users/UsersManager";
 import UsersList from "../components/users/UsersList";
+import UserInformationUpdate from "../components/users/UserInformationUpdate";
 
 import { getAllUser } from "../store/selectUserReducer";
 
@@ -19,25 +17,20 @@ function UsersView() {
 
   return (
     <div className="UsersView">
-      <div className="UsersView-blockLogoNav">
-        <div className="UsersView-logo">
-          <img src={logo} alt="logo" />
-        </div>
-        <div>
-          <ActionBar />
-        </div>
-      </div>
-      <div className="UsersView-InfoBlock">
-        <br />
+      <div className="UsersView-header">
         <h2>Users Manager</h2>
-        <hr />
-        <div className="UsersView-usermanagerblock">
-          <UsersManager />
-        </div>
-        <br />
-        <hr />
-        <UsersList />
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#uploadUser"
+        >
+          Create user
+        </button>
       </div>
+      <UsersManager />
+      <UserInformationUpdate />
+      <UsersList />
     </div>
   );
 }

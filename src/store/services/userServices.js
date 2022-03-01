@@ -35,17 +35,17 @@ export async function userRegister(name, lastname, email, role, password) {
   });
 }
 
-export async function userUpdate(token, name, lastname, role, password) {
+export async function userUpdate(token, name, lastname, role, email, userId) {
   return await axios({
     method: "PUT",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/user/userUpdate",
     data: {
-      token,
       name,
       lastname,
       role,
-      password,
+      email,
+      userId
     },
     headers: {
       Authorization: `Bearer ${token}`,

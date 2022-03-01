@@ -1,16 +1,25 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfileInfo } from "../../store/selectUserReducer";
 
 function UserInformationUpdate() {
+  const user = useSelector(state => state.selectUserReducer.userToUpdate)
+
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [role, setRole] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    setName(user.name);
+    setLastname(user.lastname);
+    setRole(user.role);
+    setEmail(user.email);
+  }, [user])
 
   const handleUpdate = () => {
-    dispatch(updateUserProfileInfo(name, lastname, role, password));
+    dispatch(updateUserProfileInfo(user._id, name, lastname, role, email));
   };
 
   const onSave = () => {
@@ -83,32 +92,32 @@ function UserInformationUpdate() {
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
               />
-              <label htmlFor="password">
-                <strong> Password: </strong>
+              <label htmlFor="email">
+                <strong> Email: </strong>
               </label>
               <input
-                id="password"
-                type="password"
-                name="password"
+                id="email"
+                type="email"
+                name="email"
                 className="form-control"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="modal-footer">
               <button
-                type="submit"
-                className="btn btn-outline-secondary"
-                onClick={onSave}
-              >
-                Update
-              </button>
-              <button
                 type="button"
-                className="btn btn-outline-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={onSave}
+              >
+                Update
               </button>
             </div>
           </div>

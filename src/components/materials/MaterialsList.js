@@ -14,6 +14,14 @@ function MaterialsList() {
     dispatch(deleteMaterial(id));
   };
 
+  const handleBatches = (stock) => {
+    const batches = []
+    stock.forEach(({batch}) => {
+      batches.push(` ${batch}`)
+    });
+    return batches.length ? batches.toString() : 'none';
+  }
+
   const { materialList } = useSelector((state) => {
     return {
       materialList: state.selectMaterialReducer.materialList,
@@ -52,14 +60,21 @@ function MaterialsList() {
                 </ul>
               </div>
             </th>
-            <td style={{ width: "35%", textAlign: "center" }}>
+            <td style={{ width: "30%", textAlign: "center" }}>
               {material.name}
             </td>
-            <td style={{ width: "35%", textAlign: "center" }}>
+            <td style={{ width: "30%", textAlign: "center" }}>
               {material.description}
             </td>
-
-            <td style={{ width: "25%", textAlign: "center" }}>
+            <td style={{ width: "20%", textAlign: "center" }}>
+              <div className="my-tooltip-container">
+                <div className="my-tooltip">
+                  {handleBatches(material.stock)}
+                </div>
+                {material.stock.length}
+              </div>
+            </td>
+            <td style={{ width: "20%", textAlign: "center" }}>
               {new Intl.NumberFormat().format(parseInt(material.threshold))}
             </td>
           </tr>
@@ -69,15 +84,16 @@ function MaterialsList() {
   };
 
   return (
-    <div style={{ width: "90%" }} className="table-responsive">
+    <div style={{ width: "90%", overflow: "visible" }} className="table-responsive">
       <table className="table table-striped">
         <caption>List of materials</caption>
         <thead>
           <tr>
             <th style={{ width: "10%", textAlign: 'center' }}>Select</th>
-            <th style={{ width: "35%", textAlign: "center" }}>Name</th>
-            <th style={{ width: "35%", textAlign: "center" }}>Description</th>
-            <th style={{ width: "25%", textAlign: "center" }}>
+            <th style={{ width: "30%", textAlign: "center" }}>Name</th>
+            <th style={{ width: "30%", textAlign: "center" }}>Description</th>
+            <th style={{ width: "20%", textAlign: "center" }}>Batches</th>
+            <th style={{ width: "20%", textAlign: "center" }}>
               Threshold (kg)
             </th>
           </tr>

@@ -25,15 +25,12 @@ export async function materialRegister(name, description, threshold) {
     data: {
       name,
       description,
-
       threshold,
     },
   });
 }
 
 export async function batchCreation(token, materialId, batch) {
-  console.log("batch creation");
-  console.log(materialId, batch);
   return await axios({
     method: "POST",
     baseURL: process.env.REACT_APP_SERVER_URL,

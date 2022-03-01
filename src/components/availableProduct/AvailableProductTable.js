@@ -29,7 +29,7 @@ function AvailableProduct() {
             </td>
             <td>
               {parseInt(material.threshold) >
-              parseInt(material.stock.reduce(reduc, 0))
+                parseInt(material.stock.reduce(reduc, 0))
                 ? "🚨"
                 : " "}
             </td>

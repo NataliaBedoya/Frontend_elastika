@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import logo from "../assets/images/logo.png";
-import ActionBar from "../components/general/ActionBar";
 import AvailableProduct from "../components/availableProduct/AvailableProductTable";
 import UpdateManager from "../components/updateProduct/UpdateManager";
 import CommittedProductManager from "../components/committedProduct/CommitedProductManager";

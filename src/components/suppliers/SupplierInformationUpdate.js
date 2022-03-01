@@ -92,18 +92,18 @@ function SupplierInformationUpdate() {
             </div>
             <div className="modal-footer">
               <button
-                type="submit"
-                className="btn btn-outline-secondary"
-                onClick={onSave}
-              >
-                Update
-              </button>
-              <button
                 type="button"
-                className="btn btn-outline-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={onSave}
+              >
+                Update
               </button>
             </div>
           </div>

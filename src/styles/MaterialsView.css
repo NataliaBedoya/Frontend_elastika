@@ -22,3 +22,41 @@
   border: 0.5px solid #ced4da;
   padding: 0.375rem 0.75rem;
 }
+
+.my-tooltip-container {
+  position: relative;
+}
+
+.my-tooltip-container:hover {
+  cursor: pointer;
+}
+
+.my-tooltip-container:hover .my-tooltip {
+  visibility: visible;
+}
+
+.my-tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: #383838;
+  color: white;
+  padding: 5px;
+  z-index: 2;
+  border-radius: 10px;
+  bottom: 23px;
+  right: 50%;
+  transform: translateX(50%);
+  max-width: 350px;
+  word-wrap: break-word;
+}
+
+.my-tooltip::after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #383838 transparent transparent transparent;
+}

@@ -123,11 +123,13 @@ export function createNewBatch(materialId, batch) {
         materialId,
         batch
       );
-
       dispatch({
         type: CREATE_NEW_BATCH,
         payload: data,
       });
+      dispatch(getAllMaterials());
+      const modalCreateBatch = document.getElementById('createBatch');
+      window.bootstrap.Modal.getInstance(modalCreateBatch).hide();
       Swal.fire({
         title: "Confirmation",
         icon: "success",

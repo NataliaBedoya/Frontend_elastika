@@ -12,13 +12,13 @@ export const USER_SIGN_IN = "USER_SIGN_IN";
 export const GET_USER_LIST = "GET_USER_LIST";
 export const CREATE_NEW_USER = "CREATE_NEW_USER";
 export const UPDATE_USER_PROFILE_INFO = "UPDATE_USER_PROFILE_INFO";
-export const ASSIGN_USER_TO_DELETE = "ASSIGN_USER_TO_DELETE";
+export const ASSIGN_USER_TO_UPDATE = "ASSIGN_USER_TO_UPDATE";
 export const REMOVE_USER_DELETED = "REMOVE_USER_DELETED";
 
 const initialState = {
   user: {},
   userList: {},
-  userToDelete: {},
+  userToUpdate: {},
 };
 
 export function accessUser(email, password, history) {
@@ -68,11 +68,12 @@ export function createNewUser(name, lastname, email, role, password) {
         role,
         password
       );
-      console.log(data);
       dispatch({
         type: CREATE_NEW_USER,
         payload: data.user,
       });
+      const modalUploadUser = document.getElementById('uploadUser');
+      window.bootstrap.Modal.getInstance(modalUploadUser).hide();
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -91,7 +92,7 @@ export function createNewUser(name, lastname, email, role, password) {
   };
 }
 
-export function updateUserProfileInfo(name, lastname, role, password) {
+export function updateUserProfileInfo(userId, name, lastname, role, email) {
   return async function (dispatch) {
     try {
       const authorizationToken = localStorage.getItem("token");
@@ -100,12 +101,14 @@ export function updateUserProfileInfo(name, lastname, role, password) {
         name,
         lastname,
         role,
-        password
+        email,
+        userId
       );
       dispatch({
         type: UPDATE_USER_PROFILE_INFO,
         payload: data,
       });
+      dispatch(getAllUser());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -124,10 +127,10 @@ export function updateUserProfileInfo(name, lastname, role, password) {
   };
 }
 
-export function assignUserToDelete(id) {
+export function assignUserToUpdate(id) {
   return async function (dispatch) {
     dispatch({
-      type: ASSIGN_USER_TO_DELETE,
+      type: ASSIGN_USER_TO_UPDATE,
       payload: id,
     });
   };
@@ -194,10 +197,10 @@ function reducer(state = initialState, action) {
         ),
       };
     }
-    case ASSIGN_USER_TO_DELETE: {
+    case ASSIGN_USER_TO_UPDATE: {
       return {
         ...state,
-        userToDelete: action.payload,
+        userToUpdate: action.payload,
       };
     }
     case REMOVE_USER_DELETED: {

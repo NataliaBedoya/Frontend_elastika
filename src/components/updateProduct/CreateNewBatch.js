@@ -5,7 +5,7 @@ import { createNewBatch } from "../../store/selectMaterialReducer";
 
 function CreateNewBatch() {
   const dispatch = useDispatch();
-  const [material, setMaterial] = useState("");
+  const [materialId, setMaterial] = useState("");
   const [batch, setBatch] = useState("");
 
   const { materialList } = useSelector((state) => {
@@ -15,8 +15,7 @@ function CreateNewBatch() {
   });
 
   const handleCreate = () => {
-    console.log(material, batch);
-    dispatch(createNewBatch(material, batch));
+    dispatch(createNewBatch(materialId, batch));
   };
 
   return (
@@ -49,45 +48,50 @@ function CreateNewBatch() {
               ></button>
             </div>
             <div className="modal-body">
-              <label htmlFor="material" style={{ color: "black" }}>
-                <strong> Material * </strong>
-              </label>
-              <select
-                className="form-select"
-                id="material"
-                aria-label="Example select with button addon"
-                onChange={(e) => setMaterial(e.target.value)}
-              >
-                <option selected> Choose a material</option>
-                {!!materialList &&
-                  materialList.length > 0 &&
-                  materialList.map((material) => (
-                    <option value={material._id}>{material.name}</option>
-                  ))}
-              </select>
+              <div className="input-group mb-1">
+                <span className="input-group-text" id="name">
+                  Material *
+                </span>
+                <select
+                  className="form-select"
+                  id="material"
+                  aria-label="Example select with button addon"
+                  onChange={(e) => setMaterial(e.target.value)}
+                  value={materialId}
+                >
+                  <option value="default"> Choose a material</option>
+                  {!!materialList &&
+                    materialList.length > 0 &&
+                    materialList.map((material) => (
+                      <option value={material._id}>{material.name}</option>
+                    ))}
+                </select>
+              </div>
               <br />
-              <label htmlFor="batch" style={{ color: "black" }}>
-                <strong> Batch * </strong>
-              </label>
-              <input
-                id="batch"
-                type="text"
-                name="batch"
-                className="form-control"
-                onChange={(e) => setBatch(e.target.value)}
-                value={batch}
-              />
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="name">
+                  Batch *
+                </span>
+                <input
+                  id="batch"
+                  type="text"
+                  name="batch"
+                  className="form-control"
+                  onChange={(e) => setBatch(e.target.value)}
+                  value={batch}
+                />
+              </div>
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-outline-secondary">
-                Create
-              </button>
               <button
                 type="button"
-                className="btn btn-outline-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cancel
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Create
               </button>
             </div>
           </div>
