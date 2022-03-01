@@ -7,8 +7,8 @@ import {
 
 function UpdateManager() {
   const dispatch = useDispatch();
-  const [material, setMaterial] = useState("");
-  const [batch, setBatch] = useState("");
+  const [material, setMaterial] = useState("default");
+  const [batch, setBatch] = useState("default");
   const [amountInStock, setAmountInStock] = useState("");
 
   const { materialList, stockByMaterial } = useSelector((state) => {
@@ -39,8 +39,9 @@ function UpdateManager() {
           id="material"
           aria-label="Example select with button addon"
           onChange={(e) => setMaterial(e.target.value)}
+          value={material}
         >
-          <option selected> Choose a material *</option>
+          <option value="default"> Choose a material *</option>
           {!!materialList &&
             materialList.length > 0 &&
             materialList.map((material) => (
@@ -56,8 +57,9 @@ function UpdateManager() {
           id="material"
           aria-label="Example select with button addon"
           onChange={(e) => setBatch(e.target.value)}
+          value={batch}
         >
-          <option selected> Choose a batch * </option>
+          <option value="default"> Choose a batch * </option>
           {!!batchToShow &&
             batchToShow.length > 0 &&
             batchToShow.map((element) => (

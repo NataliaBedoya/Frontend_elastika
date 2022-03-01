@@ -19,8 +19,8 @@ import ReportCommitByReference from "./ReportCommitByReference";
 
 function MaterialsManager() {
   const dispatch = useDispatch();
-  const [report, setReport] = useState("");
-  const [customer, setCustomer] = useState("");
+  const [report, setReport] = useState("default");
+  const [customer, setCustomer] = useState("default");
   const [material, setMaterial] = useState("default");
 
   useEffect(() => {

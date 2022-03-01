@@ -5,7 +5,7 @@ import { createNewBatch } from "../../store/selectMaterialReducer";
 
 function CreateNewBatch() {
   const dispatch = useDispatch();
-  const [materialId, setMaterial] = useState("");
+  const [materialId, setMaterial] = useState("default");
   const [batch, setBatch] = useState("");
 
   const { materialList } = useSelector((state) => {

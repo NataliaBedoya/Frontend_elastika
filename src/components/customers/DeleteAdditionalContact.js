@@ -4,7 +4,7 @@ import { deleteAdditionalContact } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
-  const [customer, setCustomer] = useState("");
+  const [customer, setCustomer] = useState("default");
 
   const { customerList } = useSelector((state) => {
     return {
@@ -58,8 +58,9 @@ function CustomerInformationUpdate() {
                 id="customer"
                 aria-label="Example select with button addon"
                 onChange={(e) => setCustomer(e.target.value)}
+                value={customer}
               >
-                <option selected> Choose a customer</option>
+                <option value="customer"> Choose a customer</option>
                 {!!customerList &&
                   customerList.length > 0 &&
                   customerList.map((customer) => (
