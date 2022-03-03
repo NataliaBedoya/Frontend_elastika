@@ -6,10 +6,10 @@ function CommittedProductManager() {
   const dispatch = useDispatch();
   const [order, setOrder] = useState("");
   const [orderDate, setOrderDate] = useState("");
-  const [supplier, setSupplier] = useState("default");
-  const [material, setMaterial] = useState("default");
+  const [supplier, setSupplier] = useState("");
+  const [material, setMaterial] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionType, setTransactionType] = useState("default");
+  const [transactionType, setTransactionType] = useState("");
   const [shipmentDate, setShipmentDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
@@ -90,7 +90,7 @@ function CommittedProductManager() {
             onChange={(e) => setSupplier(e.target.value)}
             value={supplier}
           >
-            <option value="default"> Choose a supplier</option>
+            <option value=""> Choose a supplier</option>
             {!!supplierList &&
               supplierList.length > 0 &&
               supplierList.map((supplier) => (
@@ -109,7 +109,7 @@ function CommittedProductManager() {
             onChange={(e) => setMaterial(e.target.value)}
             value={material}
           >
-            <option value="default"> Choose a material</option>
+            <option value=""> Choose a material</option>
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
@@ -143,7 +143,7 @@ function CommittedProductManager() {
             onChange={(e) => setTransactionType(e.target.value)}
             value={transactionType}
           >
-            <option value="default"> Choose an option</option>
+            <option value=""> Choose an option</option>
             <option>100% anticipated</option>
             <option>50% anticipated - 50% cash against documents</option>
             <option>30% anticipated - 70% cash against documents</option>

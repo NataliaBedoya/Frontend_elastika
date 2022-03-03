@@ -47,7 +47,7 @@ function UserInformationUpdate() {
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
+              <h5 className="modal-title">
                 Personal Information Update
               </h5>
               <button
@@ -63,7 +63,7 @@ function UserInformationUpdate() {
               </label>
               <input
                 autoFocus
-                id="name"
+                id="nameUpdate"
                 type="text"
                 name="name"
                 className="form-control"
@@ -74,7 +74,7 @@ function UserInformationUpdate() {
                 <strong> Lastname: </strong>
               </label>
               <input
-                id="lastname"
+                id="lastnameUpdate"
                 type="text"
                 name="lastname"
                 className="form-control"
@@ -85,7 +85,7 @@ function UserInformationUpdate() {
                 <strong> Role: </strong>
               </label>
               <input
-                id="role"
+                id="roleUpdate"
                 type="text"
                 name="role"
                 className="form-control"
@@ -96,7 +96,7 @@ function UserInformationUpdate() {
                 <strong> Email: </strong>
               </label>
               <input
-                id="email"
+                id="emailUpdate"
                 type="email"
                 name="email"
                 className="form-control"

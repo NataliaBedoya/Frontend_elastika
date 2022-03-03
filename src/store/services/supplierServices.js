@@ -5,6 +5,9 @@ export async function getSupplierList() {
     method: "GET",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/supplier/supplierList",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -14,6 +17,9 @@ export async function destroySupplier(supplierId) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/supplier/supplierDelete",
     data: { supplierId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -39,6 +45,9 @@ export async function supplierRegister(
       country,
       city,
     },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -52,6 +61,9 @@ export async function supplierUpdate(supplierId, contact1, email1, phone1) {
       contact1,
       email1,
       phone1,
+    },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 }

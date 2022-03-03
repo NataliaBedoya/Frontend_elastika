@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AvailableProduct from "../components/availableProduct/AvailableProductTable";
 import UpdateManager from "../components/updateProduct/UpdateManager";
 import CommittedProductManager from "../components/committedProduct/CommitedProductManager";
@@ -11,8 +11,26 @@ import { getStock, getCommit, getTransit } from "../store/selectReportReducer";
 
 import "../styles/MainView.css";
 
+const tabOptions = {
+  default: [
+    {name: '', title: '', component: <></>}
+  ],
+  admin: [
+    {name: 'commit', title: 'Commit product', component: <CommittedProductManager />},
+    {name: 'transit', title: 'Product in transit', component: <ProductInTransitManager />}
+  ],
+  internal: [
+    {name: 'commit', title: 'Commit product', component: <CommittedProductManager />}
+  ],
+  external: [
+    {name: 'transit', title: 'Product in transit', component: <ProductInTransitManager />}
+  ]
+}
+
 function MainView() {
   const dispatch = useDispatch();
+  const role = useSelector(state => state.selectUserReducer.userRole);
+  
   useEffect(() => {
     dispatch(getAllMaterials());
     dispatch(getAllCustomer());
@@ -29,7 +47,6 @@ function MainView() {
           <li className="nav-item">
             <button
               className="nav-link active"
-              id="available-tab"
               href="#available"
               data-bs-toggle="tab"
               data-bs-target="#available"
@@ -45,7 +62,6 @@ function MainView() {
           <li className="nav-item">
             <button
               className="nav-link"
-              id="update-tab"
               href="#update"
               data-bs-toggle="tab"
               data-bs-target="#update"
@@ -57,8 +73,23 @@ function MainView() {
               Update Stock
             </button>
           </li>
-
-          <li className="nav-item">
+          {tabOptions[role].map((option, i) => (
+            <li className="nav-item" key={i}>
+              <button
+                className="nav-link"
+                href="#commit"
+                data-bs-toggle="tab"
+                data-bs-target={`#${option.name}`}
+                type="button"
+                role="tab"
+                aria-controls={option.name}
+                aria-selected="false"
+              >
+                {option.title}
+              </button>
+            </li>
+          ))}
+          {/* <li className="nav-item">
             <button
               className="nav-link"
               id="commit-tab"
@@ -88,7 +119,7 @@ function MainView() {
             >
               Product in transit
             </button>
-          </li>
+          </li> */}
         </ul>
       </nav>
 
@@ -118,7 +149,20 @@ function MainView() {
           <hr />
           <UpdateManager />
         </div>
-        <div
+        {tabOptions[role].map(option => (
+          <div
+            className="tab-pane fade"
+            id={option.name}
+            role="tabpanel"
+            aria-labelledby={`${option.name}-tab`}
+          >
+            <br />
+            <h2>{option.title}</h2>
+            <hr />
+            {option.component}
+          </div>
+        ))}
+        {/* <div
           className="tab-pane fade"
           id="commit"
           role="tabpanel"
@@ -140,7 +184,7 @@ function MainView() {
           <h2>Product in transit</h2>
           <hr />
           <ProductInTransitManager />
-        </div>
+        </div> */}
       </div>
     </div>
   );

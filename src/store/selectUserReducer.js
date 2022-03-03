@@ -14,11 +14,20 @@ export const CREATE_NEW_USER = "CREATE_NEW_USER";
 export const UPDATE_USER_PROFILE_INFO = "UPDATE_USER_PROFILE_INFO";
 export const ASSIGN_USER_TO_UPDATE = "ASSIGN_USER_TO_UPDATE";
 export const REMOVE_USER_DELETED = "REMOVE_USER_DELETED";
+export const UPDATE_USER_ROLE = "UPDATE_USER_ROLE";
 
 const initialState = {
   user: {},
   userList: {},
   userToUpdate: {},
+  userRole: 'default'
+};
+
+export function updateUserRole(payload) {
+  return {
+    type: UPDATE_USER_ROLE,
+    payload
+  }
 };
 
 export function accessUser(email, password, history) {
@@ -58,6 +67,7 @@ export function getAllUser() {
     }
   };
 }
+
 export function createNewUser(name, lastname, email, role, password) {
   return async function (dispatch) {
     try {
@@ -95,9 +105,7 @@ export function createNewUser(name, lastname, email, role, password) {
 export function updateUserProfileInfo(userId, name, lastname, role, email) {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
       const { data } = await userUpdate(
-        authorizationToken,
         name,
         lastname,
         role,
@@ -182,12 +190,12 @@ function reducer(state = initialState, action) {
         userList: state.userList.concat(action.payload),
       };
     }
-    // case UPDATE_USER_PROFILE_INFO: {
-    //   return {
-    //     ...state,
-    //     user: action.payload,
-    //   };
-    // }
+    case UPDATE_USER_ROLE: {
+      return {
+        ...state,
+        userRole: action.payload,
+      };
+    }
     case UPDATE_USER_PROFILE_INFO: {
       return {
         ...state,

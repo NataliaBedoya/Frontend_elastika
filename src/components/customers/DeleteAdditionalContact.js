@@ -4,7 +4,7 @@ import { deleteAdditionalContact } from "../../store/selectCustomerReducer";
 
 function CustomerInformationUpdate() {
   const dispatch = useDispatch();
-  const [customer, setCustomer] = useState("default");
+  const [customer, setCustomer] = useState("");
 
   const { customerList } = useSelector((state) => {
     return {
@@ -60,7 +60,7 @@ function CustomerInformationUpdate() {
                 onChange={(e) => setCustomer(e.target.value)}
                 value={customer}
               >
-                <option value="customer"> Choose a customer</option>
+                <option value=""> Choose a customer</option>
                 {!!customerList &&
                   customerList.length > 0 &&
                   customerList.map((customer) => (

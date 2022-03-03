@@ -23,9 +23,8 @@ export const REMOVE_COMMIT = "REMOVE_COMMIT";
 export const REMOVE_BATCH = "REMOVE_BATCH";
 export const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
-//
 
-///
+
 const initialState = {
   material: {},
   materialList: {},
@@ -182,6 +181,7 @@ export function updateStockInfo(stockId, amountInStock) {
         type: UPDATE_AMOUNT,
         payload: data,
       });
+      dispatch(getAllMaterials());
       Swal.fire({
         title: "Confirmation",
         icon: "success",
@@ -235,9 +235,7 @@ export function assignMaterialToCustomer(
 ) {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
       const { data } = await commitMaterial(
-        authorizationToken,
         material,
         amount,
         customer,
@@ -330,9 +328,7 @@ export function registerMaterialInTransit(
 ) {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
       const { data } = await transitRegister(
-        authorizationToken,
         order,
         orderDate,
         supplier,

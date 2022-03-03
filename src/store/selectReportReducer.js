@@ -34,11 +34,10 @@ export function AssignCustomerToGetReport(customer) {
   };
 }
 
-export function getStock(materialId) {
+export function getStock() {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
-      const { data } = await getStockByMaterial(authorizationToken, materialId);
+      const { data } = await getStockByMaterial();
       dispatch({ type: GET_STOCK_BY_MATERIAL, payload: data });
     } catch (error) {
       console.log(error);
@@ -46,14 +45,10 @@ export function getStock(materialId) {
   };
 }
 
-export function getCommit(materialId) {
+export function getCommit() {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
-      const { data } = await getCommitByMaterial(
-        authorizationToken,
-        materialId
-      );
+      const { data } = await getCommitByMaterial();
       dispatch({ type: GET_COMMIT_BY_MATERIAL, payload: data });
     } catch (error) {
       console.log(error);
@@ -61,14 +56,10 @@ export function getCommit(materialId) {
   };
 }
 
-export function getTransit(materialId) {
+export function getTransit() {
   return async function (dispatch) {
     try {
-      const authorizationToken = localStorage.getItem("token");
-      const { data } = await getTransitByMaterial(
-        authorizationToken,
-        materialId
-      );
+      const { data } = await getTransitByMaterial();
       dispatch({ type: GET_TRANSIT_BY_MATERIAL, payload: data });
     } catch (error) {
       console.log(error);

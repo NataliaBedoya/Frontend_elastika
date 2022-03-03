@@ -20,14 +20,14 @@ function ReportTransitByMaterial() {
       transitToShow.map((transit) => {
         return (
           <tr>
-            <td style={{ width: "25%", textAlign: "left" }}>
+            <td style={{ width: "25%" }}>
               {transit.supplier.name} <br />
               Order: {transit.order}
             </td>
-            <td style={{ width: "15%", textAlign: "center" }}>
+            <td style={{ width: "15%" }}>
               {new Intl.NumberFormat().format(parseInt(transit.amount))}
             </td>
-            <td style={{ width: "30%", textAlign: "left" }}>
+            <td style={{ width: "30%" }}>
               &#8226; Order: {new Date(transit.orderDate).toDateString()}
               <br />
               &#8226; Shipment: {new Date(transit.shipmentDate).toDateString()}
@@ -36,7 +36,7 @@ function ReportTransitByMaterial() {
               <br />
               &#8226; Release: {new Date(transit.releaseDate).toDateString()}
             </td>
-            <td style={{ width: "30%", textAlign: "left" }}>
+            <td style={{ width: "30%" }}>
               {transit.transactionType} <hr />
               {transit.notes}
             </td>
@@ -52,10 +52,10 @@ function ReportTransitByMaterial() {
         <caption>Product In Transit</caption>
         <thead>
           <tr>
-            <th style={{ width: "25%", textAlign: "center" }}>Supplier</th>
-            <th style={{ width: "15%", textAlign: "center" }}>Amount (kg)</th>
-            <th style={{ width: "30%", textAlign: "center" }}>Timing</th>
-            <th style={{ width: "30%", textAlign: "center" }}>Notes</th>
+            <th style={{ width: "25%" }}>Supplier</th>
+            <th style={{ width: "15%" }}>Amount (kg)</th>
+            <th style={{ width: "30%" }}>Timing</th>
+            <th style={{ width: "30%" }}>Notes</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>

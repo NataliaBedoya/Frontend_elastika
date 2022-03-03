@@ -22,17 +22,17 @@ function CommitByMaterial() {
       commitToShow.map((commit) => {
         return (
           <tr>
-            <td style={{ width: "25%", textAlign: "left" }}>
+            <td style={{ width: "25%" }}>
               {commit.customer.name} <br />
               Order: {commit.order}
             </td>
-            <td style={{ width: "25%", textAlign: "center" }}>
+            <td style={{ width: "25%" }}>
               {new Intl.NumberFormat().format(parseInt(commit.amount))}
             </td>
-            <td style={{ width: "25%", textAlign: "center" }}>
+            <td style={{ width: "25%" }}>
               {new Date(commit.deliveryDate).toDateString()}
             </td>
-            <td style={{ width: "25%", textAlign: "left" }}>{commit.notes}</td>
+            <td style={{ width: "25%" }}>{commit.notes}</td>
           </tr>
         );
       })
@@ -45,10 +45,10 @@ function CommitByMaterial() {
         <caption>Commited Product</caption>
         <thead>
           <tr>
-            <th style={{ width: "25%", textAlign: "center" }}>Customer</th>
-            <th style={{ width: "25%", textAlign: "center" }}>Amount (kg) </th>
-            <th style={{ width: "25%", textAlign: "center" }}>Delivery Date</th>
-            <th style={{ width: "25%", textAlign: "center" }}>Notes</th>
+            <th style={{ width: "25%" }}>Customer</th>
+            <th style={{ width: "25%" }}>Amount (kg) </th>
+            <th style={{ width: "25%" }}>Delivery Date</th>
+            <th style={{ width: "25%" }}>Notes</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>

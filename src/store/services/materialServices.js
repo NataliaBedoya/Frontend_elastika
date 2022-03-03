@@ -5,6 +5,9 @@ export async function getMaterialList() {
     method: "GET",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/material/materialList",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -14,6 +17,9 @@ export async function destroyMaterial(materialId) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/material/materialDelete",
     data: { materialId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -27,6 +33,9 @@ export async function materialRegister(name, description, threshold) {
       description,
       threshold,
     },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -36,9 +45,9 @@ export async function batchCreation(token, materialId, batch) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/stock/create",
     data: { materialId, batch },
-    // headers: {
-    //   Authorization: `Bearer ${token}`,
-    // },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -48,6 +57,9 @@ export async function destroyBatch(batchId) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/stock/stockDelete",
     data: { batchId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -57,6 +69,9 @@ export async function amountUpdate(batchId, amountInStock) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/stock/stockUpdate",
     data: { batchId, amountInStock },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -66,11 +81,13 @@ export async function thresholdUpdate(materialId, threshold) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/material/materialUpdate",
     data: { materialId, threshold },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
 export async function commitMaterial(
-  token,
   materialId,
   amount,
   customerId,
@@ -93,7 +110,7 @@ export async function commitMaterial(
       deliveryDate,
     },
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 }
@@ -104,11 +121,13 @@ export async function destroyCommit(commitId) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/commit/commitDelete",
     data: { commitId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
 export async function transitRegister(
-  token,
   order,
   orderDate,
   supplierId,
@@ -137,7 +156,7 @@ export async function transitRegister(
       notes,
     },
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 }

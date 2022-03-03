@@ -5,6 +5,9 @@ export async function getCustomerList() {
     method: "GET",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/customer/customerList",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -14,6 +17,9 @@ export async function destroyCustomer(customerId) {
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/customer/customerDelete",
     data: { customerId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -43,6 +49,9 @@ export async function customerRegister(
       email2,
       phone2,
     },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -64,6 +73,9 @@ export async function customerUpdate(
       email1,
       phone1,
     },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 }
 
@@ -74,6 +86,9 @@ export async function deleteContact(customerId) {
     url: "/customer/deleteContact",
     data: {
       customerId,
+    },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 }

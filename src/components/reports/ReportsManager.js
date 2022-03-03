@@ -19,9 +19,9 @@ import ReportCommitByReference from "./ReportCommitByReference";
 
 function MaterialsManager() {
   const dispatch = useDispatch();
-  const [report, setReport] = useState("default");
-  const [customer, setCustomer] = useState("default");
-  const [material, setMaterial] = useState("default");
+  const [report, setReport] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [material, setMaterial] = useState("");
 
   useEffect(() => {
     dispatch(getAllCustomer());
@@ -61,7 +61,7 @@ function MaterialsManager() {
               onChange={(e) => setCustomer(e.target.value)}
               value={customer}
             >
-              <option value="default"> Choose a customer</option>
+              <option value=""> Choose a customer</option>
               {!!customerList &&
                 customerList.length > 0 &&
                 customerList.map((customer) => (
@@ -95,7 +95,7 @@ function MaterialsManager() {
               onChange={(e) => setMaterial(e.target.value)}
               value={material}
             >
-              <option value="default"> Choose a material</option>
+              <option value=""> Choose a material</option>
               {!!materialList &&
                 materialList.length > 0 &&
                 materialList.map((material) => (
@@ -143,7 +143,7 @@ function MaterialsManager() {
               onChange={(e) => setMaterial(e.target.value)}
               value={material}
             >
-              <option value="default"> Choose a material</option>
+              <option value=""> Choose a material</option>
               {!!materialList &&
                 materialList.length > 0 &&
                 materialList.map((material) => (
@@ -181,7 +181,7 @@ function MaterialsManager() {
             onChange={(e) => setReport(e.target.value)}
             value={report}
           >
-            <option value="default">Choose a report</option>
+            <option value="">Choose a report</option>
             <option value={"InformationByMaterial"}>
               Information by material
             </option>

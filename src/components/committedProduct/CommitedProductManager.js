@@ -6,9 +6,9 @@ import DeleteAssignment from "./DeleteAssignment";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
-  const [material, setMaterial] = useState("default");
+  const [material, setMaterial] = useState("");
   const [amount, setAmount] = useState("");
-  const [customer, setCustomer] = useState("default");
+  const [customer, setCustomer] = useState("");
   const [order, setOrder] = useState("");
   const [notes, setNotes] = useState("");
   const [assignmentDate, setAssignmentDate] = useState("");
@@ -54,7 +54,7 @@ function CommittedProductManager() {
             onChange={(e) => setMaterial(e.target.value)}
             value={material}
           >
-            <option value="default"> Choose a material</option>
+            <option value=""> Choose a material</option>
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
@@ -87,7 +87,7 @@ function CommittedProductManager() {
             onChange={(e) => setCustomer(e.target.value)}
             value={customer}
           >
-            <option value="default"> Choose a customer</option>
+            <option value=""> Choose a customer</option>
             {!!customerList &&
               customerList.length > 0 &&
               customerList.map((customer) => (

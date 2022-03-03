@@ -4,8 +4,8 @@ import { deleteCommit } from "../../store/selectMaterialReducer";
 
 function DeleteAssignment() {
   const dispatch = useDispatch();
-  const [customer, setCustomer] = useState("default");
-  const [order, setOrder] = useState("default");
+  const [customer, setCustomer] = useState("");
+  const [order, setOrder] = useState("");
 
   const { customerList, commitByMaterial } = useSelector((state) => {
     return {
@@ -67,7 +67,7 @@ function DeleteAssignment() {
                 onChange={(e) => setCustomer(e.target.value)}
                 value={customer}
               >
-                <option value="default"> Choose a customer * </option>
+                <option value=""> Choose a customer * </option>
                 {!!customerList &&
                   customerList.length > 0 &&
                   customerList.map((customer) => (
@@ -84,7 +84,7 @@ function DeleteAssignment() {
                 onChange={(e) => setOrder(e.target.value)}
                 value={order}
               >
-                <option value="default"> Choose an order * </option>
+                <option value=""> Choose an order * </option>
                 {!!orderList &&
                   orderList.length > 0 &&
                   orderList.map((order) => (

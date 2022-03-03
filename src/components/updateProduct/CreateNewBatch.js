@@ -5,7 +5,7 @@ import { createNewBatch } from "../../store/selectMaterialReducer";
 
 function CreateNewBatch() {
   const dispatch = useDispatch();
-  const [materialId, setMaterial] = useState("default");
+  const [materialId, setMaterial] = useState("");
   const [batch, setBatch] = useState("");
 
   const { materialList } = useSelector((state) => {
@@ -59,7 +59,7 @@ function CreateNewBatch() {
                   onChange={(e) => setMaterial(e.target.value)}
                   value={materialId}
                 >
-                  <option value="default"> Choose a material</option>
+                  <option value=""> Choose a material</option>
                   {!!materialList &&
                     materialList.length > 0 &&
                     materialList.map((material) => (
