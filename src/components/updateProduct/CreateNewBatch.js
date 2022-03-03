@@ -63,7 +63,7 @@ function CreateNewBatch() {
                   {!!materialList &&
                     materialList.length > 0 &&
                     materialList.map((material) => (
-                      <option value={material._id}>{material.name}</option>
+                      <option key={material._id} value={material._id}>{material.name}</option>
                     ))}
                 </select>
               </div>

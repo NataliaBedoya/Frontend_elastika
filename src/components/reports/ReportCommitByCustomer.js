@@ -19,7 +19,7 @@ function CommitByMaterial() {
       commitToShow.length > 0 &&
       commitToShow.map((commit) => {
         return (
-          <tr>
+          <tr key={commit._id}>
             <td>
               {commit.material.name} <br />
               Order: {commit.order}

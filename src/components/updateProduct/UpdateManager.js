@@ -45,7 +45,7 @@ function UpdateManager() {
           {!!materialList &&
             materialList.length > 0 &&
             materialList.map((material) => (
-              <option value={material._id}>{material.name}</option>
+              <option key={material._id} value={material._id}>{material.name}</option>
             ))}
         </select>
       </div>
@@ -63,7 +63,7 @@ function UpdateManager() {
           {!!batchToShow &&
             batchToShow.length > 0 &&
             batchToShow.map((element) => (
-              <option value={element._id}>{element.batch}</option>
+              <option key={element._id} value={element._id}>{element.batch}</option>
             ))}
         </select>
       </div>

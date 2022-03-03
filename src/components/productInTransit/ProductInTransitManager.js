@@ -94,7 +94,7 @@ function CommittedProductManager() {
             {!!supplierList &&
               supplierList.length > 0 &&
               supplierList.map((supplier) => (
-                <option value={supplier._id}>{supplier.name}</option>
+                <option key={supplier._id} value={supplier._id}>{supplier.name}</option>
               ))}
           </select>
         </div>
@@ -113,7 +113,7 @@ function CommittedProductManager() {
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
-                <option value={material._id}>{material.name}</option>
+                <option key={material._id} value={material._id}>{material.name}</option>
               ))}
           </select>
         </div>

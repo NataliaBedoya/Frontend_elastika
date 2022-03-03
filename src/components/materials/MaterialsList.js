@@ -45,15 +45,15 @@ function MaterialsList() {
                     className="dropdown-item"
                     data-bs-toggle="modal"
                     data-bs-target="#materialUpdateModal"
+                    href="#materialUpdateModal"
                     onClick={() => handleUpdate(material)}
-                    href="#"
                   >
                     Update threshold
                   </a></li>
                   <li><a
                     className="dropdown-item"
+                    href="#delete"
                     onClick={() => handleDelete(material._id)}
-                    href="#"
                   >
                     Delete
                   </a></li>

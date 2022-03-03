@@ -15,7 +15,7 @@ function AvailableProduct() {
       materialList.length > 0 &&
       materialList.map((material) => {
         return (
-          <tr>
+          <tr key={material._id}>
             <td>{material.name}</td>
             <td>{material.description}</td>
 

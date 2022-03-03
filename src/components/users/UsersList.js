@@ -30,7 +30,7 @@ function UsersList() {
       userList.length > 0 &&
       userList.map((user) => {
         return (
-          <tr>
+          <tr key={user._id}>
             <td style={{ width: "10%", textAlign: 'center' }}>
               <div className="dropdown">
                 <button className="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,15 +41,15 @@ function UsersList() {
                     className="dropdown-item"
                     data-bs-toggle="modal"
                     data-bs-target="#userUpdateModal"
+                    href="#userUpdateModal"
                     onClick={() => handleUpdate(user)}
-                    href="#"
                   >
                     Update
                   </a></li>
                   <li><a
                     className="dropdown-item"
+                    href="#delete"
                     onClick={() => handleDelete(user._id)}
-                    href="#"
                   >
                     Delete
                   </a></li>

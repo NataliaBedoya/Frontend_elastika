@@ -203,7 +203,7 @@ export function updateStockInfo(stockId, amountInStock) {
 export function updateMaterialInfo(materialId, threshold) {
   return async function (dispatch) {
     try {
-      const { data } = await thresholdUpdate(materialId, threshold);
+      await thresholdUpdate(materialId, threshold);
       dispatch(getAllMaterials());
       Swal.fire({
         title: "Confirmation",

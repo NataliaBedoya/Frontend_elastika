@@ -64,7 +64,7 @@ function CustomerInformationUpdate() {
                 {!!customerList &&
                   customerList.length > 0 &&
                   customerList.map((customer) => (
-                    <option value={customer._id}>{customer.name}</option>
+                    <option key={customer._id} value={customer._id}>{customer.name}</option>
                   ))}
               </select>
             </div>

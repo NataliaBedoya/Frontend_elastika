@@ -1,5 +1,3 @@
-import Swal from "sweetalert2";
-
 import {
   getStockByMaterial,
   getCommitByMaterial,

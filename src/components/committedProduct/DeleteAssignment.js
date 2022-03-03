@@ -71,7 +71,7 @@ function DeleteAssignment() {
                 {!!customerList &&
                   customerList.length > 0 &&
                   customerList.map((customer) => (
-                    <option value={customer._id}>{customer.name}</option>
+                    <option key={customer._id} value={customer._id}>{customer.name}</option>
                   ))}
               </select>
               <hr />
@@ -88,7 +88,7 @@ function DeleteAssignment() {
                 {!!orderList &&
                   orderList.length > 0 &&
                   orderList.map((order) => (
-                    <option value={order._id}>{order.order}</option>
+                    <option key={order._id} value={order._id}>{order.order}</option>
                   ))}
               </select>
             </div>

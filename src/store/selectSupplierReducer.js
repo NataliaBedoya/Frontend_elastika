@@ -15,7 +15,11 @@ export const UPDATE_SUPPLIER_PROFILE_INFO = "UPDATE_SUPPLIER_PROFILE_INFO";
 
 const initialState = {
   supplierList: {},
-  supplierToUpdate: {},
+  supplierToUpdate: {
+    contact1: '',
+    email1: '',
+    phone1: ''
+  },
   supplier: {},
 };
 

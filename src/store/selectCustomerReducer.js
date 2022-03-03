@@ -49,7 +49,7 @@ export function assignCustomerToUpdate(customer) {
 export function deleteCustomer(customerToDelete) {
   return async function (dispatch) {
     try {
-      const { data } = await destroyCustomer(customerToDelete);
+      await destroyCustomer(customerToDelete);
       dispatch(getAllCustomer());
       Swal.fire({
         title: "Confirmation",

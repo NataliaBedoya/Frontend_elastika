@@ -89,37 +89,6 @@ function MainView() {
               </button>
             </li>
           ))}
-          {/* <li className="nav-item">
-            <button
-              className="nav-link"
-              id="commit-tab"
-              href="#commit"
-              data-bs-toggle="tab"
-              data-bs-target="#commit"
-              type="button"
-              role="tab"
-              aria-controls="commit"
-              aria-selected="false"
-            >
-              Committed product
-            </button>
-          </li>
-
-          <li className="nav-item">
-            <button
-              className="nav-link"
-              id="transit-tab"
-              href="#transit"
-              data-bs-toggle="tab"
-              data-bs-target="#transit"
-              type="button"
-              role="tab"
-              aria-controls="transit"
-              aria-selected="false"
-            >
-              Product in transit
-            </button>
-          </li> */}
         </ul>
       </nav>
 
@@ -149,10 +118,11 @@ function MainView() {
           <hr />
           <UpdateManager />
         </div>
-        {tabOptions[role].map(option => (
+        {tabOptions[role].map((option, i) => (
           <div
             className="tab-pane fade"
             id={option.name}
+            key={i}
             role="tabpanel"
             aria-labelledby={`${option.name}-tab`}
           >
@@ -162,29 +132,6 @@ function MainView() {
             {option.component}
           </div>
         ))}
-        {/* <div
-          className="tab-pane fade"
-          id="commit"
-          role="tabpanel"
-          aria-labelledby="commit-tab"
-        >
-          <br />
-          <h2>Commit product</h2>
-          <hr />
-          <CommittedProductManager />
-        </div>
-
-        <div
-          className="tab-pane fade"
-          id="transit"
-          role="tabpanel"
-          aria-labelledby="transit-tab"
-        >
-          <br />
-          <h2>Product in transit</h2>
-          <hr />
-          <ProductInTransitManager />
-        </div> */}
       </div>
     </div>
   );

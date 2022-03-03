@@ -41,22 +41,22 @@ function CustomerList() {
                     className="dropdown-item"
                     data-bs-toggle="modal"
                     data-bs-target="#customersUpdateModal"
+                    href="#customersUpdateModal"
                     onClick={() => handleUpdate(customer)}
-                    href="#"
                   >
                     Update
                   </a></li>
                   <li><a
                     className="dropdown-item"
+                    href="#delete"
                     onClick={() => handleDelete(customer._id)}
-                    href="#"
                   >
                     Delete
                   </a></li>
                   <li><a
                     className="dropdown-item"
+                    href="#delete-contact"
                     onClick={() => handleDeleteContact(customer._id)}
-                    href="#"
                   >
                     Delete additional contact
                   </a></li>

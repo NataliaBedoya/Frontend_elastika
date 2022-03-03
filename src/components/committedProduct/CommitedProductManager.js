@@ -11,7 +11,7 @@ function CommittedProductManager() {
   const [customer, setCustomer] = useState("");
   const [order, setOrder] = useState("");
   const [notes, setNotes] = useState("");
-  const [assignmentDate, setAssignmentDate] = useState("");
+  const [assignmentDate, setAssignmentDate] = useState(new Date());
   const [deliveryDate, setDeliveryDate] = useState("");
 
   const { materialList, customerList } = useSelector((state) => {
@@ -58,7 +58,7 @@ function CommittedProductManager() {
             {!!materialList &&
               materialList.length > 0 &&
               materialList.map((material) => (
-                <option value={material._id}>{material.name}</option>
+                <option key={material._id} value={material._id}>{material.name}</option>
               ))}
           </select>
         </div>
@@ -91,7 +91,7 @@ function CommittedProductManager() {
             {!!customerList &&
               customerList.length > 0 &&
               customerList.map((customer) => (
-                <option value={customer._id}>{customer.name}</option>
+                <option key={customer._id} value={customer._id}>{customer.name}</option>
               ))}
           </select>
         </div>
@@ -116,7 +116,6 @@ function CommittedProductManager() {
           <input
             id="assignmentDate"
             type="date"
-            defaultValue={new Date()}
             className="form-control"
             aria-label="assignmentDate"
             aria-describedby="basic-addon1"

@@ -19,7 +19,7 @@ function ReportTransitByMaterial() {
       transitToShow.length > 0 &&
       transitToShow.map((transit) => {
         return (
-          <tr>
+          <tr key={transit._id}>
             <td style={{ width: "25%" }}>
               {transit.supplier.name} <br />
               Order: {transit.order}

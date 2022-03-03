@@ -26,7 +26,7 @@ function SuppliersList() {
       supplierList.length > 0 &&
       supplierList.map((supplier) => {
         return (
-          <tr>
+          <tr key={supplier._id}>
             <td style={{ width: "10%", textAlign: 'center' }}>
               <div className="dropdown">
                 <button
@@ -43,15 +43,15 @@ function SuppliersList() {
                     className="dropdown-item"
                     data-bs-toggle="modal"
                     data-bs-target="#supplierUpdateModal"
+                    href="#supplierUdateModal"
                     onClick={() => handleUpdate(supplier)}
-                    href="#"
                   >
                     Update
                   </a></li>
                   <li><a
                     className="dropdown-item"
+                    href="#delete"
                     onClick={() => handleDelete(supplier._id)}
-                    href="#"
                   >
                     Delete
                   </a></li>

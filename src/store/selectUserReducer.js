@@ -18,7 +18,12 @@ export const UPDATE_USER_ROLE = "UPDATE_USER_ROLE";
 
 const initialState = {
   user: {},
-  userList: {},
+  userList: {
+    name: '',
+    lastname: '',
+    email: '',
+    role: ''
+  },
   userToUpdate: {},
   userRole: 'default'
 };

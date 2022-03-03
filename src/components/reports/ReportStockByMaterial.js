@@ -19,7 +19,7 @@ function ReportStockByMaterial() {
       stockToShow.length > 0 &&
       stockToShow.map((stock) => {
         return (
-          <tr>
+          <tr key={stock._id}>
             <td style={{ width: "50%", textAlign: "center" }}>{stock.batch}</td>
             <td style={{ width: "50%", textAlign: "center" }}>
               {new Intl.NumberFormat().format(parseInt(stock.amountInStock))}

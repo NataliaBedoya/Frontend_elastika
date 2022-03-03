@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -20,21 +20,29 @@ function PrivateRoute(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const stableDispatch = useCallback((args) => {
+    return dispatch(args)
+  }, [dispatch])
+
+  const stableHistory = useCallback((args) => {
+    return history.push(args)
+  }, [history])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
         await tokenValidation(token);
         const role = jwt_decode(token).role;
-        dispatch(updateUserRole(role));
+        stableDispatch(updateUserRole(role));
         const validRole = props.roles.includes(role);
-        if(!token || !validRole) history.push("/");
+        if(!token || !validRole) stableHistory("/");
       } catch(err) {
-        history.push("/");
+        stableHistory("/");
       }
     };
     fetchData();
-  }, [props])
+  }, [props, stableDispatch, stableHistory])
 
   return (
     <Route {...props}></Route>
