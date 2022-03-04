@@ -17,3 +17,32 @@ html, body {
 .dropdown-item {
   cursor: pointer;
 }
+
+.pagination > li > button
+{
+    background-color: white;
+    color: #282828;
+}
+
+.pagination > li > button:focus,
+.pagination > li > button:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > button
+{
+    color: white;
+    background-color: #282828 !Important;
+    border: solid 1px #282828 !Important;
+}
+
+.pagination > .active > button:hover
+{
+    background-color: #282828 !Important;
+    border: solid 1px #282828;
+}

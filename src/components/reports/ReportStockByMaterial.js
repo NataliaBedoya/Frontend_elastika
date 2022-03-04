@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Paginator from "../general/Paginator";
 
 function ReportStockByMaterial() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(8);
+  const [stockToShow, setStockToShow] = useState([]);
+
   const { stockByMaterial, materialToGetReport } = useSelector((state) => {
     return {
       stockByMaterial: state.selectReportReducer.stockByMaterial,
@@ -9,15 +14,29 @@ function ReportStockByMaterial() {
     };
   });
 
-  const stockToShow = stockByMaterial.filter(
-    (stock) => stock.material === materialToGetReport
-  );
+  useEffect(() => {
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    stockByMaterial.filter(
+      (stock) => stock.material === materialToGetReport
+    ).forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === stockByMaterial.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    });
+    setStockToShow(newArr);
+  }, [stockByMaterial, materialToGetReport])
 
   const renderTable = () => {
     return (
       !!stockToShow &&
       stockToShow.length > 0 &&
-      stockToShow.map((stock) => {
+      stockToShow[page].map((stock) => {
         return (
           <tr key={stock._id}>
             <td style={{ width: "50%", textAlign: "center" }}>{stock.batch}</td>
@@ -44,6 +63,7 @@ function ReportStockByMaterial() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={stockToShow}/>
     </div>
   );
 }

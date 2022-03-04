@@ -14,7 +14,7 @@ export const CREATE_NEW_SUPPLIER = "CREATE_NEW_SUPPLIER";
 export const UPDATE_SUPPLIER_PROFILE_INFO = "UPDATE_SUPPLIER_PROFILE_INFO";
 
 const initialState = {
-  supplierList: {},
+  supplierList: [],
   supplierToUpdate: {
     contact1: '',
     email1: '',

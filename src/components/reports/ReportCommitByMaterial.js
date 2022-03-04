@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Paginator from "../general/Paginator";
 
 function CommitByMaterial() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(5);
+  const [commitToShow, setCommitToShow] = useState([]);
+
   const { commitByMaterial, materialToGetReport } = useSelector((state) => {
     return {
       commitByMaterial: state.selectReportReducer.commitByMaterial,
@@ -9,17 +14,29 @@ function CommitByMaterial() {
     };
   });
 
-  console.log(commitByMaterial);
+  useEffect(() => {
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
 
-  const commitToShow = commitByMaterial.filter(
-    (commit) => commit.material._id === materialToGetReport
-  );
+    commitByMaterial.filter(
+      (commit) => commit.material._id === materialToGetReport
+    ).forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === commitByMaterial.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    });
+    setCommitToShow(newArr);
+  }, [commitByMaterial, materialToGetReport])
 
   const renderTable = () => {
     return (
       !!commitToShow &&
       commitToShow.length > 0 &&
-      commitToShow.map((commit) => {
+      commitToShow[page].map((commit) => {
         return (
           <tr key={commit._id}>
             <td style={{ width: "25%" }}>
@@ -53,6 +70,7 @@ function CommitByMaterial() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={commitToShow}/>
     </div>
   );
 }

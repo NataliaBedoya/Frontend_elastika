@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Options from "../../assets/images/menu.png";
 import { assignUserToUpdate, deleteUser, getAllUser } from "../../store/selectUserReducer";
+import Paginator from "../general/Paginator";
 
 function UsersList() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(8);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,8 +23,21 @@ function UsersList() {
   };
 
   const { userList } = useSelector((state) => {
+    const arr = state.selectUserReducer.userList;
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    arr.forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === arr.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    })
     return {
-      userList: state.selectUserReducer.userList,
+      userList: newArr,
     };
   });
 
@@ -28,7 +45,7 @@ function UsersList() {
     return (
       !!userList &&
       userList.length > 0 &&
-      userList.map((user) => {
+      userList[page].map((user) => {
         return (
           <tr key={user._id}>
             <td style={{ width: "10%", textAlign: 'center' }}>
@@ -81,6 +98,7 @@ function UsersList() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={userList}/>
     </div>
   );
 }

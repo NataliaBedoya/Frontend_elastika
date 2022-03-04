@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Options from "../../assets/images/menu.png";
 import { assignSupplierToUpdate, deleteSupplier } from "../../store/selectSupplierReducer";
+import Paginator from "../general/Paginator";
 
 function SuppliersList() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(8);
+
   const dispatch = useDispatch();
 
   const handleUpdate = (supplier) => {
@@ -15,8 +19,21 @@ function SuppliersList() {
   };
 
   const { supplierList } = useSelector((state) => {
+    const arr = state.selectSupplierReducer.supplierList;
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    arr.forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === arr.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    })
     return {
-      supplierList: state.selectSupplierReducer.supplierList,
+      supplierList: newArr,
     };
   });
 
@@ -24,7 +41,7 @@ function SuppliersList() {
     return (
       !!supplierList &&
       supplierList.length > 0 &&
-      supplierList.map((supplier) => {
+      supplierList[page].map((supplier) => {
         return (
           <tr key={supplier._id}>
             <td style={{ width: "10%", textAlign: 'center' }}>
@@ -96,40 +113,9 @@ function SuppliersList() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={supplierList}/>
     </div>
   );
 }
 
 export default SuppliersList;
-
-/* <div>
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={handleCreate}
-          >
-            Create New Supplier
-          </button>
-          <button
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#supplierUpdateModal"
-            className="btn btn-outline-secondary"
-            style={{ marginLeft: 10 }}
-          >
-            Update Supplier
-          </button>
-        </div>
-        <hr />
-        <h6>
-          To delete a supplier, select it in the table and then click the button
-        </h6>
-        <div>
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={handleDelete}
-          >
-            Delete Supplier
-          </button>
-        </div> */

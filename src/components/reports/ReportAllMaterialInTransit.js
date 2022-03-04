@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Paginator from "../general/Paginator";
 
 function ReportAllMaterialInTransit() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(8);
+
   const { transitByMaterial } = useSelector((state) => {
+    const arr = state.selectReportReducer.transitByMaterial;
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    arr.forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === arr.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    })
     return {
-      transitByMaterial: state.selectReportReducer.transitByMaterial,
+      transitByMaterial: newArr,
     };
   });
 
@@ -12,7 +29,7 @@ function ReportAllMaterialInTransit() {
     return (
       !!transitByMaterial &&
       transitByMaterial.length > 0 &&
-      transitByMaterial.map((transit) => {
+      transitByMaterial[page].map((transit) => {
         return (
           <tr key={transit._id}>
             <td style={{ width: "25%" }}>
@@ -55,6 +72,7 @@ function ReportAllMaterialInTransit() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={transitByMaterial}/>
     </div>
   );
 }

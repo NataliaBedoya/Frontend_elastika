@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Options from "../../assets/images/menu.png";
 import { assignCustomerToUpdate, deleteAdditionalContact, deleteCustomer } from "../../store/selectCustomerReducer";
+import Paginator from "../general/Paginator";
 
 function CustomerList() {
   const dispatch = useDispatch();
 
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(5);
+
   const { customerList } = useSelector((state) => {
+    const arr = state.selectCustomerReducer.customerList;
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    arr.forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === arr.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    })
+    
     return {
-      customerList: state.selectCustomerReducer.customerList,
+      customerList: newArr,
     };
   });
 
@@ -28,7 +46,7 @@ function CustomerList() {
     return (
       !!customerList &&
       customerList.length > 0 &&
-      customerList.map((customer) => {
+      customerList[page].map((customer) => {
         return (
           <tr key={customer._id}>
             <td style={{ width: "10%", textAlign: 'center' }}>
@@ -109,6 +127,7 @@ function CustomerList() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={customerList}/>
     </div>
   );
 }

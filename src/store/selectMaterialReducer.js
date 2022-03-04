@@ -27,7 +27,7 @@ export const PRODUCT_IN_TRANSIT = "PRODUCT_IN_TRANSIT";
 
 const initialState = {
   material: {},
-  materialList: {},
+  materialList: [],
   materialToUpdate: {
     threshold: ''
   },

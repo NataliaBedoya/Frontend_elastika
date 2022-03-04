@@ -14,7 +14,7 @@ export const CREATE_NEW_CUSTOMER = "CREATE_NEW_CUSTOMER";
 
 const initialState = {
   customer: {},
-  customerList: {},
+  customerList: [],
   customerToUpdate: {
     businessPhone: '',
     contact1: '',

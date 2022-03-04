@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Options from "../../assets/images/menu.png";
 import { assignMaterialToUpdate, deleteMaterial } from "../../store/selectMaterialReducer";
+import Paginator from "../general/Paginator";
 
 function MaterialsList() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(2);
+
   const dispatch = useDispatch();
 
   const handleUpdate = (material) => {
@@ -23,8 +27,21 @@ function MaterialsList() {
   }
 
   const { materialList } = useSelector((state) => {
+    const arr = state.selectMaterialReducer.materialList;
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    arr.forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === arr.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    })
     return {
-      materialList: state.selectMaterialReducer.materialList,
+      materialList: newArr,
     };
   });
 
@@ -32,7 +49,7 @@ function MaterialsList() {
     return (
       !!materialList &&
       materialList.length > 0 &&
-      materialList.map((material) => {
+      materialList[page].map((material) => {
         return (
           <tr key={material._id}>
             <th style={{ width: "10%", textAlign: 'center' }}>
@@ -100,6 +117,7 @@ function MaterialsList() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={materialList}/>
     </div>
   );
 }

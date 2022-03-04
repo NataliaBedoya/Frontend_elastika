@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Paginator from "../general/Paginator";
 
 function ReportTransitByMaterial() {
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState(8);
+  const [transitToShow, setTransitToShow] = useState([]);
+
   const { transitByMaterial, materialToGetReport } = useSelector((state) => {
     return {
       transitByMaterial: state.selectReportReducer.transitByMaterial,
@@ -9,15 +14,29 @@ function ReportTransitByMaterial() {
     };
   });
 
-  const transitToShow = transitByMaterial.filter(
-    (transit) => transit.material === materialToGetReport
-  );
+  useEffect(() => {
+    let section = 0;
+    const newArr = [];
+    let innerArr = [];
+
+    transitByMaterial.filter(
+      (transit) => transit.material === materialToGetReport
+    ).forEach((row, i) => {
+      innerArr.push(row)
+      if(i === ((section + 1)*items - 1) || i === transitByMaterial.length - 1) {
+        newArr.push(innerArr);
+        innerArr = [];
+        section++
+      }
+    });
+    setTransitToShow(newArr);
+  }, [transitByMaterial, materialToGetReport])
 
   const renderTable = () => {
     return (
       !!transitToShow &&
       transitToShow.length > 0 &&
-      transitToShow.map((transit) => {
+      transitToShow[page].map((transit) => {
         return (
           <tr key={transit._id}>
             <td style={{ width: "25%" }}>
@@ -60,6 +79,7 @@ function ReportTransitByMaterial() {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
+      <Paginator page={page} setPage={setPage} totalPages={transitToShow}/>
     </div>
   );
 }
