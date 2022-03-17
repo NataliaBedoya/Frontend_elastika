@@ -160,3 +160,15 @@ export async function transitRegister(
     },
   });
 }
+
+export async function destroyTransit(transitId) {
+  return await axios({
+    method: "DELETE",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/transit/transitDelete",
+    data: { transitId },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+}

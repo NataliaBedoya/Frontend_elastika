@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { registerMaterialInTransit } from "../../store/selectMaterialReducer";
+import DeleteTransitAssignment from "./DeleteTransitAssignment";
 
 function CommittedProductManager() {
   const dispatch = useDispatch();
@@ -37,10 +38,6 @@ function CommittedProductManager() {
         notes
       )
     );
-  };
-
-  const handleDelete = () => {
-    console.log("delete");
   };
 
   return (
@@ -227,12 +224,14 @@ function CommittedProductManager() {
           <button
             type="button"
             className="btn btn-outline-secondary"
-            onClick={handleDelete}
+            data-bs-toggle="modal"
+            data-bs-target="#deleteTransitAssignmentModal"
           >
             Delete Assignment
           </button>
         </div>
       </div>
+      <DeleteTransitAssignment/>
     </div>
   );
 }

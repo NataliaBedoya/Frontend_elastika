@@ -127,7 +127,7 @@ function MaterialsManager() {
     } else if (report === "MaterialInTransit") {
       return (
         <div>
-          <h4>Material Commited</h4>
+          <h4>Material in Transit</h4>
           <ReportAllMaterialInTransit />
           <hr />
         </div>

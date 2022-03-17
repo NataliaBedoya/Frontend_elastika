@@ -20,7 +20,7 @@ function ReportTransitByMaterial() {
     let innerArr = [];
 
     transitByMaterial.filter(
-      (transit) => transit.material === materialToGetReport
+      (transit) => transit.material._id === materialToGetReport
     ).forEach((row, i) => {
       innerArr.push(row)
       if(i === ((section + 1)*items - 1) || i === transitByMaterial.length - 1) {

@@ -6,7 +6,7 @@ import Paginator from "../general/Paginator";
 
 function MaterialsList() {
   const [page, setPage] = useState(0);
-  const [items, setItems] = useState(2);
+  const [items, setItems] = useState(8);
 
   const dispatch = useDispatch();
 

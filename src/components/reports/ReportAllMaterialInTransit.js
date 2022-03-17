@@ -32,11 +32,14 @@ function ReportAllMaterialInTransit() {
       transitByMaterial[page].map((transit) => {
         return (
           <tr key={transit._id}>
-            <td style={{ width: "25%" }}>
+            <td style={{ width: "15%" }}>
+              {transit.material.name}
+            </td>
+            <td style={{ width: "15%" }}>
               {transit.supplier.name} <br />
               Order: {transit.order}
             </td>
-            <td style={{ width: "15%" }}>
+            <td style={{ width: "10%" }}>
               {new Intl.NumberFormat().format(parseInt(transit.amount))}
             </td>
             <td style={{ width: "30%" }}>
@@ -64,7 +67,8 @@ function ReportAllMaterialInTransit() {
         <caption>Product In Transit</caption>
         <thead>
           <tr>
-            <th style={{ width: "25%" }}>Supplier</th>
+            <th style={{ width: "15%" }}>Material</th>
+            <th style={{ width: "15%" }}>Supplier</th>
             <th style={{ width: "10%" }}>Amount (kg)</th>
             <th style={{ width: "30%" }}>Timing</th>
             <th style={{ width: "30%" }}>Notes</th>

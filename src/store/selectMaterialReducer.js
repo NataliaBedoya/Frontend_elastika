@@ -11,6 +11,7 @@ import {
   destroyBatch,
   amountUpdate,
   transitRegister,
+  destroyTransit
 } from "./services/materialServices";
 
 export const GET_MATERIAL_LIST = "GET_MATERIAL_LIST";
@@ -358,6 +359,28 @@ export function registerMaterialInTransit(
         button: "OK",
       });
       console.log(error.message);
+    }
+  };
+}
+
+export function deleteTransit(transitId) {
+  return async function () {
+    try {
+      await destroyTransit(transitId);
+      Swal.fire({
+        title: "Confirmation",
+        icon: "success",
+        text: `The transit assignment has been successfully deleted!`,
+        button: "OK",
+      });
+    } catch (error) {
+      console.log(error.message);
+      Swal.fire({
+        title: "Alert",
+        icon: "error",
+        text: `Something went wrong`,
+        button: "OK",
+      });
     }
   };
 }

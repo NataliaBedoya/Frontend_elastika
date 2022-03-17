@@ -4,7 +4,7 @@ import Paginator from "../general/Paginator";
 
 function AvailableProduct() {
   const [page, setPage] = useState(0);
-  const [items, setItems] = useState(5);
+  const [items, setItems] = useState(8);
 
   const { materialList } = useSelector((state) => {
     const arr = state.selectMaterialReducer.materialList;
